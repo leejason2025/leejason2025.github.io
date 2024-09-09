@@ -35,7 +35,18 @@
         }
         section h2 {
             font-size: 1.8em; 
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* Adjusted for more space */
+            margin-top: 50px; /* Added more space above the title */
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #081F62; /* Line color matches title block */
+            margin: 10px auto; /* Adds space between title and line */
         }
 
         section {
