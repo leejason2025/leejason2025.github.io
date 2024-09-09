@@ -8,27 +8,29 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            text-align: center; /* Center all text */
         }
-        h1 {
-            text-align: center;
-        }
-        h2 {
+        h1, h2, h3 {
             color: #333;
         }
         section {
             margin-bottom: 30px;
         }
+        /* Grid layout for images */
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three images per row */
+            gap: 10px; /* Space between images */
+            justify-items: center; /* Center images in each grid cell */
+        }
         img {
             max-width: 100%;
+            width: 300px; /* Set a specific width for each image */
             height: auto;
             margin: 10px 0;
         }
-        .image-container {
-            text-align: center;
-        }
-        .image-description {
-            margin: 15px 0;
-            font-style: italic;
+        p {
+            text-align: center; /* Center the paragraphs */
         }
     </style>
 </head>
