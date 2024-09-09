@@ -116,7 +116,7 @@
     <section id="single-scale-search">
         <h2>Single Scale Search Approach</h2>
         <p>
-            The exhaustive_align method aligns two images by testing all possible shifts within a specified range. For each shift, the target image is displaced, and the similarity to the reference image is measured using the Normalized Cross-Correlation (NCC) score. To speed up the process, I used parallel processing with joblib.Parallel, allowing the evaluation of multiple shifts simultaneously. This approach ensures accurate alignment while efficiently handling computational complexity. Here are the results on lower resolution images.
+            The exhaustive align method is a single scale search that aligns two images by testing all possible shifts within a specified range. For each shift, the target image is displaced, and the similarity to the reference image is measured using the Normalized Cross-Correlation (NCC) score. To speed up the process, I used parallel processing with joblib.Parallel, allowing the evaluation of multiple shifts simultaneously. This approach ensures accurate alignment while efficiently handling computational complexity. Here are the results on lower resolution images.
         </p>
         <div class="image-container">
             <img src="media/monastery_colorized.jpg" alt="Monastery Colorized">
@@ -128,7 +128,7 @@
     <section id="multi-scale-pyramid-search">
         <h2>Multi-Scale Pyramid Search</h2>
         <p>
-            Multi-scale pyramid search here ...
+            Furthermore, I implemented a pyramid align function that is a multi-scale approach which leverages image pyramids to align two images more efficiently. This method progressively aligns images at different resolutions, starting from a low-resolution version and refining the alignment at higher resolutions. First, I construct Gaussian pyramids for both the reference (base) and target (shift) images by iteratively applying a Gaussian filter and downscaling the images at each level. Starting with the lowest-resolution images, I use the exhaustive_align method to compute the optimal shift. The alignment is then refined at each subsequent level by adjusting the displacement according to the image's resolution. By progressively aligning the images from coarse to fine detail, this approach reduces the search space at higher resolutions, resulting in faster and more efficient alignment for large or high-resolution images. Here are three results on high resolution images.
         </p>
         <div class="image-container">
             <img src="media/icon_colorized.jpg" alt="Icon Colorized">
