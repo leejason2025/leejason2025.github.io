@@ -190,13 +190,7 @@
         <p>
             <b>3. Accuracy Issues:</b> After optimizing the runtime, the image alignment was still not as accurate as expected. The 
             issue stemmed from the lack of a Gaussian blur in the image pyramid. Once I applied the Gaussian blur to the images 
-            during the pyramid construction, the alignment improved significantly, and the majority of the images were properly aligned.
-        </p>
-        <p>
-            <b>4. Edge Cases:</b> Despite all the improvements, three images—emir.tif, melons.tif, and self_portrait.tif—remained misaligned. 
-            This was likely due to the sensitivity of the NCC score in certain types of images. For example, in emir.tif, the blue 
-            channel contained many near-zero intensity pixels, whereas the red and green channels did not, which may have caused 
-            difficulties in aligning these images accurately.
+            during the pyramid construction, the alignment improved significantly.
         </p>
     </section>
 
