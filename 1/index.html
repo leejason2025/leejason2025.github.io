@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            text-align: center; 
+            text-align: center;
         }
         h1, h2, h3 {
             color: #333;
@@ -20,15 +20,17 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 7px;
-            justify-items: center; 
+            justify-items: center;
         }
         img {
             max-width: 100%;
-            width: 400px; 
+            width: 400px;
             height: auto;
         }
         p {
-            text-align: center; 
+            text-align: left;
+            padding: 0 20px; /* Adds padding to the left and right of the paragraphs */
+            margin-bottom: 20px; /* Adds space between paragraphs */
         }
     </style>
 </head>
@@ -42,7 +44,9 @@
         <h2>Abstract</h2>
         <p>
             When I was first introduced to this project by Professor Alexei A. Efros, I was immediately captured by Sergei Mikhailovich Prokudin-Gorskii’s innovative mindset. Prokudin-Gorskii was a pioneer in the field of color photography, foreseeing its future as early as 1907. After gaining  special permission from the Tzar, Prokudin-Gorskii embarked on an ambitious journey. In his expeditions across the Russian Empire, he captured thousands of images, ranging from people to architecture to nature. His technique involved photographing scenes with three separate exposures on glass plates, each filtered through red, green, and blue filters. However, in Prokudin-Gorskii’s time period, there was no technology available to produce colored images from his black and white images. Prokudin-Gorskii’s glass plate negatives were later digitized by the Library of Congress, and thus the objective of this project became clear: to put Prokudin-Gorskii’s hard work into fruition and display a unique glimpse of the Russian Empire’s final years.
-The objective of this project is to take the digitized glass plate images and use modern image processing techniques to recreate color images with minimal visual artifacts. To achieve this, I implemented and tested several methods for aligning the three color channels. Initially, I employed an exhaustive search method using L2 norm and normalized cross-correlation (NCC) on low-resolution images. Based on the visual results, I determined that NCC offered better performance for alignment. I then implemented a Gaussian image pyramid approach to handle higher-resolution images more efficiently. While this method successfully improved the alignment, it significantly increased computation time. To address this, I optimized my algorithm by vectorizing large array operations and parallelizing processes, which substantially reduced the processing time.
+        </p>
+        <p>
+            The objective of this project is to take the digitized glass plate images and use modern image processing techniques to recreate color images with minimal visual artifacts. To achieve this, I implemented and tested several methods for aligning the three color channels. Initially, I employed an exhaustive search method using L2 norm and normalized cross-correlation (NCC) on low-resolution images. Based on the visual results, I determined that NCC offered better performance for alignment. I then implemented a Gaussian image pyramid approach to handle higher-resolution images more efficiently. While this method successfully improved the alignment, it significantly increased computation time. To address this, I optimized my algorithm by vectorizing large array operations and parallelizing processes, which substantially reduced the processing time.
         </p>
     </section>
 
