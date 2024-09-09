@@ -110,14 +110,26 @@
             into fruition and display a unique glimpse of the Russian Empire’s final years.
         </p>
         <p>
-            The objective of this project is to take the digitized glass plate images and use modern image processing techniques to recreate color images with minimal visual artifacts. To achieve this, I implemented and tested several methods for aligning the three color channels. Initially, I employed an exhaustive search method using L2 norm and normalized cross-correlation (NCC) on low resolution images. Based on the visual results, I determined that NCC offered better performance for alignment. I then implemented a Gaussian image pyramid approach to handle higher resolution images more efficiently. While this method successfully improved the alignment, it significantly increased computation time. To address this, I optimized my algorithm by vectorizing large array operations and parallelizing processes, which substantially reduced the processing time.
+            The objective of this project is to take the digitized glass plate images and use modern 
+            image processing techniques to recreate color images with minimal visual artifacts. To 
+            achieve this, I implemented and tested several methods for aligning the three color channels.
+            Initially, I employed an exhaustive search method using L2 norm and normalized cross correlation 
+            on low resolution images. Based on the visual results, I determined that NCC offered better 
+            performance for alignment. I then implemented a Gaussian image pyramid approach to handle higher 
+            resolution images more efficiently. While this method successfully improved the alignment, it 
+            significantly increased computation time. To address this, I optimized my algorithm by vectorizing 
+            large array operations and parallelizing processes, which substantially reduced the processing time.
         </p>
     </section>
 
     <section id="Score Metric">
         <h2>Score Metric</h2>
         <p>
-            In order to measure the quality of alignment between two images, I utilized Normalized Cross-Correlation (NCC) as the score metric. I picked NCC as it is a robust method for comparing the similarity between two images by measuring the correlation between pixel intensities, normalized to account for differences in lighting or contrast. This method computes the similarity on a scale from -1 to 1, where a score closer to 1 indicates better alignment.
+            In order to measure the quality of alignment between two images, I utilized Normalized Cross 
+            Correlation (NCC) as the score metric. I picked NCC as it is a robust method for comparing the 
+            similarity between two images by measuring the correlation between pixel intensities, normalized 
+            to account for differences in lighting or contrast. This method computes the similarity on a scale 
+            from -1 to 1, where a score closer to 1 indicates better alignment.
         </p>
         <div class="ncc-image-container">
             <img src="media/ncc.jpg" alt="NCC">
@@ -127,7 +139,10 @@
     <section id="single-scale-search">
         <h2>Single Scale Search Approach</h2>
         <p>
-            The exhaustive align method is a single scale search that aligns two images by testing all possible shifts within a specified range. For each shift, the target image is displaced, and the similarity to the reference image is measured using the Normalized Cross Correlation (NCC) score. To speed up the process, I used parallel processing with joblib.Parallel, allowing the evaluation of multiple shifts simultaneously. This approach ensures accurate alignment while efficiently handling computational complexity. Here are the results on lower resolution images.
+            The exhaustive align method is a single scale search that aligns two images by testing all possible 
+            shifts within a specified range. For each shift, the target image is displaced, and the similarity 
+            to the reference image is measured using the NCC score. Here are 
+            the results on lower resolution images.
         </p>
         <div class="image-container">
             <img src="media/monastery_colorized.jpg" alt="Monastery Colorized">
@@ -139,7 +154,16 @@
     <section id="multi-scale-pyramid-search">
         <h2>Multi-Scale Pyramid Search</h2>
         <p>
-            Furthermore, I implemented a pyramid align function that is a multi-scale approach which leverages image pyramids to align two images more efficiently. This method progressively aligns images at different resolutions, starting from a low resolution version and refining the alignment at higher resolutions. First, I construct Gaussian pyramids for both the reference (base) and target (shift) images by iteratively applying a Gaussian filter and downscaling the images at each level. Starting with the lowest resolution images, I use the exhaustive_align method to compute the optimal shift. The alignment is then refined at each subsequent level by adjusting the displacement according to the image's resolution. By progressively aligning the images from coarse to fine detail, this approach reduces the search space at higher resolutions, resulting in faster and more efficient alignment for large or high resolution images. Here are three results on high resolution images.
+            Furthermore, I implemented a pyramid align function that is a multi-scale approach which leverages 
+            image pyramids to align two images more efficiently. This method progressively aligns images at 
+            different resolutions, starting from a low resolution version and refining the alignment at higher 
+            resolutions. First, I construct Gaussian pyramids for both the reference (base) and target (shift) 
+            images by iteratively applying a Gaussian filter and downscaling the images at each level. Starting 
+            with the lowest resolution images, I use the previously defined exhaustive align method to compute the optimal shift. 
+            The alignment is then refined at each subsequent level by adjusting the displacement according to 
+            the image's resolution. By progressively aligning the images from coarse to fine detail, this 
+            approach reduces the search space at higher resolutions, resulting in faster and more efficient 
+            alignment for large or high resolution images. Here are three results on high resolution images.
         </p>
         <div class="image-container">
             <img src="media/icon_colorized.jpg" alt="Icon Colorized">
@@ -151,7 +175,29 @@
     <section id="challenges-faced">
         <h2>Challenges Faced</h2>
         <p>
-            Challenges faced here ...
+            1. Inaccuracy in Exhaustive Search: Initially, the exhaustive search method struggled with alignment accuracy, 
+            even on low-resolution images. The issue was caused by the presence of borders in the images, which disrupted 
+            the similarity calculations. I resolved this by manually cropping the images to remove the borders, which greatly 
+            improved the alignment results.
+        </p>
+        <p>
+            2. High Runtime: When I first ran the naive version of the pyramid align function, the runtime exceeded 10 minutes
+            per image. To address this, I optimized the performance in two key ways: first, I vectorized the large array 
+            calculations to take advantage of faster, element-wise operations. Then, I implemented multi-core parallelism 
+            using Joblib, which distributed alignment tasks across multiple CPU cores. Additionally, I used Numba to compile 
+            Python functions into machine code, speeding up the individual computations. These optimizations reduced the 
+            runtime to approximately 1 minute per image.
+        </p>
+        <p>
+            3. Accuracy Issues: After optimizing the runtime, the image alignment was still not as accurate as expected. The 
+            issue stemmed from the lack of a Gaussian blur in the image pyramid. Once I applied the Gaussian blur to the images 
+            during the pyramid construction, the alignment improved significantly, and the majority of the images were properly aligned.
+        </p>
+        <p>
+            Edge Cases: Despite all the improvements, three images—emir.tif, melons.tif, and self_portrait.tif—remained misaligned. 
+            This was likely due to the sensitivity of the NCC score in certain types of images. For example, in emir.tif, the blue 
+            channel contained many near-zero intensity pixels, whereas the red and green channels did not, which may have caused 
+            difficulties in aligning these images accurately.
         </p>
     </section>
 
