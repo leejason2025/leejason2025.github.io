@@ -88,6 +88,28 @@
             width: 70%;
             border: 5px solid #535F80;
         }
+        .abstract-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .abstract-text {
+            width: 55%; /* The text will take up 55% of the width */
+        }
+        
+        .abstract-images {
+            width: 40%; /* The images will take up 40% of the width */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .abstract-images img {
+            max-width: 100%;
+            border: 3px solid #535F80;
+        }
 
     </style>
 </head>
@@ -97,7 +119,42 @@
         <h2>Colorizing the Prokudin-Gorskii Photo Collection</h2>
         <h3>Jason Lee</h3>
     </div>
-
+    <section id="abstract">
+        <h2>Abstract</h2>
+        <div class="abstract-container">
+            <div class="abstract-text">
+                <p>
+                    When I was first introduced to this project by Professor Alexei A. Efros, 
+                    I was immediately captured by Sergei Mikhailovich Prokudin-Gorskii’s innovative mindset. 
+                    Prokudin-Gorskii was a pioneer in the field of color photography, 
+                    foreseeing its future as early as 1907. After gaining special permission from the Tzar,
+                    Prokudin-Gorskii embarked on an ambitious journey. In his expeditions across the Russian Empire,
+                    he captured thousands of images, ranging from people to architecture to nature. 
+                    His technique involved photographing scenes with three separate exposures on glass plates, 
+                    each filtered through red, green, and blue filters. However, in Prokudin-Gorskii’s time period, 
+                    there was no technology available to produce colored images from his black and white images. 
+                    Prokudin-Gorskii’s glass plate negatives were later digitized by the Library of Congress, 
+                    and thus the objective of this project became clear: to put Prokudin-Gorskii’s hard work 
+                    into fruition and display a unique glimpse of the Russian Empire’s final years.
+                </p>
+                <p>
+                    The objective of this project is to take the digitized glass plate images and use modern 
+                    image processing techniques to recreate color images with minimal visual artifacts. To 
+                    achieve this, I implemented and tested several methods for aligning the three color channels.
+                    Initially, I employed an exhaustive search method using L2 norm and normalized cross correlation 
+                    on low resolution images. Based on the visual results, I determined that NCC offered better 
+                    performance for alignment. I then implemented a Gaussian image pyramid approach to handle higher 
+                    resolution images more efficiently. While this method successfully improved the alignment, it 
+                    significantly increased computation time. To address this, I optimized my algorithm by vectorizing 
+                    large array operations and parallelizing processes, which substantially reduced the processing time.
+                </p>
+            </div>
+            <div class="abstract-images">
+                <img src="media/melons_abstract.jpg" alt="Melons Original">
+                <img src="media/melons_colorized.jpg" alt="Melons Colorized">
+            </div>
+        </div>
+    </section>
     <section id="abstract">
         <h2>Abstract</h2>
         <p>
