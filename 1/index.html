@@ -10,23 +10,54 @@
             margin: 20px;
             text-align: center;
         }
-        h1, h2, h3 {
-            color: #333;
+
+        /* Styles for title block */
+        .title-block {
+            background-color: #D2B48C; /* Tan color */
+            padding: 40px 20px; /* Adds padding inside the block */
+            margin-bottom: 30px;
+            text-align: center;
         }
+
+        /* Main Title Styles */
+        h1 {
+            font-size: 3em; /* Increase main title size */
+            margin-bottom: 10px;
+        }
+
+        /* Subtitle and Name styles */
+        h2 {
+            font-size: 2.5em; /* Increase subtitle size */
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 2em; /* Increase name size */
+        }
+
+        /* Section title size adjustment */
+        section h2 {
+            font-size: 1.8em; /* Increase section titles */
+            margin-bottom: 10px;
+        }
+
         section {
             margin-bottom: 30px;
         }
+
         .image-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 7px;
             justify-items: center;
         }
+
         img {
             max-width: 100%;
             width: 400px;
             height: auto;
         }
+
         p {
             text-align: left;
             padding: 0 20px; /* Adds padding to the left and right of the paragraphs */
@@ -36,9 +67,12 @@
 </head>
 <body>
 
-    <h1>CS 180 Proj 1: Images of the Russian Empire</h1>
-    <h2>Colorizing the Prokudin-Gorskii Photo Collection</h2>
-    <h3>Jason Lee</h3>
+    <!-- Title block with tan background -->
+    <div class="title-block">
+        <h1>CS 180 Proj 1: Images of the Russian Empire</h1>
+        <h2>Colorizing the Prokudin-Gorskii Photo Collection</h2>
+        <h3>Jason Lee</h3>
+    </div>
 
     <section id="abstract">
         <h2>Abstract</h2>
