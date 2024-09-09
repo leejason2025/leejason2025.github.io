@@ -116,7 +116,7 @@
     <section id="single-scale-search">
         <h2>Single Scale Search Approach</h2>
         <p>
-            Single scale search approach ...
+            The exhaustive_align method aligns two images by testing all possible shifts within a specified range. For each shift, the target image is displaced, and the similarity to the reference image is measured using the Normalized Cross-Correlation (NCC) score. To speed up the process, I used parallel processing with joblib.Parallel, allowing the evaluation of multiple shifts simultaneously. This approach ensures accurate alignment while efficiently handling computational complexity. Here are the results on lower resolution images.
         </p>
         <div class="image-container">
             <img src="media/monastery_colorized.jpg" alt="Monastery Colorized">
