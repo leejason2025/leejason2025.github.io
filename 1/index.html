@@ -58,13 +58,20 @@
             margin-bottom: 3%;
         }
 
+        .image-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
         .image-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 7px;
             justify-items: center;
         }
-
+        
         img {
             max-width: 100%;
             width: 400px;
@@ -111,9 +118,6 @@
             border: 3px solid #535F80;
             margin-left: auto;
             display: block;
-        }
-        .image-item {
-            text-align: center;
         }
     </style>
 </head>
@@ -262,14 +266,46 @@
             The following are the remaining images processed from the colorized Prokudin-Gorskii photo collection.
         </p>
         <div class="image-container">
-            <img src="media/emir_colorized.jpg" alt="Emir Colorized">
-            <img src="media/icon_colorized.jpg" alt="Icon Colorized">
-            <img src="media/onion_church_colorized.jpg" alt="Onion Church Colorized">
-            <img src="media/melons_colorized.jpg" alt="Melons Colorized">   
-            <img src="media/self_portrait_colorized.jpg" alt="Self Portrait Colorized">
-            <img src="media/three_generations_colorized.jpg" alt="Three Generations Colorized">
-            <img src="media/sculpture_colorized.jpg" alt="Sculpture Colorized">
-            <img src="media/lady_colorized.jpg" alt="Lady Colorized">
+            <div class="image-item">
+                <img src="media/emir_colorized.jpg" alt="Emir Colorized">
+                <p>G displacement: (5, 42)</p>
+                <p>R displacement: (32, 87)</p>
+            </div>
+            <div class="image-item">
+                <img src="media/icon_colorized.jpg" alt="Icon Colorized">
+                <p>G displacement: (16, 59)</p>
+                <p>R displacement: (13, 124)</p>
+            </div>
+            <div class="image-item">
+                <img src="media/onion_church_colorized.jpg" alt="Onion Church Colorized">
+                <p>G displacement: (4, 25)</p>
+                <p>R displacement: (-4, 58)</p>
+            </div>
+            <div class="image-item">
+                <img src="media/melons_colorized.jpg" alt="Melons Colorized">
+                <p>G displacement: (5, 42)</p>
+                <p>R displacement: (32, 87)</p>
+            </div>
+            <div class="image-item">
+                <img src="media/self_portrait_colorized.jpg" alt="Self Portrait Colorized">
+                <p>G displacement: (16, 59)</p>
+                <p>R displacement: (13, 124)</p>
+            </div>
+            <div class="image-item">
+                <img src="media/three_generations_colorized.jpg" alt="Three Generations Colorized">
+                <p>G displacement: (4, 25)</p>
+                <p>R displacement: (-4, 58)</p>
+            </div>
+            <div class="image-item">
+                <img src="media/sculpture_colorized.jpg" alt="Sculpture Colorized">
+                <p>G displacement: (5, 42)</p>
+                <p>R displacement: (32, 87)</p>
+            </div>
+            <div class="image-item">
+                <img src="media/lady_colorized.jpg" alt="Lady Colorized">
+                <p>G displacement: (16, 59)</p>
+                <p>R displacement: (13, 124)</p>
+            </div>
         </div>
     </section>
 
