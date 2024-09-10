@@ -112,7 +112,9 @@
             margin-left: auto;
             display: block;
         }
-
+        .image-item {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -178,17 +180,17 @@
             to the reference image is measured using the NCC score. Here are the results on lower resolution images, with displacement range of [-16, 16].
         </p>
         <div class="image-container">
-            <div>
+            <div class="image-item">
                 <img src="media/monastery_colorized.jpg" alt="Monastery Colorized">
                 <p>G displacement: (2, -3)</p>
                 <p>R displacement: (2, 3)</p>
             </div>
-            <div>
+            <div class="image-item">
                 <img src="media/tobolsk_colorized.jpg" alt="Tobolsk Colorized">
                 <p>G displacement: (3, 3)</p>
                 <p>R displacement: (3, 6)</p>
             </div>
-            <div>
+            <div class="image-item">
                 <img src="media/cathedral_colorized.jpg" alt="Cathedral Colorized">
                 <p>G displacement: (2, 5)</p>
                 <p>R displacement: (3, 12)</p>
