@@ -196,7 +196,8 @@
             The alignment is then refined at each subsequent level by adjusting the displacement according to 
             the image's resolution. By progressively aligning the images from coarse to fine detail, this 
             approach reduces the search space at higher resolutions, resulting in faster and more efficient 
-            alignment for large or high resolution images. Here are three results for high resolution images, ran with displacement range of [-64, 64].
+            alignment for large or high resolution images. Here are three results for high resolution images, 
+            ran with displacement range of [-48, 48] and 5 levels for the pyramid.
         </p>
         <div class="image-container">
             <img src="media/melons_colorized.jpg" alt="Melons Colorized">
@@ -224,7 +225,8 @@
         <p>
             <b>3. Accuracy Issues:</b> After optimizing the runtime, the image alignment was still not as accurate as expected. The 
             issue stemmed from the lack of a Gaussian blur in the image pyramid. Once I applied the Gaussian blur to the images 
-            during the pyramid construction, the alignment improved significantly.
+            during the pyramid construction, the alignment improved significantly. However, it was still not entirely accurate for 
+            three images: emir, self portrait, and melons. To combat this, I just increased the displacement range to [-64, 64] but only ay 3 levels for the guassian pyramid. 
         </p>
     </section>
 
