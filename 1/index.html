@@ -119,6 +119,21 @@
             margin-left: auto;
             display: block;
         }
+        .hover-image-container-melons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2%;
+            position: relative;
+        }
+        
+        .hover-image-container-melons img {
+            width: 70%;
+            transition: opacity 0.5s ease;
+        }
+        
+        .hover-image-container-melons img:hover {
+            content: url('media/melons_colorized.jpg'); 
+        }
     </style>
 </head>
 <body>
@@ -319,9 +334,8 @@
             and only the Y/luminance channel gets affected. This algorithm works best for any images that are too dark or washed out.
             </b> 
         </p>
-        <div class="image-container">
-            <img src="media/self_portrait_colorized.jpg" alt="Self Portrait Colorized">
-            <img src="media/melons_colorized.jpg" alt="Melons Colorized">
+        <div class="hover-image-container-melons">
+            <img src="media/melons_contrasted.jpg" alt="Melons Contrasted">
         </div>
         <p>
             <b>2. Better Color Mapping:</b> 
