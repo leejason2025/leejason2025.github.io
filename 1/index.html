@@ -329,8 +329,7 @@
         <p>
             <b>1. Automatic Contrasting:</b> I implemented automatic contrasting by using 
             <b>histogram equalization</b>, as learned in lecture. I started by taking a properly aligned image
-            and converting the image from RGB to YUV color space (with the
-            help of cv2.cvtColor). This method works since color information is stored in the U and V channels
+            and converting the image from RGB to YUV color space. This method works since color information is stored in the U and V channels
             and only the Y/luminance channel gets affected. This algorithm works best for any images that are too dark or washed out.
             Here is the algorithm ran on the melons image, hover over it to see the original colorized image.
             
@@ -340,7 +339,7 @@
         </div>
         <p>
             <b>2. Automatic Cropping:</b> I implemented automatic cropping by leveraging <b>edge detection</b> and <b>contour analysis</b>.
-                I started by loading the image and converting it to grayscale using cv2.cvtColor to simplify the process of detecting edges. 
+                I started by loading the image and converting it to grayscale to simplify the process of detecting edges. 
                 I then applied the Canny edge detection algorithm to highlight the boundaries of the objects in the image. 
                 Once the edge map was generated, I identified the largest contour. To ensure a reasonable crop without losing important content, 
             I defined a maximum allowable crop (7% on each side). Using the bounding rectangle of the largest contour, I applied these 
