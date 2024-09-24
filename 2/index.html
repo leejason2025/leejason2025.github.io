@@ -101,7 +101,7 @@
             To start off this project, I used simple difference operators to compute the image gradients along the x and y axes for edge detection. 
             By applying convolution with D_x = [[1, -1]] and D_y = [[1], [-1]] to the "Cameraman" image, I obtained the partial derivatives I_x and I_y
              , which highlight vertical and horizontal edges, respectively. I then combined these gradients to calculate the overall gradient magnitude, 
-            representing the strength of edges. After testing different thresholds, I found that a value of 50 worked best for binarizing the gradient 
+            representing the strength of edges. The formula that I used for gradient magnitude was √ ((I_x)^2 + (I_y)^2). After testing different thresholds, I found that a value of 50 worked best for binarizing the gradient 
             magnitude, producing a binary edge map that effectively highlights the detected edges in the image.
         </p>
         <div class="image-container">
