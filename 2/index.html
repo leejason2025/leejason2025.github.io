@@ -294,7 +294,14 @@
     <section id="gaussian-laplacian-stacks">
         <h2>Gaussian and Laplacian Stacks</h2>
         <p>
-            Gaussian and Laplacian stacks are used to represent an image at different frequency bands. Gaussian stacks progressively blur an image, while Laplacian stacks are derived by subtracting two consecutive levels of the Gaussian stack. Below are four examples.
+            In this section, I generated and visualized Gaussian and Laplacian Stacks for multi-resolution analysis of images.
+            The Gaussian stack was created by progressively blurring the image at each level using a Gaussian filter with an 
+            increasing sigma value, resulting in a series of images that become smoother at higher levels. The Laplacian stack
+            was then formed by subtracting each blurred image from the next level in the Gaussian stack, isolating the high-frequency
+            details between levels, with the final level representing the most blurred, low-frequency version of the image. I 
+            applied this process to two grayscale images, "Apple" and "Orange," creating five levels for each image. The Gaussian 
+            stack showed progressively blurred versions, while the Laplacian stack revealed finer details at each level. This 
+            multi-resolution decomposition is useful for analyzing and manipulating images across different scales and frequencies.
         </p>
         <div class="image-container">
             <div class="image-item">
