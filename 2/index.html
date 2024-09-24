@@ -131,22 +131,28 @@
     <section id="dog-filter">
         <h2>Derivative of Gaussian (DoG) Filter</h2>
         <p>
-            The Derivative of Gaussian (DoG) filter is an extension of the Gaussian blur, which smooths the image and computes the derivative. This is useful for detecting edges in the image after reducing noise. Below are three examples of edge detection using the DoG filter.
+            The Derivative of Gaussian (DoG) filter is an extension of the Gaussian blur, which smooths the image and computes the derivative. 
+            This is useful for detecting edges in the image after reducing noise. Below are the images of the cameraman with a blurr applied and then the edge
+            detection. Also, there is a second method of calculating the derivative of guassian filters to only use one convolution per direction.
         </p>
         <div class="image-container">
             <div class="image-item">
-                <img src="media/dog1.jpg" alt="DoG Example 1">
-                <p>Image 1: DoG Applied</p>
+                <img src="media/Cameraman_With_Blurr.jpg" alt="DoG Example 1">
+                <p>Cameraman Blurred</p>
             </div>
             <div class="image-item">
-                <img src="media/dog2.jpg" alt="DoG Example 2">
-                <p>Image 2: DoG Applied</p>
+                <img src="media/Binary_Edge_Image_With_Blurr.jpg" alt="DoG Example 2">
+                <p>Binary Edge Image With Blurr</p>
             </div>
             <div class="image-item">
-                <img src="media/dog3.jpg" alt="DoG Example 3">
-                <p>Image 3: DoG Applied</p>
+                <img src="media/Single Convolution.jpg" alt="DoG Example 3">
+                <p>DoG Applied</p>
             </div>
         </div>
+        <p>
+            After applying the blurr, we can see that there is a lot less noise which is extremely helpful for edge detection. Also, we know that by 
+            the properties of convolution, we can use the derivative of guassians to convolve and get the same answers. This is confirmed by the example above.
+        </p>
     </section>
 
     <section id="image-sharpening">
