@@ -341,44 +341,53 @@
     <section id="multiresolution-blending">
         <h2>Multiresolution Blending</h2>
         <p>
-            Multiresolution blending is a technique that blends two images by decomposing them into different frequency bands and blending the corresponding bands. This creates seamless transitions between images. Below are nine examples of multiresolution blending.
+            In this section, I implemented multiresolution blending using Gaussian and Laplacian stacks to seamlessly merge images 
+            based on different masks. First, I created three types of masks: vertical, horizontal, and circular, which define the 
+            blending regions in the images. The blending process works by constructing Gaussian and Laplacian stacks for each image
+            and the mask. The Gaussian stack progressively blurs the images at multiple levels, while the Laplacian stack isolates 
+            the details between each level of the Gaussian stack, splitting the images into high and low-frequency components. To 
+            blend two images, I applied the Laplacian stacks of both images to their respective color channels (RGB) and used the 
+            Gaussian stack of the mask to smoothly combine the two Laplacian stacks. The blending is achieved by weighting each 
+            image based on the mask, creating a transition between the two images. Finally, I reconstructed the blended image by 
+            adding the frequency levels from the Laplacian stacks, producing the final composite. I tested this approach on three 
+            image pairs: "Apple + Orange" using a vertical mask, "Night + River" using a horizontal mask, and "Itachi + Fire" using a circular mask.
         </p>
         <div class="image-container">
             <div class="image-item">
-                <img src="media/blend1.jpg" alt="Blending Example 1">
-                <p>Blending Example 1</p>
+                <img src="media/apple.jpeg" alt="Blending Example 1">
+                <p>Apple</p>
             </div>
             <div class="image-item">
-                <img src="media/blend2.jpg" alt="Blending Example 2">
-                <p>Blending Example 2</p>
+                <img src="media/orange.jpeg" alt="Blending Example 2">
+                <p>Orange</p>
             </div>
             <div class="image-item">
-                <img src="media/blend3.jpg" alt="Blending Example 3">
-                <p>Blending Example 3</p>
+                <img src="media/Apple + Orange.jpg" alt="Blending Example 3">
+                <p>Apple + Orange</p>
             </div>
             <div class="image-item">
-                <img src="media/blend4.jpg" alt="Blending Example 4">
-                <p>Blending Example 4</p>
+                <img src="media/itachi.jpg" alt="Blending Example 4">
+                <p>Itachi</p>
             </div>
             <div class="image-item">
-                <img src="media/blend5.jpg" alt="Blending Example 5">
-                <p>Blending Example 5</p>
+                <img src="media/fire.jpg" alt="Blending Example 5">
+                <p>Fire</p>
             </div>
             <div class="image-item">
-                <img src="media/blend6.jpg" alt="Blending Example 6">
-                <p>Blending Example 6</p>
+                <img src="media/Itachi_Fire.jpg" alt="Blending Example 6">
+                <p>Itachi + Fire</p>
             </div>
             <div class="image-item">
-                <img src="media/blend7.jpg" alt="Blending Example 7">
-                <p>Blending Example 7</p>
+                <img src="media/night.jpg" alt="Blending Example 7">
+                <p>Night View</p>
             </div>
             <div class="image-item">
-                <img src="media/blend8.jpg" alt="Blending Example 8">
-                <p>Blending Example 8</p>
+                <img src="media/river.jpg" alt="Blending Example 8">
+                <p>River</p>
             </div>
             <div class="image-item">
-                <img src="media/blend9.jpg" alt="Blending Example 9">
-                <p>Blending Example 9</p>
+                <img src="media/Night_River.jpg" alt="Blending Example 9">
+                <p>Night + River</p>
             </div>
         </div>
     </section>
