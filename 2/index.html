@@ -1,1 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 180 Proj 2: Fun with Filters and Frequencies!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 2%;
+            padding: 0 5%; 
+            text-align: center;
+            background-color: #E7E9F0;
+            color: #051747;
+        }
+
+        .title-block {
+            background-color: #081F62; 
+            color: #E7E9F0;
+            padding: 4% 2%; 
+            margin-bottom: 3%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.7em; 
+            margin-bottom: 1%;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 1%;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        section h2 {
+            font-size: 1.8em; 
+            margin-bottom: 2%;
+            margin-top: 5%; 
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #081F62; 
+            margin: 1% auto; 
+        }
+
+        section {
+            margin-bottom: 3%;
+        }
+
+        .image-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
+            justify-items: center;
+        }
+        
+        img {
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            border: 5px solid #535F80;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 2%;
+            font-size: 1.1em;
+            line-height: 1.6em; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="title-block">
+        <h1>CS 180 Project 2: Fun with Filters and Frequencies!</h1>
+        <h2>Exploring Image Filters and Frequency Domain Techniques</h2>
+        <h3>Jason Lee</h3>
+    </div>
+    
+    <section id="finite-difference-operator">
+        <h2>Finite Difference Operator</h2>
+        <p>
+            The finite difference operator is a basic method for computing gradients in an image. It detects edges by calculating the differences between adjacent pixels in horizontal and vertical directions. Below are the results showing gradient detection using this operator.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/finite_diff1.jpg" alt="Finite Difference Example 1">
+                <p>Image 1: Original</p>
+            </div>
+            <div class="image-item">
+                <img src="media/finite_diff2.jpg" alt="Finite Difference Example 2">
+                <p>Image 2: X-gradient</p>
+            </div>
+            <div class="image-item">
+                <img src="media/finite_diff3.jpg" alt="Finite Difference Example 3">
+                <p>Image 3: Y-gradient</p>
+            </div>
+            <div class="image-item">
+                <img src="media/finite_diff4.jpg" alt="Finite Difference Example 4">
+                <p>Image 4: Magnitude of Gradient</p>
+            </div>
+            <div class="image-item">
+                <img src="media/finite_diff5.jpg" alt="Finite Difference Example 5">
+                <p>Image 5: Edge Detected</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="dog-filter">
+        <h2>Derivative of Gaussian (DoG) Filter</h2>
+        <p>
+            The Derivative of Gaussian (DoG) filter is an extension of the Gaussian blur, which smooths the image and computes the derivative. This is useful for detecting edges in the image after reducing noise. Below are three examples of edge detection using the DoG filter.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/dog1.jpg" alt="DoG Example 1">
+                <p>Image 1: DoG Applied</p>
+            </div>
+            <div class="image-item">
+                <img src="media/dog2.jpg" alt="DoG Example 2">
+                <p>Image 2: DoG Applied</p>
+            </div>
+            <div class="image-item">
+                <img src="media/dog3.jpg" alt="DoG Example 3">
+                <p>Image 3: DoG Applied</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="image-sharpening">
+        <h2>Image "Sharpening"</h2>
+        <p>
+            Image sharpening enhances the edges and details of an image by amplifying high-frequency components. Here are seven results demonstrating image sharpening.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/sharpen1.jpg" alt="Sharpening Example 1">
+                <p>Sharpening Example 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/sharpen2.jpg" alt="Sharpening Example 2">
+                <p>Sharpening Example 2</p>
+            </div>
+            <div class="image-item">
+                <img src="media/sharpen3.jpg" alt="Sharpening Example 3">
+                <p>Sharpening Example 3</p>
+            </div>
+            <div class="image-item">
+                <img src="media/sharpen4.jpg" alt="Sharpening Example 4">
+                <p>Sharpening Example 4</p>
+            </div>
+            <div class="image-item">
+                <img src="media/sharpen5.jpg" alt="Sharpening Example 5">
+                <p>Sharpening Example 5</p>
+            </div>
+            <div class="image-item">
+                <img src="media/sharpen6.jpg" alt="Sharpening Example 6">
+                <p>Sharpening Example 6</p>
+            </div>
+            <div class="image-item">
+                <img src="media/sharpen7.jpg" alt="Sharpening Example 7">
+                <p>Sharpening Example 7</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="hybrid-images">
+        <h2>Hybrid Images</h2>
+        <p>
+            Hybrid images combine two different images by filtering one for high frequencies and the other for low frequencies, creating an interesting effect where different images are perceived at varying viewing distances. Below are nine examples of hybrid images.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/hybrid1.jpg" alt="Hybrid Image 1">
+                <p>Hybrid Image 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid2.jpg" alt="Hybrid Image 2">
+                <p>Hybrid Image 2</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid3.jpg" alt="Hybrid Image 3">
+                <p>Hybrid Image 3</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid4.jpg" alt="Hybrid Image 4">
+                <p>Hybrid Image 4</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid5.jpg" alt="Hybrid Image 5">
+                <p>Hybrid Image 5</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid6.jpg" alt="Hybrid Image 6">
+                <p>Hybrid Image 6</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid7.jpg" alt="Hybrid Image 7">
+                <p>Hybrid Image 7</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid8.jpg" alt="Hybrid Image 8">
+                <p>Hybrid Image 8</p>
+            </div>
+            <div class="image-item">
+                <img src="media/hybrid9.jpg" alt="Hybrid Image 9">
+                <p>Hybrid Image 9</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="fourier-analysis">
+        <h2>Fourier Analysis</h2>
+        <p>
+            Fourier analysis breaks down an image into its frequency components. This is particularly useful for filtering images in the frequency domain. Below are five examples showcasing the Fourier Transform of different images.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/fourier1.jpg" alt="Fourier Analysis 1">
+                <p>Fourier Example 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/fourier2.jpg" alt="Fourier Analysis 2">
+                <p>Fourier Example 2</p>
+            </div>
+            <div class="image-item">
+                <img src="media/fourier3.jpg" alt="Fourier Analysis 3">
+                <p>Fourier Example 3</p>
+            </div>
+            <div class="image-item">
+                <img src="media/fourier4.jpg" alt="Fourier Analysis 4">
+                <p>Fourier Example 4</p>
+            </div>
+            <div class="image-item">
+                <img src="media/fourier5.jpg" alt="Fourier Analysis 5">
+                <p>Fourier Example 5</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gaussian-laplacian-stacks">
+        <h2>Gaussian and Laplacian Stacks</h2>
+        <p>
+            Gaussian and Laplacian stacks are used to represent an image at different frequency bands. Gaussian stacks progressively blur an image, while Laplacian stacks are derived by subtracting two consecutive levels of the Gaussian stack. Below are four examples.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/stack1.jpg" alt="Stack Example 1">
+                <p>Gaussian Stack Example 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/stack2.jpg" alt="Stack Example 2">
+                <p>Laplacian Stack Example 2</p>
+            </div>
+            <div class="image-item">
+                <img src="media/stack3.jpg" alt="Stack Example 3">
+                <p>Gaussian Stack Example 3</p>
+            </div>
+            <div class="image-item">
+                <img src="media/stack4.jpg" alt="Stack Example 4">
+                <p>Laplacian Stack Example 4</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="multiresolution-blending">
+        <h2>Multiresolution Blending</h2>
+        <p>
+            Multiresolution blending is a technique that blends two images by decomposing them into different frequency bands and blending the corresponding bands. This creates seamless transitions between images. Below are nine examples of multiresolution blending.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/blend1.jpg" alt="Blending Example 1">
+                <p>Blending Example 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend2.jpg" alt="Blending Example 2">
+                <p>Blending Example 2</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend3.jpg" alt="Blending Example 3">
+                <p>Blending Example 3</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend4.jpg" alt="Blending Example 4">
+                <p>Blending Example 4</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend5.jpg" alt="Blending Example 5">
+                <p>Blending Example 5</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend6.jpg" alt="Blending Example 6">
+                <p>Blending Example 6</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend7.jpg" alt="Blending Example 7">
+                <p>Blending Example 7</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend8.jpg" alt="Blending Example 8">
+                <p>Blending Example 8</p>
+            </div>
+            <div class="image-item">
+                <img src="media/blend9.jpg" alt="Blending Example 9">
+                <p>Blending Example 9</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
