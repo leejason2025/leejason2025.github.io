@@ -250,27 +250,38 @@
     <section id="fourier-analysis">
         <h2>Fourier Analysis</h2>
         <p>
-            Fourier analysis breaks down an image into its frequency components. This is particularly useful for filtering images in the frequency domain. Below are five examples showcasing the Fourier Transform of different images.
+            Next, I performed a Fourier Transform Analysis on images to visualize their frequency 
+            components and observe the effects of filtering. I first implemented a function to compute the 2D Fast 
+            Fourier Transform of an image using np.fft.fft2. The FFT converts the image from the spatial domain to the frequency domain, 
+            where each point represents a specific frequency. I then shifted the zero frequency component to the center of the 
+            spectrum using np.fft.fftshift and applied a logarithmic transformation to the magnitude to enhance the visibility 
+            of the frequencies for display purposes. Next, I applied this FFT analysis to the images of "Ruffalo" and "Hulk" 
+            to visualize their frequency content. After that, I used Gaussian filters to isolate the low-frequency components 
+            in both images, displayed their filtered frequency spectra, and subtracted the low frequencies from the "Ruffalo" 
+            image to obtain the high frequencies. Finally, I combined the low-frequency components of "Hulk" with the high-frequency 
+            components of "Ruffalo" to create a hybrid image, and I displayed its frequency spectrum. This Fourier analysis allowed me 
+            to explore how the combination of different frequency bands contributes to the resulting hybrid image, making the transitions
+            between the two images more understandable in terms of their frequency characteristics.
         </p>
         <div class="image-container">
             <div class="image-item">
-                <img src="media/fourier1.jpg" alt="Fourier Analysis 1">
+                <img src="media/Hulk_FFT.jpg" alt="Fourier Analysis 1">
                 <p>Fourier Example 1</p>
             </div>
             <div class="image-item">
-                <img src="media/fourier2.jpg" alt="Fourier Analysis 2">
+                <img src="media/Ruffalo_FFT" alt="Fourier Analysis 2">
                 <p>Fourier Example 2</p>
             </div>
             <div class="image-item">
-                <img src="media/fourier3.jpg" alt="Fourier Analysis 3">
+                <img src="media/Hulk_Filtered_FFT.jpg" alt="Fourier Analysis 3">
                 <p>Fourier Example 3</p>
             </div>
             <div class="image-item">
-                <img src="media/fourier4.jpg" alt="Fourier Analysis 4">
+                <img src="media/Ruffalo_Filtered_FFT.jpg" alt="Fourier Analysis 4">
                 <p>Fourier Example 4</p>
             </div>
             <div class="image-item">
-                <img src="media/fourier5.jpg" alt="Fourier Analysis 5">
+                <img src="media/Hybrid_FFT.jpg" alt="Fourier Analysis 5">
                 <p>Fourier Example 5</p>
             </div>
         </div>
