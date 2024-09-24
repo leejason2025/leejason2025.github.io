@@ -199,44 +199,50 @@
     <section id="hybrid-images">
         <h2>Hybrid Images</h2>
         <p>
-            Hybrid images combine two different images by filtering one for high frequencies and the other for low frequencies, creating an interesting effect where different images are perceived at varying viewing distances. Below are nine examples of hybrid images.
+            I created a hybrid image by combining the low-frequency components of one image with the high-frequency components of another. 
+            First, I applied a Gaussian blur to the first image ("Derek") to extract its low frequencies, and separately blurred the second 
+            image ("Nutmeg") to isolate the high-frequency details by subtracting its blurred version from the original. The hybrid image was 
+            then formed by adding the low-frequency content of the first image to the high-frequency content of the second, producing a result 
+            where the viewer sees one image up close and another from a distance. After aligning the two images using a provided function, 
+            I experimented with different blur levels to create the final hybrid image. This method blends the two images in a way that 
+            shifts perception based on viewing distance.
         </p>
         <div class="image-container">
             <div class="image-item">
-                <img src="media/hybrid1.jpg" alt="Hybrid Image 1">
-                <p>Hybrid Image 1</p>
+                <img src="media/Top_Image_Nutmeg.jpg" alt="Hybrid Image 1">
+                <p>Aligned Gray Nutmeg</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid2.jpg" alt="Hybrid Image 2">
-                <p>Hybrid Image 2</p>
+                <img src="media/Base_Image_Derek.jpg" alt="Hybrid Image 2">
+                <p>Aligned Gray Derek</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid3.jpg" alt="Hybrid Image 3">
-                <p>Hybrid Image 3</p>
+                <img src="media/Hybrid_Derek_Nutmeg.jpg" alt="Hybrid Image 3">
+                <p>Derek + Nutmeg</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid4.jpg" alt="Hybrid Image 4">
-                <p>Hybrid Image 4</p>
+                <img src="media/Top_Image_Wolf.jpg" alt="Hybrid Image 4">
+                <p>Aligned Gray Wolf</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid5.jpg" alt="Hybrid Image 5">
-                <p>Hybrid Image 5</p>
+                <img src="media/Base_Image_Leonardo.jpg" alt="Hybrid Image 5">
+                <p>Aligned Gray Leonardo</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid6.jpg" alt="Hybrid Image 6">
-                <p>Hybrid Image 6</p>
+                <img src="media/Hybrid_Wolf_Leonardo.jpg" alt="Hybrid Image 6">
+                <p>Leonardo + Wolf</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid7.jpg" alt="Hybrid Image 7">
-                <p>Hybrid Image 7</p>
+                <img src="media/Top_Image_Hulk.jpg" alt="Hybrid Image 7">
+                <p>Aligned Gray Hulk</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid8.jpg" alt="Hybrid Image 8">
-                <p>Hybrid Image 8</p>
+                <img src="media/Base_Image_Ruffalo.jpg" alt="Hybrid Image 8">
+                <p>Aligned Gray Ruffalo</p>
             </div>
             <div class="image-item">
-                <img src="media/hybrid9.jpg" alt="Hybrid Image 9">
-                <p>Hybrid Image 9</p>
+                <img src="media/Hybrid_Hulk_Ruffalo.jpg" alt="Hybrid Image 9">
+                <p>Ruffalo + Hulk</p>
             </div>
         </div>
     </section>
