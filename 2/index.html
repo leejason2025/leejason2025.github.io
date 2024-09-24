@@ -158,7 +158,11 @@
     <section id="image-sharpening">
         <h2>Image "Sharpening"</h2>
         <p>
-            Image sharpening enhances the edges and details of an image by amplifying high-frequency components. Here are seven results demonstrating image sharpening.
+            In this section, I implemented a function to enhance image details by isolating and amplifying high-frequency components. 
+            This was achieved by applying a Gaussian blur to the image, subtracting the blurred version to isolate the high frequencies, 
+            and adding them back to the original image, scaled by a factor α. For color images, each RGB channel was sharpened 
+            individually before recombining them. I tested this on the images of the Taj Mahal as well as a picture of a blurry road with trees.
+            I also confirmed it worked by taking a non-blurry image of a city, applying a blur and then sharpening it.
         </p>
         <div class="image-container">
             <div class="image-item">
