@@ -173,9 +173,15 @@
     <section id="midway-face">
         <h2>Computing the "Mid-way Face"</h2>
         <p>
-            After defining correspondences, I computed the mid-way face. The mid-way face is a combination of both the geometry 
-            and colors of the two images, taking the average shape of the two faces and blending their pixel intensities. 
-            This produces a face that is an equal mix of both input images.
+            In this section, I computed the "mid-way face," which is a blend of both my face and the
+            Joker's face. The mid-way face is created by averaging the shapes and pixel values of the 
+            two images, resulting in a face that is a 50/50 mix of both. To achieve this, I used 
+            Delaunay triangulation to divide both faces into corresponding triangles. For each 
+            pair of triangles, I calculated an affine transformation that mapped my triangle onto 
+            the mid-way triangle and similarly mapped the Joker's triangle to the same mid-way 
+            triangle. Once the affine transformations were computed, I warped each triangle from 
+            my face and from the Joker's face to fit the mid-way shape. Then I averaged the pixel 
+            values of the warped regions from both images. Here is the result.
         </p>
         <div class="image-container">
             <div class="image-item">
