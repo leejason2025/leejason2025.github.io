@@ -1,1 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 180 Proj 3: Face Morphing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 2%;
+            padding: 0 5%; 
+            text-align: center;
+            background-color: #E7E9F0;
+            color: #051747;
+        }
+
+        .title-block {
+            background-color: #081F62; 
+            color: #E7E9F0;
+            padding: 4% 2%; 
+            margin-bottom: 3%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.7em; 
+            margin-bottom: 1%;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 1%;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        section h2 {
+            font-size: 1.8em; 
+            margin-bottom: 2%;
+            margin-top: 5%; 
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #081F62; 
+            margin: 1% auto; 
+        }
+
+        section {
+            margin-bottom: 3%;
+        }
+
+        .image-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 7px;
+            justify-items: center;
+        }
+        
+        img {
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            border: 5px solid #535F80;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 2%;
+            font-size: 1.1em;
+            line-height: 1.6em; 
+        }
+
+        /* Specific grid adjustments for each section */
+        #defining-correspondences .image-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        #midway-face .image-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        #mean-face-population .image-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        #caricatures .image-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #changing-genders .image-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Adjust for second row of images in gender-changing section */
+        #changing-genders .image-container + .image-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="title-block">
+        <h1>CS 180 Project 3: Face Morphing</h1>
+        <h2>Exploring Face Morphing Techniques</h2>
+        <h3>Your Name</h3>
+    </div>
+    
+    <section id="intro">
+        <h2>Introduction</h2>
+        <p>
+            In this project, we explored face morphing techniques by producing a morph animation between two faces. 
+            We also computed the mean of a population of faces and extrapolated a caricature from the mean. Face morphing 
+            is achieved by warping the image shape and cross-dissolving the colors between two faces. The warp is controlled 
+            by defining correspondences between facial features, such as the eyes, nose, mouth, and ears.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/face1.jpg" alt="Your Face">
+                <p>Your Face</p>
+            </div>
+            <div class="image-item">
+                <img src="media/face2.jpg" alt="Target Face">
+                <p>Target Face</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="defining-correspondences">
+        <h2>Defining Correspondences</h2>
+        <p>
+            To achieve a smooth transformation, I defined correspondences between my face and the target face. Key points 
+            such as the eyes, nose, mouth, and chin were manually marked on both images. The corresponding points ensure 
+            that the transformation maps the facial features correctly, resulting in a smooth morphing process.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/your_face_points.jpg" alt="Your Face with Correspondence Points">
+                <p>Your Face Points</p>
+            </div>
+            <div class="image-item">
+                <img src="media/target_face_points.jpg" alt="Target Face with Correspondence Points">
+                <p>Target Face Points</p>
+            </div>
+            <div class="image-item">
+                <img src="media/triangulation.jpg" alt="Delaunay Triangulation">
+                <p>Delaunay Triangulation</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="midway-face">
+        <h2>Computing the "Mid-way Face"</h2>
+        <p>
+            After defining correspondences, I computed the mid-way face. The mid-way face is a combination of both the geometry 
+            and colors of the two images, taking the average shape of the two faces and blending their pixel intensities. 
+            This produces a face that is an equal mix of both input images.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/your_face_warped.jpg" alt="Your Face Warped">
+                <p>Your Face Warped</p>
+            </div>
+            <div class="image-item">
+                <img src="media/target_face_warped.jpg" alt="Target Face Warped">
+                <p>Target Face Warped</p>
+            </div>
+            <div class="image-item">
+                <img src="media/midway_face.jpg" alt="Mid-way Face">
+                <p>Mid-way Face</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="morph-sequence">
+        <h2>The Morph Sequence</h2>
+        <p>
+            The morph sequence is the animation of my face transforming into the target face. 
+            This animation consists of 45 frames where frame 0 is my original face and frame 45 is the target face. 
+            Below is the animation in .gif format.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/morph_sequence.gif" alt="Morph Sequence">
+            </div>
+        </div>
+    </section>
+
+    <section id="mean-face-population">
+        <h2>The "Mean Face" of a Population</h2>
+        <p>
+            I computed the mean face from a population of faces by averaging their shapes and pixel intensities. 
+            Below are some sample images from the population, followed by the computed mean face.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/face_1.jpg" alt="Face 1">
+            </div>
+            <div class="image-item">
+                <img src="media/face_2.jpg" alt="Face 2">
+            </div>
+            <div class="image-item">
+                <img src="media/face_3.jpg" alt="Face 3">
+            </div>
+            <div class="image-item">
+                <img src="media/face_4.jpg" alt="Face 4">
+            </div>
+            <div class="image-item">
+                <img src="media/face_5.jpg" alt="Face 5">
+            </div>
+            <div class="image-item">
+                <img src="media/face_6.jpg" alt="Face 6">
+            </div>
+            <div class="image-item">
+                <img src="media/face_7.jpg" alt="Face 7">
+            </div>
+            <div class="image-item">
+                <img src="media/face_8.jpg" alt="Face 8">
+            </div>
+            <div class="image-item">
+                <img src="media/mean_face.jpg" alt="Mean Face">
+                <p>Mean Face of Population</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="caricatures">
+        <h2>Caricatures: Extrapolating from the Mean</h2>
+        <p>
+            To create caricatures, I extrapolated from the mean face by amplifying the differences between my face 
+            and the population mean. Below are my face and the exaggerated caricature.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/your_face.jpg" alt="Your Face">
+                <p>Your Face</p>
+            </div>
+            <div class="image-item">
+                <img src="media/caricature.jpg" alt="Caricature">
+                <p>Caricature of Your Face</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="changing-genders">
+        <h2>Changing Genders</h2>
+        <p>
+            Finally, I explored gender morphing by blending my face with a male and female population mean. 
+            Below is the result of morphing my face into the male and female means, as well as some intermediate stages.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/your_face.jpg" alt="Your Face">
+                <p>Your Face</p>
+            </div>
+            <div class="image-item">
+                <img src="media/female_mean.jpg" alt="Female Mean">
+                <p>Female Mean</p>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/gender_transition1.jpg" alt="Transition 1">
+            </div>
+            <div class="image-item">
+                <img src="media/gender_transition2.jpg" alt="Transition 2">
+            </div>
+            <div class="image-item">
+                <img src="media/gender_transition3.jpg" alt="Transition 3">
+            </div>
+        </div>
+    </section>
+</body>
+</html>
