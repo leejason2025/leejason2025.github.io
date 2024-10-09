@@ -144,9 +144,15 @@
     <section id="defining-correspondences">
         <h2>Defining Correspondences</h2>
         <p>
-            To achieve a smooth transformation, I defined correspondences between my face and the target face. Key points 
-            such as the eyes, nose, mouth, and chin were manually marked on both images. The corresponding points ensure 
-            that the transformation maps the facial features correctly, resulting in a smooth morphing process.
+            I started by taking a picture of myself and selecting an image of Arthur Fleck (Joker). 
+            To properly morph the images, I used a student-made keypoint labeling tool to mark corresponding
+            facial landmarks (eyes, nose, mouth, etc.) on both images. These points ensured proper 
+            alignment of facial features during the transformation. Next, I computed the mid-way shape 
+            by averaging the correspondence points from both faces. Using these points, I applied 
+            Delaunay triangulation to divide the faces into triangular regions, which helped 
+            preserve the structure and smoothness during the morph. Finally, I visualized the 
+            triangulation for my face, Joker's face, and the mid-way shape to confirm the 
+            accuracy of the correspondences and triangulation.
         </p>
         <div class="image-container">
             <div class="image-item">
