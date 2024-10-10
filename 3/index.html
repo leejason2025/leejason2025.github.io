@@ -124,10 +124,12 @@
     <section id="intro">
         <h2>Introduction</h2>
         <p>
-            In this project, we explored face morphing techniques by producing a morph animation between two faces. 
-            We also computed the mean of a population of faces and extrapolated a caricature from the mean. Face morphing 
+            In this project, I explored face morphing techniques by producing a morph animation between two faces. 
+            I also computed the mean of a population of faces and extrapolated a caricature from the mean. Face morphing 
             is achieved by warping the image shape and cross-dissolving the colors between two faces. The warp is controlled 
-            by defining correspondences between facial features, such as the eyes, nose, mouth, and ears.
+            by defining correspondences between facial features, such as the eyes, nose, mouth, and ears. Moreover, I worked with 
+            images of Danish people and found the average face of a Danish person, as well as trasnformed myself into the opposite gender
+             by using an averaged image of Chinese females.
         </p>
         <div class="image-container">
             <div class="image-item">
@@ -219,8 +221,12 @@
     <section id="mean-face-population">
         <h2>The "Mean Face" of a Population</h2>
         <p>
-            I computed the mean face from a population of faces by averaging their shapes and pixel intensities. 
-            Below are some sample images from the population, followed by the computed mean face.
+            Next, I worked with a dataset of 37 Danish faces to compute the average face. I began by extracting 
+            key facial points from .asf files associated with each image, which marked important features. Using these keypoints, 
+            I calculated the average shape of the faces and warped each face to fit this geometry using Delaunay triangulation. 
+            After aligning all the faces to the average shape, I averaged their pixel values to create the "mean face" 
+            of the population, representing the typical facial features of the dataset. Lastly, I compared my face to the 
+            average face by warping my face into the average geometry and vice versa.
         </p>
         <div class="image-container">
             <div class="image-item">
@@ -266,8 +272,12 @@
     <section id="caricatures">
         <h2>Caricatures: Extrapolating from the Mean</h2>
         <p>
-            To create caricatures, I extrapolated from the mean face by amplifying the differences between my face 
-            and the population mean. Below are my face and the exaggerated caricature.
+            For this section, I exaggerated my facial features by manipulating the keypoints in relation to 
+            the average face of the population. Using an extrapolation factor (alpha), I adjusted the 
+            keypoints to either emphasize the differences (positive alpha, e.g., 1.4) or make
+            my features closer to the average (negative alpha, e.g., -1.5). I then warped my face to these
+            new, exaggerated geometries using Delaunay triangulation, creating two caricatures: one where 
+            my features are exaggerated and distinct, and another where they are more blended with the average. 
         </p>
         <div class="image-container">
             <div class="image-item">
@@ -284,8 +294,13 @@
     <section id="changing-genders">
         <h2>Changing Genders</h2>
         <p>
-            Finally, I explored gender morphing by blending my face with a male and female population mean. 
-            Below is the result of morphing my face into the male and female means, as well as some intermediate stages.
+            In the Changing Genders section, I transformed my face into the face of an average Chinese female 
+            by experimenting with both shape and appearance changes. First, I morphed my face into the female 
+            shape by aligning my facial structure with the average female keypoints while keeping my original 
+            appearance. Then, I applied only the female appearance, maintaining my original facial structure 
+            but adopting the female's textures and colors. Finally, I combined both the shape and appearance t
+            ransformations, fully morphing my face into a female version, altering both the geometry and visual 
+            traits.
         </p>
         <div class="image-container">
             <div class="image-item">
