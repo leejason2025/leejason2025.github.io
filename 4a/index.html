@@ -127,11 +127,11 @@
         </p>
         <div class="image-container">
             <div class="image-item">
-                <img src="media/leftp.jpg" alt="Image 1">
+                <img src="media/leftp.png" alt="Image 1">
                 <p>Left Image</p>
             </div>
             <div class="image-item">
-                <img src="media/rightp.jpg" alt="Image 2">
+                <img src="media/rightp.png" alt="Image 2">
                 <p>Right Image</p>
             </div>
         </div>
@@ -196,8 +196,13 @@
     <section id="blending-mosaic">
         <h2>Blending Mosaic</h2>
         <p>
-            In the final step, I blended the warped images to create a mosaic. By carefully blending the overlapping regions, 
-            I created a smooth transition between the images, producing a visually coherent result. Below is the completed mosaic.
+            In the final section, I blended the warped left image with the right image to create a seamless mosaic. 
+            First, I created binary masks for both images to identify the regions where they overlap. 
+            I set the right image as the base and then applied a weighted average blending in the overlapping 
+            areas. For non-overlapping regions, I directly copied pixels from the warped left image. Initially, there were 
+            extremely visible edges so I used a laplacian pyramid to blend it. I also tried playing with the weights of the averaging.
+            To my suprise, by tweaking the weights while averaging the photos, I created a seemless transition, better than the laplacian pyramid.
+            I am not sure why, but I think it was due to the nature of my photo. Thus, I left it with only using a naive weighted average blend.
         </p>
         <div class="image-container">
             <div class="image-item">
