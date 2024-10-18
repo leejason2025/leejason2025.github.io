@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 180 Project 4a: Image Warping and Homographies</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 2%;
+            padding: 0 5%; 
+            text-align: center;
+            background-color: #E7E9F0;
+            color: #051747;
+        }
+
+        .title-block {
+            background-color: #081F62; 
+            color: #E7E9F0;
+            padding: 4% 2%; 
+            margin-bottom: 3%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.7em; 
+            margin-bottom: 1%;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 1%;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        section h2 {
+            font-size: 1.8em; 
+            margin-bottom: 2%;
+            margin-top: 5%; 
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #081F62; 
+            margin: 1% auto; 
+        }
+
+        section {
+            margin-bottom: 3%;
+        }
+
+        .image-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 7px;
+            justify-items: center;
+        }
+        
+        img {
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            border: 5px solid #535F80;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 2%;
+            font-size: 1.1em;
+            line-height: 1.6em; 
+        }
+
+        /* Specific grid adjustments for each section */
+        #collecting-pictures .image-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #image-rectification .image-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #recover-homographies .image-container, 
+        #blending-mosaic .image-container,
+        #warping-images .image-container {
+            grid-template-columns: 1fr;
+        }
+
+        #recover-homographies img,
+        #warping-images img,
+        #blending-mosaic img {
+            width: 800px; /* Adjust long image width */
+        }
+    </style>
+</head>
+<body>
+    <div class="title-block">
+        <h1>CS 180 Project: Image Warping and Homographies</h1>
+        <h2>Exploring Homography and Image Warping</h2>
+        <h3>Your Name</h3>
+    </div>
+    
+    <section id="collecting-pictures">
+        <h2>Collecting Pictures</h2>
+        <p>
+            In the first stage of the project, I collected images from different perspectives to create a mosaic.
+            The images were captured with slight changes in viewpoint to later apply homographies for alignment. 
+            Below are two of the collected images.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/image1.jpg" alt="Image 1">
+                <p>Collected Image 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/image2.jpg" alt="Image 2">
+                <p>Collected Image 2</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="recover-homographies">
+        <h2>Recover Homographies</h2>
+        <p>
+            To align the images, I recovered the homographies by matching corresponding points between the images. 
+            The homography matrix allows transforming one image to align with the others by estimating how 
+            the plane of the second image can be transformed into the first. Here is the result of applying 
+            the recovered homography to align one image with the other.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/homography_result.jpg" alt="Homography Alignment">
+                <p>Homography Alignment Result</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="warping-images">
+        <h2>Warping Images</h2>
+        <p>
+            After recovering the homographies, the next step involved warping the images so that they could be 
+            stitched together seamlessly. By applying the homography transformations, I was able to warp each 
+            image into the correct perspective. Below is the result of the image warping process.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/warped_image.jpg" alt="Warped Image">
+                <p>Warped Image</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="image-rectification">
+        <h2>Image Rectification</h2>
+        <p>
+            Image rectification was performed to correct the perspective of tilted or skewed images. This technique 
+            was useful for transforming an image of a planar surface into a frontal view. Below are examples of an 
+            image before and after rectification, where the plane is restored to its correct orientation.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/original_rectification.jpg" alt="Original Image">
+                <p>Original Image</p>
+            </div>
+            <div class="image-item">
+                <img src="media/rectified_image.jpg" alt="Rectified Image">
+                <p>Rectified Image</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="blending-mosaic">
+        <h2>Blending Mosaic</h2>
+        <p>
+            In the final step, I blended the warped images to create a mosaic. By carefully blending the overlapping regions, 
+            I created a smooth transition between the images, producing a visually coherent result. Below is the completed mosaic.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/mosaic.jpg" alt="Blended Mosaic">
+                <p>Blended Mosaic</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
