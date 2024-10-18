@@ -156,10 +156,12 @@
     <section id="warping-images">
         <h2>Warping Images</h2>
         <p>
-            After recovering the homographies, the next step involved warping the images so that they could be 
-            stitched together seamlessly. By applying the homography transformations, I was able to warp each 
-            image into the correct perspective. Below is the result of the image warping process.
-        </p>
+            Next I implemented a function warpImage that applies a homography transformation to warp an image onto a new plane.
+            The function takes in an image, a homography matrix, and an output size for the resulting warped image. Inside the function,
+            I calculated the inverse of the homography matrix to map each pixel from the output image back to the original image 
+            coordinates. For every pixel in the output, I used the inverse homography to find its corresponding position 
+            in the original image, then sampled the pixel value from that position if it was within the bounds of the 
+            original image.
         <div class="image-container">
             <div class="image-item">
                 <img src="media/right.jpg" alt="Warped Image">
@@ -175,9 +177,9 @@
     <section id="image-rectification">
         <h2>Image Rectification</h2>
         <p>
-            Image rectification was performed to correct the perspective of tilted or skewed images. This technique 
-            was useful for transforming an image of a planar surface into a frontal view. Below are examples of an 
-            image before and after rectification, where the plane is restored to its correct orientation.
+            To test the homography and image warping functions, I took a skewed picture of a painting I recently completed and rectified it. 
+            To do this, I chose the four corners of the painting and also using a blank image i chose the four corners as the set of points. 
+            I then found the homography matrix and used it to warp the skewed painting to a rectangle.
         </p>
         <div class="image-container">
             <div class="image-item">
