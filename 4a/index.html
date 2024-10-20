@@ -140,15 +140,16 @@
     <section id="recover-homographies">
         <h2>Recover Homographies</h2>
         <p>
-            To align the images, I recovered the homographies by matching corresponding points between the images. 
-            The homography matrix allows transforming one image to align with the others by estimating how 
-            the plane of the second image can be transformed into the first. Here is the result of applying 
-            the recovered homography to align one image with the other.
+            To align the images, I needed to determine a homography matrix that allow me to transform the images. In this 3 by 3 matrix, the bottom right value
+            is 1 as a scaling factor. The homography can then be calculated by selecting corresponding points in both images and setting up a system of equations.
+            using corresponding homogenous points, we can derive two equations. By expanding and simplifying the terms, and then dividing by the homogeneous coordinate 
+            we obtain two equations per point pair. Then all of the n pairs will result in 2n equations with 8 unknowns. As suggested by course staff, I used 12 pairs instead of 
+            the minimum of four so that my images could alight more precisely. The equations are displayed below:
         </p>
         <div class="image-container">
             <div class="image-item">
-                <img src="media/homography_result.jpg" alt="Homography Alignment">
-                <p>Homography Alignment Result</p>
+                <img src="media/homography.jpg" alt="Homography Alignment">
+                <p>Homography Equations</p>
             </div>
         </div>
     </section>
