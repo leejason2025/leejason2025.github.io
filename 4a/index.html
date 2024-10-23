@@ -125,7 +125,7 @@
             that important landmarks were consistently mapped across both images, which would 
             facilitate accurate homography recovery and seamless image blending later in the project.
         </p>
-        <div class="image-container">
+        <div class="image-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
         <div class="image-item">
             <img src="media/left.jpg" alt="Tree Left">
             <p>Tree Left</p>
@@ -178,7 +178,8 @@
             I calculated the inverse of the homography matrix to map each pixel from the output image back to the original image 
             coordinates. For every pixel in the output, I used the inverse homography to find its corresponding position 
             in the original image, then sampled the pixel value from that position if it was within the bounds of the 
-            original image.
+            original image. Moreover, I also added a box function so that I could properly calculate a box that would fit the comined image
+            of the left (base) and right (warped).
         <div class="image-container">
             <div class="image-item">
                 <img src="media/right.jpg" alt="Warped Image">
