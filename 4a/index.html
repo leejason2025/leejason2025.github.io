@@ -180,22 +180,39 @@
             in the original image, then sampled the pixel value from that position if it was within the bounds of the 
             original image. Moreover, I also added a box function so that I could properly calculate a box that would fit the comined image
             of the left (base) and right (warped).
-        <div class="image-container">
-            <div class="image-item">
-                <img src="media/right.jpg" alt="Warped Image">
-                <p>Original Image</p>
-            </div>
-            <div class="image-item">
-                <img src="media/right_warped.jpg" alt="Warped Image">
-                <p>Warped Image</p>
-            </div>
+        <div class="image-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div class="image-item">
+            <img src="media/right.jpg" alt="Tree Right">
+            <p>Tree Right</p>
         </div>
+        <div class="image-item">
+            <img src="media/brick_right.jpg" alt="Brick Right">
+            <p>Brick Right</p>
+        </div>
+        <div class="image-item">
+            <img src="media/alley_right.jpg" alt="Alley Right">
+            <p>Alley Right</p>
+        </div>
+        <div class="image-item">
+            <img src="media/warped_right_trees.jpg" alt="Tree Left">
+            <p>Tree Right Warped</p>
+        </div>
+        <div class="image-item">
+            <img src="media/warped_right_brick.jpg" alt="Brick Left">
+            <p>Brick Right Warped</p>
+        </div>
+        <div class="image-item">
+            <img src="media/warped_right_alley.jpg" alt="Alley Left">
+            <p>Alley Right Warped</p>
+        </div>
+        
+    </div>
     </section>
 
     <section id="image-rectification">
         <h2>Image Rectification</h2>
         <p>
-            To test the homography and image warping functions, I took a skewed picture of a painting I recently completed and rectified it. 
+            To test the homography and image warping functions, I took a skewed two pictures of paintings I recently completed and rectified it. 
             To do this, I chose the four corners of the painting and also using a blank image i chose the four corners as the set of points. 
             I then found the homography matrix and used it to warp the skewed painting to a rectangle.
         </p>
@@ -214,13 +231,13 @@
     <section id="blending-mosaic">
         <h2>Blending Mosaic</h2>
         <p>
-            In the final section, I blended the warped left image with the right image to create a seamless mosaic. 
+            In the final section, I blended the warped right image with the left image to create a seamless mosaic. 
             First, I created binary masks for both images to identify the regions where they overlap. 
             I set the right image as the base and then applied a weighted average blending in the overlapping 
-            areas. For non-overlapping regions, I directly copied pixels from the warped left image. Initially, there were 
-            extremely visible edges so I used a laplacian pyramid to blend it. I also tried playing with the weights of the averaging.
-            To my suprise, by tweaking the weights while averaging the photos, I created a seemless transition, better than the laplacian pyramid.
-            I am not sure why, but I think it was due to the nature of my photo. Thus, I left it with only using a naive weighted average blend.
+            areas. For non-overlapping regions, I  tried playing with the weights of the averaging. I tested many alpha
+            values for each of the three comined images. It worked seemlessly for the first two. However, the third image 
+            was hard to create a seamless transition due to the original nature of the images. One was a lot darker than the 
+            other.
         </p>
         <div class="image-container">
             <div class="image-item">
