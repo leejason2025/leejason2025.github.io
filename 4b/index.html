@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 180 Project 4a: Image Warping and Homographies</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 2%;
+            padding: 0 5%; 
+            text-align: center;
+            background-color: #E7E9F0;
+            color: #051747;
+        }
+
+        .title-block {
+            background-color: #081F62; 
+            color: #E7E9F0;
+            padding: 4% 2%; 
+            margin-bottom: 3%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.7em; 
+            margin-bottom: 1%;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 1%;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        section h2 {
+            font-size: 1.8em; 
+            margin-bottom: 2%;
+            margin-top: 5%; 
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #081F62; 
+            margin: 1% auto; 
+        }
+
+        section {
+            margin-bottom: 3%;
+        }
+
+        .image-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 7px;
+            justify-items: center;
+        }
+        
+        img {
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            border: 5px solid #535F80;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 2%;
+            font-size: 1.1em;
+            line-height: 1.6em; 
+        }
+
+        /* Specific grid adjustments for each section */
+        #collecting-pictures .image-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #image-rectification .image-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #recover-homographies .image-container, 
+        #blending-mosaic .image-container,
+        #warping-images .image-container {
+            grid-template-columns: 1fr;
+        }
+
+        #recover-homographies img,
+        #warping-images img,
+        #blending-mosaic img {
+            width: 800px; /* Adjust long image width */
+        }
+    </style>
+</head>
+<body>
+    <div class="title-block">
+        <h1>CS 180 Project 4a: Image Warping and Homographies</h1>
+        <h2>Homography and Image Warping</h2>
+        <h3>Jason Lee</h3>
+    </div>
+    
+    <section id="collecting-pictures">
+        <h2>Collecting Pictures</h2>
+        <p>
+            In the first stage of the project, I collected two pictures of Southside Berkeley 
+            from slightly different perspectives. These images were chosen to capture enough 
+            variation for the subsequent alignment process. To prepare for image warping, I 
+            identified and defined 12 key correspondence points between the pairs of photos, ensuring 
+            that important landmarks were consistently mapped across both images, which would 
+            facilitate accurate homography recovery and seamless image blending later in the project.
+        </p>
+        <div class="image-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div class="image-item">
+            <img src="media/left.jpg" alt="Tree Left">
+            <p>Tree Left</p>
+        </div>
+        <div class="image-item">
+            <img src="media/brick_left.jpg" alt="Brick Left">
+            <p>Brick Left</p>
+        </div>
+        <div class="image-item">
+            <img src="media/alley_left.jpg" alt="Alley Left">
+            <p>Alley Left</p>
+        </div>
+        <div class="image-item">
+            <img src="media/right.jpg" alt="Tree Right">
+            <p>Tree Right</p>
+        </div>
+        <div class="image-item">
+            <img src="media/brick_right.jpg" alt="Brick Right">
+            <p>Brick Right</p>
+        </div>
+        <div class="image-item">
+            <img src="media/alley_right.jpg" alt="Alley Right">
+            <p>Alley Right</p>
+        </div>
+    </div>
+    </section>
+
+    <section id="recover-homographies">
+        <h2>Recover Homographies</h2>
+        <p>
+            To align the images, I needed to determine a homography matrix that allow me to transform the images. In this 3 by 3 matrix, the bottom right value
+            is 1 as a scaling factor. The homography can then be calculated by selecting corresponding points in both images and setting up a system of equations.
+            using corresponding homogenous points, we can derive two equations. By expanding and simplifying the terms, and then dividing by the homogeneous coordinate 
+            we obtain two equations per point pair. Then all of the n pairs will result in 2n equations with 8 unknowns. As suggested by course staff, I used 12 pairs instead of 
+            the minimum of four so that my images could alight more precisely. The equations are displayed below:
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/homography.jpg" alt="Homography Alignment">
+                <p>Homography Equations</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="warping-images">
+        <h2>Warping Images</h2>
+        <p>
+            Next I implemented a function warpImage that applies a homography transformation to warp an image onto a new plane.
+            The function takes in an image, a homography matrix, and an output size for the resulting warped image. Inside the function,
+            I calculated the inverse of the homography matrix to map each pixel from the output image back to the original image 
+            coordinates. For every pixel in the output, I used the inverse homography to find its corresponding position 
+            in the original image, then sampled the pixel value from that position if it was within the bounds of the 
+            original image. Moreover, I also added a box function so that I could properly calculate a box that would fit the comined image
+            of the left (base) and right (warped).
+        <div class="image-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div class="image-item">
+            <img src="media/right.jpg" alt="Tree Right">
+            <p>Tree Right</p>
+        </div>
+        <div class="image-item">
+            <img src="media/brick_right.jpg" alt="Brick Right">
+            <p>Brick Right</p>
+        </div>
+        <div class="image-item">
+            <img src="media/alley_right.jpg" alt="Alley Right">
+            <p>Alley Right</p>
+        </div>
+        <div class="image-item">
+            <img src="media/warped_right_trees.jpg" alt="Tree Left">
+            <p>Tree Right Warped</p>
+        </div>
+        <div class="image-item">
+            <img src="media/warped_right_brick.jpg" alt="Brick Left">
+            <p>Brick Right Warped</p>
+        </div>
+        <div class="image-item">
+            <img src="media/warped_right_alley.jpg" alt="Alley Left">
+            <p>Alley Right Warped</p>
+        </div>
+        
+    </div>
+    </section>
+
+    <section id="image-rectification">
+        <h2>Image Rectification</h2>
+        <p>
+            To test the homography and image warping functions, I took a skewed two pictures of paintings I recently completed and rectified it. 
+            To do this, I chose the four corners of the painting and also using a blank image i chose the four corners as the set of points. 
+            I then found the homography matrix and used it to warp the skewed painting to a rectangle.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/paint.jpg" alt="Original Image">
+                <p>Original Image</p>
+            </div>
+            <div class="image-item">
+                <img src="media/paint_warped.jpg" alt="Rectified Image">
+                <p>Rectified Image</p>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/monkey.jpg" alt="Original Image">
+                <p>Original Image</p>
+            </div>
+            <div class="image-item">
+                <img src="media/monkey_warped.jpg" alt="Rectified Image">
+                <p>Rectified Image</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="blending-mosaic">
+        <h2>Blending Mosaic</h2>
+        <p>
+            In the final section, I blended the warped right image with the left image to create a seamless mosaic. 
+            First, I created binary masks for both images to identify the regions where they overlap. 
+            I set the right image as the base and then applied a weighted average blending in the overlapping 
+            areas. For non-overlapping regions, I  tried playing with the weights of the averaging. I tested many alpha
+            values for each of the three comined images. It worked seemlessly for the first two. However, the third image 
+            was hard to create a seamless transition due to the original nature of the images. One was a lot darker than the 
+            other.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/combined_trees.jpg" alt="Blended Mosaic">
+                <p>Trees Blended Mosaic</p>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/combined_brick.jpg" alt="Blended Mosaic">
+                <p>Brick Blended Mosaic</p>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/combined_alley.jpg" alt="Blended Mosaic">
+                <p>Alley Blended Mosaic</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
