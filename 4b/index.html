@@ -75,10 +75,9 @@
 
         .image-container {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 7px;
             justify-items: center;
-            align-items: center;
         }
         
         img {
@@ -107,14 +106,20 @@
 
         #recover-homographies .image-container, 
         #blending-mosaic .image-container,
-        #warping-images .image-container {
+        #warping-images .image-container,
+        #feature-descriptor-extraction .image-container,
+        #feature-matching .image-container,
+        #ransac .image-container{
             grid-template-columns: 1fr;
         }
 
         #recover-homographies img,
         #warping-images img,
-        #blending-mosaic img {
-            width: 800px; /* Adjust long image width */
+        #blending-mosaic img,
+        #feature-descriptor-extraction img,
+        #feature-matching img,
+        #ransac img {
+            width: 800px; 
         }
     </style>
 </head>
