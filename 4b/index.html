@@ -38,6 +38,14 @@
             font-size: 1.8em;
         }
 
+        .section-header {
+            font-size: 2em;
+            margin-top: 4%;
+            margin-bottom: 2%;
+            color: #081F62;
+            text-transform: uppercase;
+        }
+
         section h2 {
             font-size: 1.8em; 
             margin-bottom: 2%;
@@ -110,10 +118,12 @@
 </head>
 <body>
     <div class="title-block">
-        <h1>>CS 180 Project 4: Auto-stitching and Photo Mosaics</h1>
+        <h1>CS 180 Project 4: Auto-stitching and Photo Mosaics</h1>
         <h2>Homography, Image Warping, Feature Matching, and Auto-stitching</h2>
         <h3>Jason Lee</h3>
     </div>
+
+    <h2 class="section-header">Part A</h2>
     
     <section id="collecting-pictures">
         <h2>Collecting Pictures</h2>
@@ -126,31 +136,31 @@
             facilitate accurate homography recovery and seamless image blending later in the project.
         </p>
         <div class="image-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-        <div class="image-item">
-            <img src="media/left.jpg" alt="Tree Left">
-            <p>Tree Left</p>
+            <div class="image-item">
+                <img src="media/left.jpg" alt="Tree Left">
+                <p>Tree Left</p>
+            </div>
+            <div class="image-item">
+                <img src="media/brick_left.jpg" alt="Brick Left">
+                <p>Brick Left</p>
+            </div>
+            <div class="image-item">
+                <img src="media/alley_left.jpg" alt="Alley Left">
+                <p>Alley Left</p>
+            </div>
+            <div class="image-item">
+                <img src="media/right.jpg" alt="Tree Right">
+                <p>Tree Right</p>
+            </div>
+            <div class="image-item">
+                <img src="media/brick_right.jpg" alt="Brick Right">
+                <p>Brick Right</p>
+            </div>
+            <div class="image-item">
+                <img src="media/alley_right.jpg" alt="Alley Right">
+                <p>Alley Right</p>
+            </div>
         </div>
-        <div class="image-item">
-            <img src="media/brick_left.jpg" alt="Brick Left">
-            <p>Brick Left</p>
-        </div>
-        <div class="image-item">
-            <img src="media/alley_left.jpg" alt="Alley Left">
-            <p>Alley Left</p>
-        </div>
-        <div class="image-item">
-            <img src="media/right.jpg" alt="Tree Right">
-            <p>Tree Right</p>
-        </div>
-        <div class="image-item">
-            <img src="media/brick_right.jpg" alt="Brick Right">
-            <p>Brick Right</p>
-        </div>
-        <div class="image-item">
-            <img src="media/alley_right.jpg" alt="Alley Right">
-            <p>Alley Right</p>
-        </div>
-    </div>
     </section>
 
     <section id="recover-homographies">
@@ -180,33 +190,33 @@
             in the original image, then sampled the pixel value from that position if it was within the bounds of the 
             original image. Moreover, I also added a box function so that I could properly calculate a box that would fit the comined image
             of the left (base) and right (warped).
+        </p>
         <div class="image-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-        <div class="image-item">
-            <img src="media/right.jpg" alt="Tree Right">
-            <p>Tree Right</p>
+            <div class="image-item">
+                <img src="media/right.jpg" alt="Tree Right">
+                <p>Tree Right</p>
+            </div>
+            <div class="image-item">
+                <img src="media/brick_right.jpg" alt="Brick Right">
+                <p>Brick Right</p>
+            </div>
+            <div class="image-item">
+                <img src="media/alley_right.jpg" alt="Alley Right">
+                <p>Alley Right</p>
+            </div>
+            <div class="image-item">
+                <img src="media/warped_right_trees.jpg" alt="Tree Left">
+                <p>Tree Right Warped</p>
+            </div>
+            <div class="image-item">
+                <img src="media/warped_right_brick.jpg" alt="Brick Left">
+                <p>Brick Right Warped</p>
+            </div>
+            <div class="image-item">
+                <img src="media/warped_right_alley.jpg" alt="Alley Left">
+                <p>Alley Right Warped</p>
+            </div>
         </div>
-        <div class="image-item">
-            <img src="media/brick_right.jpg" alt="Brick Right">
-            <p>Brick Right</p>
-        </div>
-        <div class="image-item">
-            <img src="media/alley_right.jpg" alt="Alley Right">
-            <p>Alley Right</p>
-        </div>
-        <div class="image-item">
-            <img src="media/warped_right_trees.jpg" alt="Tree Left">
-            <p>Tree Right Warped</p>
-        </div>
-        <div class="image-item">
-            <img src="media/warped_right_brick.jpg" alt="Brick Left">
-            <p>Brick Right Warped</p>
-        </div>
-        <div class="image-item">
-            <img src="media/warped_right_alley.jpg" alt="Alley Left">
-            <p>Alley Right Warped</p>
-        </div>
-        
-    </div>
     </section>
 
     <section id="image-rectification">
@@ -268,5 +278,7 @@
             </div>
         </div>
     </section>
+
+    <h2 class="section-header">Part B</h2>
 </body>
 </html>
