@@ -79,6 +79,12 @@
             gap: 7px;
             justify-items: center;
         }
+        .image-item.single-image img {
+            width: 80%; 
+            max-width: 800px; 
+            display: block;
+            margin: 0 auto; 
+        }
         
         img {
             max-width: 100%;
@@ -93,6 +99,7 @@
             font-size: 1.1em;
             line-height: 1.6em; 
         }
+        
 
         /* Specific grid adjustments for each section */
         #collecting-pictures .image-container {
@@ -324,7 +331,7 @@
             This descriptor is used in the feature matching step to compare features across images.
         </p>
         <div class="image-container">
-            <div class="image-item">
+            <div class="image-item single-image">
                 <img src="media/features.jpg" alt="Feature Descriptor Extraction">
                 <p>Feature Descriptor Extraction</p>
             </div>
@@ -338,7 +345,7 @@
             I identified corresponding features in each image that are likely to represent the same point in the scene.
         </p>
         <div class="image-container">
-            <div class="image-item">
+            <div class="image-item single-image">
                 <img src="media/matches.jpg" alt="Feature Matching">
                 <p>Feature Matching</p>
             </div>
@@ -353,7 +360,7 @@
             the most reliable correspondences.
         </p>
         <div class="image-container">
-            <div class="image-item">
+            <div class="image-item single-image">
                 <img src="media/ransac.jpg" alt="RANSAC Result">
                 <p>RANSAC Result</p>
             </div>
