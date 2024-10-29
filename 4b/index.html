@@ -128,7 +128,7 @@
     <section id="collecting-pictures">
         <h2>Collecting Pictures</h2>
         <p>
-            In the first stage of the project, I collected two pictures of Southside Berkeley 
+            In the first stage of the project, I collected three sets of two pictures of Southside Berkeley 
             from slightly different perspectives. These images were chosen to capture enough 
             variation for the subsequent alignment process. To prepare for image warping, I 
             identified and defined 12 key correspondence points between the pairs of photos, ensuring 
@@ -280,5 +280,117 @@
     </section>
 
     <h2 class="section-header">Part B</h2>
+    <section id="detecting-corner-features">
+        <h2>Detecting Corner Features</h2>
+        <p>
+            In this stage, I implemented corner detection using the Harris Corner Detection algorithm. The goal was to identify strong corner points 
+            that would serve as features for matching across images. Two images are presented here to show the detected corner features.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/corner_features_1.jpg" alt="Corner Features Image 1">
+                <p>Corner Features Image 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/corner_features_2.jpg" alt="Corner Features Image 2">
+                <p>Corner Features Image 2</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="adaptive-non-maximal-suppression">
+        <h2>Adaptive Non-Maximal Suppression</h2>
+        <p>
+            To reduce the number of corner points and focus on the most significant ones, I applied Adaptive Non-Maximal Suppression (ANMS). 
+            This technique selects a subset of features that are well-distributed across the image by suppressing weaker features near stronger ones.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/anms_1.jpg" alt="ANMS Image 1">
+                <p>ANMS Image 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/anms_2.jpg" alt="ANMS Image 2">
+                <p>ANMS Image 2</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="feature-descriptor-extraction">
+        <h2>Feature Descriptor Extraction</h2>
+        <p>
+            For each corner feature, I extracted a feature descriptor—a unique vector of values describing the feature's local appearance. 
+            This descriptor is used in the feature matching step to compare features across images.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/feature_descriptor.jpg" alt="Feature Descriptor Extraction">
+                <p>Feature Descriptor Extraction</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="feature-matching">
+        <h2>Feature Matching</h2>
+        <p>
+            I then matched features between the images by comparing the feature descriptors. Using nearest-neighbor distance ratio matching, 
+            I identified corresponding features in each image that are likely to represent the same point in the scene.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/feature_matching.jpg" alt="Feature Matching">
+                <p>Feature Matching</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ransac">
+        <h2>RANSAC</h2>
+        <p>
+            To improve the accuracy of feature matching, I applied the RANSAC algorithm, which iteratively selects random subsets of matches, 
+            estimates a homography, and checks its consistency across all matches. This helps in filtering outliers and retaining only 
+            the most reliable correspondences.
+        </p>
+        <div class="image-container">
+            <div class="image-item">
+                <img src="media/ransac.jpg" alt="RANSAC Result">
+                <p>RANSAC Result</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="final-results">
+        <h2>Final Results</h2>
+        <p>
+            The final output consists of the blended mosaics created by stitching images together using the robust features obtained from RANSAC.
+            The results showcase the seamless transition and alignment of overlapping areas in the images.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item">
+                <img src="media/final_result_1.jpg" alt="Final Result 1">
+                <p>Final Result 1</p>
+            </div>
+            <div class="image-item">
+                <img src="media/final_result_2.jpg" alt="Final Result 2">
+                <p>Final Result 2</p>
+            </div>
+            <div class="image-item">
+                <img src="media/final_result_3.jpg" alt="Final Result 3">
+                <p>Final Result 3</p>
+            </div>
+            <div class="image-item">
+                <img src="media/final_result_4.jpg" alt="Final Result 4">
+                <p>Final Result 4</p>
+            </div>
+            <div class="image-item">
+                <img src="media/final_result_5.jpg" alt="Final Result 5">
+                <p>Final Result 5</p>
+            </div>
+            <div class="image-item">
+                <img src="media/final_result_6.jpg" alt="Final Result 6">
+                <p>Final Result 6</p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
