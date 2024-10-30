@@ -334,8 +334,11 @@
     <section id="feature-descriptor-extraction">
         <h2>Feature Descriptor Extraction</h2>
         <p>
-            For each corner feature, I extracted a feature descriptor—a unique vector of values describing the feature's local appearance. 
-            This descriptor is used in the feature matching step to compare features across images.
+            The I extracted feature descriptors for each point found by ANMS by creating normalized, 
+            vectorized patches around each keypoint in a blurred image. For each keypoint, it extracts a 
+            square patch, flattens it, and normalizes it to zero mean and unit variance, ensuring 
+            consistency across descriptors. The result is a set of robust descriptors that capture 
+            local image details for each keypoint, ideal for reliable feature matching.
         </p>
         <div class="image-container">
             <div class="image-item">
@@ -348,8 +351,10 @@
     <section id="feature-matching">
         <h2>Feature Matching</h2>
         <p>
-            I then matched features between the images by comparing the feature descriptors. Using nearest-neighbor distance ratio matching, 
-            I identified corresponding features in each image that are likely to represent the same point in the scene.
+            I then matched features between the images by comparing the feature descriptors. I matched features between two descriptor 
+            sets by finding the two closest matches for each descriptor and applying Lowe's ratio test to ensure distinctiveness. 
+            Only matches where the closest match is significantly better than the second-best are retained, resulting in high-quality 
+            feature correspondences. However, notice how there are features that are matched incorrectly. 
         </p>
         <div class="image-container">
             <div class="image-item">
@@ -364,7 +369,7 @@
         <p>
             To improve the accuracy of feature matching, I applied the RANSAC algorithm, which iteratively selects random subsets of matches, 
             estimates a homography, and checks its consistency across all matches. This helps in filtering outliers and retaining only 
-            the most reliable correspondences.
+            the most reliable correspondences. After applying RANSAC, the points that were incorrectly matched are eliminated.
         </p>
         <div class="image-container">
             <div class="image-item">
@@ -377,8 +382,9 @@
     <section id="final-results">
         <h2>Final Results</h2>
         <p>
-            The final output consists of the blended mosaics created by stitching images together using the robust features obtained from RANSAC.
-            The results showcase the seamless transition and alignment of overlapping areas in the images.
+            Here are the final results using manually defined correspondence points versus the points found through corner detection. I think
+            that because I selected a good amount of points manually, the final resutls did not differ much. For the brick images, I think the over
+            lap is a little less blurry which means that auto detection is probably still more reliable.
         </p>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
             <div class="image-item">
@@ -410,8 +416,14 @@
     <section id="learned">
         <h2>What I Learned</h2>
         <p>
-            The final output consists of the blended mosaics created by stitching images together using the robust features obtained from RANSAC.
-            The results showcase the seamless transition and alignment of overlapping areas in the images.
+            In this project, I learned about the fundamentals of image processing, including feature extraction, 
+            matching, homography, and RANSAC. The coolest part for me was learning how to extract and match 
+            features between images, which feels incredibly powerful and versatile. I can see how this technique c
+            ould be applied in countless areas, from object detection to panorama creation. As an artist, this project 
+            inspired me to explore creative applications of these techniques. I’m excited about the idea of creating 
+            an art project that stitches together corner features from similar paintings or drawings. By aligning 
+            and blending these images, I could produce a unique, mosaic-like piece that highlights patterns and 
+            connections between my works in a way I hadn’t imagined before.
         </p>
     </section>
 </body>
