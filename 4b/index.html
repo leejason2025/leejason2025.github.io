@@ -290,8 +290,11 @@
     <section id="detecting-corner-features">
         <h2>Detecting Corner Features</h2>
         <p>
-            In this stage, I implemented corner detection using the Harris Corner Detection algorithm. The goal was to identify strong corner points 
-            that would serve as features for matching across images. Two images are presented here to show the detected corner features.
+            For the next part of the project, I aimed to have auto corner detection for image stitching.
+            I applied corner detection using the Harris Corner Detection algorithm. This algorithm was given
+            in the project starter code. The effect of this code was to identify strong corner points 
+            that would serve as features for matching across images. Here are the Harris corners found in the 
+            Trees left image. As you can see, there are thousands of corners detected that span the entire image, 
         </p>
         <div class="image-container">
             <div class="image-item">
@@ -309,7 +312,11 @@
         <h2>Adaptive Non-Maximal Suppression</h2>
         <p>
             To reduce the number of corner points and focus on the most significant ones, I applied Adaptive Non-Maximal Suppression (ANMS). 
-            This technique selects a subset of features that are well-distributed across the image by suppressing weaker features near stronger ones.
+            The ANMS code I implemented aimed to select a spatially distributed subset of strong corner points for feature matching. 
+            It does so by calculating a suppression radius for each corner point, representing the minimum distance to a 
+            stronger neighboring point. Using a KD-Tree for efficient nearest-neighbor search, the compute_radius function finds 
+            these distances, and I parrellelized this function across all points for efficiency. Finally, the points are sorted by 
+            radius, and the top num_points are selected, yielding a set of well-separated, high-quality corners for robust feature extraction.
         </p>
         <div class="image-container">
             
@@ -399,6 +406,13 @@
                 <p>Brick Auto Stitching</p>
             </div>
         </div>
+    </section>
+    <section id="learned">
+        <h2>What I Learned</h2>
+        <p>
+            The final output consists of the blended mosaics created by stitching images together using the robust features obtained from RANSAC.
+            The results showcase the seamless transition and alignment of overlapping areas in the images.
+        </p>
     </section>
 </body>
 </html>
