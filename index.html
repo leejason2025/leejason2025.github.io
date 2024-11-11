@@ -1,16 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Raleway', sans-serif;
+            margin: 2%;
+            padding: 0 5%;
+            background-color: #E7E9F0;
+            color: #051747;
+        }
+
+        .title-block {
+            background-color: #081F62;
+            color: #E7E9F0;
+            padding: 4% 2%;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        h3 {
+            font-size: 2em;
+            color: #081F62;
+        }
+
+        section {
+            margin-bottom: 5%;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #081F62;
+            margin: 0.5em auto;
+        }
+
+        .project-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: #081F62;
+            font-size: 1.3em;
+        }
+
+        .project-section h3 {
+            margin-top: 1em;
+            font-size: 1.8em;
+        }
+
+        .project-description {
+            font-size: 1.1em;
+            line-height: 1.6em;
+            max-width: 800px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to My CS180 Portfolio!</h1>
-    <a href="./1/index.html">Project 1</a>
+    <div class="title-block">
+        <h1>Welcome to My Portfolio!</h1>
+        <p>Explore my work in Computer Science and Art.</p>
+    </div>
+
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p class="project-description">
+            Hi! I'm [Your Name], a passionate student in computer science and art. In this portfolio, I showcase my work
+            from both fields, exploring the intersection of creativity and technology. Scroll down to see my projects.
+        </p>
+    </section>
+
+    <section id="computer-science">
+        <h2>Computer Science Portfolio</h2>
+        <div class="project-container">
+            <a href="./1/index.html" class="project-link">Project 1: Images of the Russian Empire</a>
+            <a href="./2/index.html" class="project-link">Project 2: Data Structures Exploration</a>
+            <a href="./3/index.html" class="project-link">Project 3: Machine Learning Basics</a>
+            <a href="./4/index.html" class="project-link">Project 4: Advanced Algorithms</a>
+        </div>
+    </section>
+
+    <section id="art-portfolio">
+        <h2>Art Portfolio</h2>
+        <p class="project-description">
+            Art has always been a personal passion. Here, I share some of my artistic creations, blending techniques
+            from digital design and traditional media.
+        </p>
+        <div class="project-container">
+            <a href="./art1/index.html" class="project-link">Digital Art Piece 1</a>
+            <a href="./art2/index.html" class="project-link">Photography Collection</a>
+            <a href="./art3/index.html" class="project-link">Sketches & Illustrations</a>
+        </div>
+    </section>
 </body>
 </html>
