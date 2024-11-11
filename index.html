@@ -67,6 +67,23 @@
             margin: 0 auto;
             text-align: center;
         }
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .art-grid img {
+            width: 100%;
+            height: auto;
+            border: 5px solid #535F80;
+            transition: transform 0.3s ease;
+        }
+
+        .art-grid img:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -99,13 +116,14 @@
     <section id="art-portfolio">
         <h2>Art Portfolio</h2>
         <p class="project-description">
-            Art has always been a personal passion. Here, I share some of my artistic creations, blending techniques
-            from digital design and traditional media.
+            Art has always been a personal passion. Here, I share some of my artistic creations. I will have an updated webpage with individual sections soon!
         </p>
-        <div class="project-container">
-            <a href="./art1/index.html" class="project-link">Digital Art Piece 1</a>
-            <a href="./art2/index.html" class="project-link">Photography Collection</a>
-            <a href="./art3/index.html" class="project-link">Sketches & Illustrations</a>
+        <div class="art-grid">
+            <img src="path/to/your/image1.jpg" alt="Art Piece 1">
+            <img src="path/to/your/image2.jpg" alt="Art Piece 2">
+            <img src="path/to/your/image3.jpg" alt="Art Piece 3">
+            <img src="path/to/your/image4.jpg" alt="Art Piece 4">
+            <!-- Add more images as needed -->
         </div>
     </section>
 </body>
