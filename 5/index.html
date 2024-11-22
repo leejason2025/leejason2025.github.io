@@ -132,10 +132,14 @@ images generated using these prompts: 'an oil painting of a snowy mountain villa
 
     <section id="forward-process">
         <h2>1.1 Forward Process</h2>
-        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="image-item"><img src="media/forward1.png" alt="Forward Process Image 1"><p>Forward 1</p></div>
-            <div class="image-item"><img src="media/forward2.png" alt="Forward Process Image 2"><p>Forward 2</p></div>
-            <div class="image-item"><img src="media/forward3.png" alt="Forward Process Image 3"><p>Forward 3</p></div>
+        <p>
+            I attempted to restore noisy images using classical Gaussian blur techniques. This method struggles to produce high-quality results, revealing the limitations of traditional approaches compared to modern diffusion methods.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="image-item"><img src="media/orig.png" alt="Forward Process Image 1"><p>Original</p></div>
+            <div class="image-item"><img src="media/g250.png" alt="Forward Process Image 1"><p>noise = 250</p></div>
+            <div class="image-item"><img src="media/g500.png" alt="Forward Process Image 2"><p>noise = 500</p></div>
+            <div class="image-item"><img src="media/g750.png" alt="Forward Process Image 3"><p>noise = 750</p></div>
         </div>
     </section>
 
