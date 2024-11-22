@@ -133,7 +133,8 @@ images generated using these prompts: 'an oil painting of a snowy mountain villa
     <section id="forward-process">
         <h2>1.1 Forward Process</h2>
         <p>
-            I attempted to restore noisy images using classical Gaussian blur techniques. This method struggles to produce high-quality results, revealing the limitations of traditional approaches compared to modern diffusion methods.
+            The forward process adds noise to clean images progressively, turning them into pure noise. This process is reversed during sampling. Using a predefined formula, I add noise to a test image at different levels and observe the gradual degradation into noise.
+
         </p>
         <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
             <div class="image-item"><img src="media/orig.png" alt="Forward Process Image 1"><p>Original</p></div>
@@ -146,8 +147,9 @@ images generated using these prompts: 'an oil painting of a snowy mountain villa
     <section id="classical-denoising">
         <h2>1.2 Classical Denoising</h2>
         <p>
-            With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy images at various levels.
-            This highlights the model's ability to recover high-quality images by projecting noisy inputs back to the image manifold. However, one step is not sufficient enough to produce crystal clear results.
+            
+I attempted to restore noisy images using classical Gaussian blur techniques. This method struggles to produce high-quality results, revealing the limitations of traditional approaches compared to modern diffusion methods.
+
         </p>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
             <div class="image-item"><img src="media/n250.png" alt="Forward Process Image 1"><p>noise = 250</p></div>
@@ -162,6 +164,10 @@ images generated using these prompts: 'an oil painting of a snowy mountain villa
 
     <section id="one-step-denoising">
         <h2>1.3 One Step Denoising</h2>
+        <p>
+With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy images at various levels.
+            This highlights the model's ability to recover high-quality images by projecting noisy inputs back to the image manifold. However, one step is not sufficient enough to produce crystal clear results.
+        </p>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
             <div class="image-item"><img src="media/onestep1.png" alt="One Step 1"><p>One Step 1</p></div>
             <div class="image-item"><img src="media/onestep2.png" alt="One Step 2"><p>One Step 2</p></div>
