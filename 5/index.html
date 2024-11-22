@@ -308,12 +308,26 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
 
         <section id="inpainting">
             <h3>1.7.2 Inpainting</h3>
+            <p>
+                Next I used this image generation technology to fill masked regions of an image with 
+                contextually relevant content. By leveraging noise and conditioning, 
+                the model integrates new elements into the original scene.
+            </p>
             <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
-                <!-- 12 images (3 rows of 4) -->
-                <div class="image-item"><img src="media/inpaint1.png" alt="Inpaint 1"></div>
-                <div class="image-item"><img src="media/inpaint2.png" alt="Inpaint 2"></div>
-                <div class="image-item"><img src="media/inpaint3.png" alt="Inpaint 3"></div>
-                <!-- Repeat for 12 images -->
+                <div class="image-item"><img src="media/orig.png" alt="Original Image"></div>
+                <div class="image-item"><img src="media/MC.png" alt="Mask"></div>
+                <div class="image-item"><img src="media/CC.png" alt="Replaced"></div>
+                <div class="image-item"><img src="media/resC.png" alt="Result"></div>
+                
+                <div class="image-item"><img src="media/origA.png" alt="Original Image"></div>
+                <div class="image-item"><img src="media/MJ.png" alt="Mask"></div>
+                <div class="image-item"><img src="media/CJ.png" alt="Replaced"></div>
+                <div class="image-item"><img src="media/resJ.png" alt="Result"></div>
+                
+                <div class="image-item"><img src="media/origB.png" alt="Original Image"></div>
+                <div class="image-item"><img src="media/MW.png" alt="Mask"></div>
+                <div class="image-item"><img src="media/CW.png" alt="Replaced"></div>
+                <div class="image-item"><img src="media/resW.png" alt="Result"></div>
             </div>
         </section>
 
