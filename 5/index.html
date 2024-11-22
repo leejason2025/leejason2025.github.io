@@ -1,1 +1,193 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun with Diffusion Models</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 2%;
+            padding: 0 5%; 
+            text-align: center;
+            background-color: #E7E9F0;
+            color: #051747;
+        }
+
+        .title-block {
+            background-color: #081F62; 
+            color: #E7E9F0;
+            padding: 4% 2%; 
+            margin-bottom: 3%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.7em; 
+            margin-bottom: 1%;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 1%;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        .section-header {
+            font-size: 2em;
+            margin-top: 4%;
+            margin-bottom: 2%;
+            color: #081F62;
+            text-transform: uppercase;
+        }
+
+        section h2 {
+            font-size: 1.8em; 
+            margin-bottom: 2%;
+            margin-top: 5%; 
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #081F62; 
+            margin: 1% auto; 
+        }
+
+        section {
+            margin-bottom: 3%;
+        }
+
+        .image-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container {
+            display: grid;
+            gap: 10px;
+            justify-items: center;
+        }
+
+        img {
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            border: 5px solid #535F80;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 2%;
+            font-size: 1.1em;
+            line-height: 1.6em; 
+        }
+    </style>
+</head>
+<body>
+    <div class="title-block">
+        <h1>Fun with Diffusion Models</h1>
+        <h2>Exploring Denoising, Sampling, and Creativity</h2>
+        <h3>Your Name</h3>
+    </div>
+
+    <section id="intro">
+        <h2 class="section-header">Introduction</h2>
+        <p>
+            Welcome to this journey into diffusion models, where we delve into the fascinating world of generative AI. 
+            This project explores key steps like forward processes, denoising, and image-to-image translation while 
+            examining the creative potential of these techniques. Through parts A and B, we will cover both theoretical 
+            foundations and practical applications.
+        </p>
+    </section>
+
+    <h2 class="section-header">Part A</h2>
+
+    <section id="setup">
+        <h2>0. Set up</h2>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/setup1.jpg" alt="Setup Image 1"><p>Setup 1</p></div>
+            <div class="image-item"><img src="media/setup2.jpg" alt="Setup Image 2"><p>Setup 2</p></div>
+            <div class="image-item"><img src="media/setup3.jpg" alt="Setup Image 3"><p>Setup 3</p></div>
+            <div class="image-item"><img src="media/setup4.jpg" alt="Setup Image 4"><p>Setup 4</p></div>
+            <div class="image-item"><img src="media/setup5.jpg" alt="Setup Image 5"><p>Setup 5</p></div>
+            <div class="image-item"><img src="media/setup6.jpg" alt="Setup Image 6"><p>Setup 6</p></div>
+        </div>
+    </section>
+
+    <section id="forward-process">
+        <h2>1.1 Forward Process</h2>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/forward1.jpg" alt="Forward Process Image 1"><p>Forward 1</p></div>
+            <div class="image-item"><img src="media/forward2.jpg" alt="Forward Process Image 2"><p>Forward 2</p></div>
+            <div class="image-item"><img src="media/forward3.jpg" alt="Forward Process Image 3"><p>Forward 3</p></div>
+        </div>
+    </section>
+
+    <section id="classical-denoising">
+        <h2>1.2 Classical Denoising</h2>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/denoise1.jpg" alt="Denoising 1"><p>Denoising 1</p></div>
+            <div class="image-item"><img src="media/denoise2.jpg" alt="Denoising 2"><p>Denoising 2</p></div>
+            <div class="image-item"><img src="media/denoise3.jpg" alt="Denoising 3"><p>Denoising 3</p></div>
+            <div class="image-item"><img src="media/denoise4.jpg" alt="Denoising 4"><p>Denoising 4</p></div>
+            <div class="image-item"><img src="media/denoise5.jpg" alt="Denoising 5"><p>Denoising 5</p></div>
+            <div class="image-item"><img src="media/denoise6.jpg" alt="Denoising 6"><p>Denoising 6</p></div>
+        </div>
+    </section>
+
+    <section id="one-step-denoising">
+        <h2>1.3 One Step Denoising</h2>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/onestep1.jpg" alt="One Step 1"><p>One Step 1</p></div>
+            <div class="image-item"><img src="media/onestep2.jpg" alt="One Step 2"><p>One Step 2</p></div>
+            <div class="image-item"><img src="media/onestep3.jpg" alt="One Step 3"><p>One Step 3</p></div>
+            <div class="image-item"><img src="media/onestep4.jpg" alt="One Step 4"><p>One Step 4</p></div>
+            <div class="image-item"><img src="media/onestep5.jpg" alt="One Step 5"><p>One Step 5</p></div>
+            <div class="image-item"><img src="media/onestep6.jpg" alt="One Step 6"><p>One Step 6</p></div>
+            <div class="image-item"><img src="media/onestep7.jpg" alt="One Step 7"><p>One Step 7</p></div>
+            <div class="image-item"><img src="media/onestep8.jpg" alt="One Step 8"><p>One Step 8</p></div>
+            <div class="image-item"><img src="media/onestep9.jpg" alt="One Step 9"><p>One Step 9</p></div>
+        </div>
+    </section>
+
+    <section id="iterative-denoising">
+        <h2>1.4 Iterative Denoising</h2>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/iterative1.jpg" alt="Iterative 1"><p>Iterative 1</p></div>
+            <div class="image-item"><img src="media/iterative2.jpg" alt="Iterative 2"><p>Iterative 2</p></div>
+            <div class="image-item"><img src="media/iterative3.jpg" alt="Iterative 3"><p>Iterative 3</p></div>
+        </div>
+    </section>
+
+    <!-- Repeat similar structure for all other sections -->
+
+    <h2 class="section-header">Part B</h2>
+
+    <section id="training-single-step">
+        <h2>Part 1: Training a Single-Step Denoising UNet</h2>
+        <p>
+            Explore the steps of training a UNet for single-step denoising and its capabilities in handling 
+            complex image distributions and generalizing to unseen data.
+        </p>
+    </section>
+
+    <section id="training-diffusion-model">
+        <h2>Part 2: Training a Diffusion Model</h2>
+        <p>
+            Dive into the process of training a diffusion model, incorporating time and class conditioning, and generating 
+            high-quality samples from the trained network.
+        </p>
+    </section>
+</body>
+</html>
