@@ -200,31 +200,30 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
     <section id="diffusion-model-sampling">
         <h2>1.5 Diffusion Model Sampling</h2>
         <p>
-            Sampling from a trained diffusion model is a critical step in generating meaningful outputs. 
-            This section demonstrates the results of sampling, showcasing how the model reconstructs high-quality images 
-            from noise step by step.
+            Starting with pure noise, I used the iterative denoising process to generate images from scratch. 
+            This showcases the model's creative potential and ability to synthesize realistic visuals. Here are 5 samples I generated.
         </p>
         <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
-            <div class="image-item"><img src="media/sample1.png" alt="Sample 1"><p>Sample 1</p></div>
-            <div class="image-item"><img src="media/sample2.png" alt="Sample 2"><p>Sample 2</p></div>
-            <div class="image-item"><img src="media/sample3.png" alt="Sample 3"><p>Sample 3</p></div>
-            <div class="image-item"><img src="media/sample4.png" alt="Sample 4"><p>Sample 4</p></div>
-            <div class="image-item"><img src="media/sample5.png" alt="Sample 5"><p>Sample 5</p></div>
+            <div class="image-item"><img src="media/s1.png" alt="Sample 1"><p>Sample 1</p></div>
+            <div class="image-item"><img src="media/s2.png" alt="Sample 2"><p>Sample 2</p></div>
+            <div class="image-item"><img src="media/s3.png" alt="Sample 3"><p>Sample 3</p></div>
+            <div class="image-item"><img src="media/s4.png" alt="Sample 4"><p>Sample 4</p></div>
+            <div class="image-item"><img src="media/s5.png" alt="Sample 5"><p>Sample 5</p></div>
         </div>
     </section>
 
     <section id="classifier-free-guidance">
         <h2>1.6 Classifier Free Guidance</h2>
         <p>
-            Classifier-free guidance enhances generation by steering the diffusion process towards more desired outputs 
-            using conditioning information. Here are examples of results with different levels of guidance applied.
+            Classifier-free guidance enhances the images made by steering the diffusion process towards more desired outputs 
+            using conditioning information. Here are 5 samples I generated.
         </p>
         <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
-            <div class="image-item"><img src="media/guidance1.png" alt="Guidance 1"><p>Guidance 1</p></div>
-            <div class="image-item"><img src="media/guidance2.png" alt="Guidance 2"><p>Guidance 2</p></div>
-            <div class="image-item"><img src="media/guidance3.png" alt="Guidance 3"><p>Guidance 3</p></div>
-            <div class="image-item"><img src="media/guidance4.png" alt="Guidance 4"><p>Guidance 4</p></div>
-            <div class="image-item"><img src="media/guidance5.png" alt="Guidance 5"><p>Guidance 5</p></div>
+            <div class="image-item"><img src="media/g1.png" alt="Guidance 1"><p>Guidance Sample 1</p></div>
+            <div class="image-item"><img src="media/g2.png" alt="Guidance 2"><p>Guidance Sample 2</p></div>
+            <div class="image-item"><img src="media/g3.png" alt="Guidance 3"><p>Guidance Sample 3</p></div>
+            <div class="image-item"><img src="media/g4.png" alt="Guidance 4"><p>Guidance Sample 4</p></div>
+            <div class="image-item"><img src="media/g5.png" alt="Guidance 5"><p>Guidance Sample 5</p></div>
         </div>
     </section>
 
