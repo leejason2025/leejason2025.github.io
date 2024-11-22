@@ -170,24 +170,30 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
             This highlights the model's ability to recover high-quality images by projecting noisy inputs back to the image manifold. However, one step is not sufficient enough to produce crystal clear results.
         </p>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="image-item"><img src="media/onestep1.png" alt="One Step 1"><p>One Step 1</p></div>
-            <div class="image-item"><img src="media/onestep2.png" alt="One Step 2"><p>One Step 2</p></div>
-            <div class="image-item"><img src="media/onestep3.png" alt="One Step 3"><p>One Step 3</p></div>
-            <div class="image-item"><img src="media/onestep4.png" alt="One Step 4"><p>One Step 4</p></div>
-            <div class="image-item"><img src="media/onestep5.png" alt="One Step 5"><p>One Step 5</p></div>
-            <div class="image-item"><img src="media/onestep6.png" alt="One Step 6"><p>One Step 6</p></div>
-            <div class="image-item"><img src="media/onestep7.png" alt="One Step 7"><p>One Step 7</p></div>
-            <div class="image-item"><img src="media/onestep8.png" alt="One Step 8"><p>One Step 8</p></div>
-            <div class="image-item"><img src="media/onestep9.png" alt="One Step 9"><p>One Step 9</p></div>
+            <div class="image-item"><img src="media/o250.png" alt="One Step 1"><p>One Step 250</p></div>
+            <div class="image-item"><img src="media/o500.png" alt="One Step 2"><p>One Step 500</p></div>
+            <div class="image-item"><img src="media/o750.png" alt="One Step 3"><p>One Step 750</p></div>
         </div>
     </section>
 
     <section id="iterative-denoising">
         <h2>1.4 Iterative Denoising</h2>
+        <p>
+            Diffusion models excel at iterative denoising. By denoising in steps, I improved the quality
+            of noisy images incrementally. Striding through timesteps optimizes this process, 
+            making a balance between efficiency and accuracy.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="image-item"><img src="media/i0.png" alt="Sample 1"><p>Step 0</p></div>
+            <div class="image-item"><img src="media/i5.png" alt="Sample 2"><p>Step 5/p></div>
+            <div class="image-item"><img src="media/i10.png" alt="Sample 3"><p>Step 10</p></div>
+            <div class="image-item"><img src="media/i15.png" alt="Sample 4"><p>Step 15</p></div>
+            <div class="image-item"><img src="media/i20.png" alt="Sample 5"><p>Step 20</p></div>
+        </div>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="image-item"><img src="media/iterative1.png" alt="Iterative 1"><p>Iterative 1</p></div>
-            <div class="image-item"><img src="media/iterative2.png" alt="Iterative 2"><p>Iterative 2</p></div>
-            <div class="image-item"><img src="media/iterative3.png" alt="Iterative 3"><p>Iterative 3</p></div>
+            <div class="image-item"><img src="media/i.png" alt="Iterative 1"><p>Iterative Denoise</p></div>
+            <div class="image-item"><img src="media/io.png" alt="Iterative 2"><p>One Step Denoise</p></div>
+            <div class="image-item"><img src="media/ig.png" alt="Iterative 3"><p>Guassian Denoise</p></div>
         </div>
     </section>
 
