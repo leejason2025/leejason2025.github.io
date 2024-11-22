@@ -105,10 +105,9 @@
     <section id="intro">
         <h2 class="section-header">Introduction</h2>
         <p>
-            Welcome to this journey into diffusion models, where we delve into the fascinating world of generative AI. 
+            This is a project on diffusion models, where I delve into the fascinating world of denoising and sampling, etc. 
             This project explores key steps like forward processes, denoising, and image-to-image translation while 
-            examining the creative potential of these techniques. Through parts A and B, we will cover both theoretical 
-            foundations and practical applications.
+            examining the creative potential of these techniques.
         </p>
     </section>
 
@@ -284,7 +283,7 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
                 
                 <div class="image-item"><img src="media/W6.png" alt="Sample 6"><p>noise = 20</p></div>
                 
-                <div class="image-item"><img src="media/origW.png" alt="Sample 5"><p>original</p></div>
+                <div class="image-item"><img src="media/OrigW.png" alt="Sample 5"><p>original</p></div>
                 <div class="image-item"><img src="media/C1.png" alt="Sample 1"><p>noise = 1</p></div>
                 <div class="image-item"><img src="media/C2.png" alt="Sample 2"><p>noise = 3</p></div>
                 <div class="image-item"><img src="media/C3.png" alt="Sample 3"><p>noise = 5</p></div>
@@ -293,7 +292,7 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
                 
                 <div class="image-item"><img src="media/C6.png" alt="Sample 6"><p>noise = 20</p></div>
                 
-                <div class="image-item"><img src="media/origC.png" alt="Sample 5"><p>original</p></div>
+                <div class="image-item"><img src="media/OrigC.png" alt="Sample 5"><p>original</p></div>
                 <div class="image-item"><img src="media/D1.png" alt="Sample 1"><p>noise = 1</p></div>
                 <div class="image-item"><img src="media/D2.png" alt="Sample 2"><p>noise = 3</p></div>
                 <div class="image-item"><img src="media/D3.png" alt="Sample 3"><p>noise = 5</p></div>
@@ -302,7 +301,7 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
                 
                 <div class="image-item"><img src="media/D6.png" alt="Sample 6"><p>noise = 20</p></div>
                 
-                <div class="image-item"><img src="media/origD.png" alt="Sample 5"><p>original</p></div>
+                <div class="image-item"><img src="media/OrigD.png" alt="Sample 5"><p>original</p></div>
             </div>
         </section>
 
@@ -369,7 +368,7 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
 
     <section id="visual-anagrams">
         <h2>1.8 Visual Anagrams</h2>
-        <p>
+<!--         <p>
             Visual anagrams involve creatively rearranging visual elements to explore new patterns and forms. 
             Below are examples of anagrams generated using diffusion models.
         </p>
@@ -377,12 +376,12 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
             <div class="image-item"><img src="media/anagram1.png" alt="Anagram 1"></div>
             <div class="image-item"><img src="media/anagram2.png" alt="Anagram 2"></div>
             <div class="image-item"><img src="media/anagram3.png" alt="Anagram 3"></div>
-        </div>
+        </div> -->
     </section>
 
     <section id="hybrid-images">
         <h2>1.10 Hybrid Images</h2>
-        <p>
+<!--         <p>
             Hybrid images blend features from multiple source images to create a unique visual output. These examples highlight 
             the fusion of textures, colors, and patterns using diffusion techniques.
         </p>
@@ -390,7 +389,7 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
             <div class="image-item"><img src="media/hybrid1.png" alt="Hybrid 1"></div>
             <div class="image-item"><img src="media/hybrid2.png" alt="Hybrid 2"></div>
             <div class="image-item"><img src="media/hybrid3.png" alt="Hybrid 3"></div>
-        </div>
+        </div> -->
     </section>
 
     <h2 class="section-header">Part B</h2>
@@ -398,28 +397,51 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
     <section id="training-single-step">
         <h2>Part 1: Training a Single-Step Denoising UNet</h2>
         <p>
-            Explore the steps of training a UNet for single-step denoising and its capabilities in handling 
-            complex image distributions and generalizing to unseen data.
-        </p>
     </section>
 
     <section id="implementing-unet">
         <h3>1.1 Implementing the UNet</h3>
         <p>
-            The UNet architecture is a versatile tool for denoising. Here, we implement and experiment with its structure.
+            I started by building a UNet architecture to act as our denoiser. The UNet consists of 
+            downsampling and upsampling blocks with skip connections to capture both local and 
+            global image features. This architecture processes noisy MNIST images and reconstructs 
+            clean versions using convolutional layers and batch normalization. By implementing this 
+            core building block, I prepared the foundation for training a simple and effective denoiser.
         </p>
     </section>
 
     <section id="using-unet">
         <h3>1.2 Using the UNet to Train a Denoiser</h3>
         <p>
-            By training the UNet with noisy image inputs and clean outputs, the model learns to reconstruct images 
-            effectively.
+            I trained the UNet to denoise MNIST images corrupted by Gaussian noise. 
+            By optimizing an L2 loss, the network learns to map noisy images to their clean counterparts. 
+            Over multiple epochs, the model improves its denoising capability, generalizing to unseen noise levels.
         </p>
         <h4>1.2.1 Training</h4>
-        <p>Details of the training process go here...</p>
+        <p>I trained the UNet on the MNIST dataset for 5 epochs, using batch sizes of 256 
+            and the Adam optimizer. During training, I dynamically generated noisy images for each batch, 
+            ensuring the model learns to generalize across varied noise patterns. The training process is 
+            monitored using a loss curve, and sample outputs are visualized after the 1st and 5th epochs.</p>
         <h4>1.2.2 Out-of-Distribution Testing</h4>
-        <p>Testing the trained model on unseen data for robustness.</p>
+        <p>To test the robustness of the trained UNet, I evaluated its performance on noise levels it 
+            wasn't trained for. By applying different noise levels to test set images, I visualized the model's
+            adaptability to out-of-distribution data.</p>
+        <div class="image-container";">
+            <div class="image-item"><img src="media/noisechart.png" alt="Forward Process Image 1"><p>Noising Process</p></div>
+        </div>
+        <div class="image-container";">
+            <div class="image-item"><img src="media/trainingloss.png" alt="Forward Process Image 1"><p>Training Loss curve</p></div>
+        </div>
+        <div class="image-container";">
+            <div class="image-item"><img src="media/epoc1.png" alt="Forward Process Image 1"><p>Epoch 1 Results</p></div>
+        </div>
+        <div class="image-container";">
+            <div class="image-item"><img src="media/epoc2.png" alt="Forward Process Image 1"><p>Epoch 5 Results</p></div>
+        </div>
+        <div class="image-container";">
+            <div class="image-item"><img src="media/denoised.png" alt="Forward Process Image 1"><p>Denoised</p></div>
+        </div>
+        
     </section>
 
     <section id="training-diffusion-model">
