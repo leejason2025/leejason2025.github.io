@@ -97,8 +97,8 @@
 <body>
     <div class="title-block">
         <h1>Fun with Diffusion Models</h1>
-        <h2>Exploring Denoising, Sampling, and Creativity</h2>
-        <h3>Your Name</h3>
+        <h2>Exploring Denoising, Sampling, and Diffusion</h2>
+        <h3>Jason Lee</h3>
     </div>
 
     <section id="intro">
@@ -115,6 +115,9 @@
 
     <section id="setup">
         <h2>0. Set up</h2>
+        <p>
+            test
+        </p>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
             <div class="image-item"><img src="media/setup1.jpg" alt="Setup Image 1"><p>Setup 1</p></div>
             <div class="image-item"><img src="media/setup2.jpg" alt="Setup Image 2"><p>Setup 2</p></div>
@@ -170,7 +173,103 @@
         </div>
     </section>
 
-    <!-- Repeat similar structure for all other sections -->
+    <section id="diffusion-model-sampling">
+        <h2>1.5 Diffusion Model Sampling</h2>
+        <p>
+            Sampling from a trained diffusion model is a critical step in generating meaningful outputs. 
+            This section demonstrates the results of sampling, showcasing how the model reconstructs high-quality images 
+            from noise step by step.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="image-item"><img src="media/sample1.jpg" alt="Sample 1"><p>Sample 1</p></div>
+            <div class="image-item"><img src="media/sample2.jpg" alt="Sample 2"><p>Sample 2</p></div>
+            <div class="image-item"><img src="media/sample3.jpg" alt="Sample 3"><p>Sample 3</p></div>
+            <div class="image-item"><img src="media/sample4.jpg" alt="Sample 4"><p>Sample 4</p></div>
+            <div class="image-item"><img src="media/sample5.jpg" alt="Sample 5"><p>Sample 5</p></div>
+        </div>
+    </section>
+
+    <section id="classifier-free-guidance">
+        <h2>1.6 Classifier Free Guidance</h2>
+        <p>
+            Classifier-free guidance enhances generation by steering the diffusion process towards more desired outputs 
+            using conditioning information. Here are examples of results with different levels of guidance applied.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="image-item"><img src="media/guidance1.jpg" alt="Guidance 1"><p>Guidance 1</p></div>
+            <div class="image-item"><img src="media/guidance2.jpg" alt="Guidance 2"><p>Guidance 2</p></div>
+            <div class="image-item"><img src="media/guidance3.jpg" alt="Guidance 3"><p>Guidance 3</p></div>
+            <div class="image-item"><img src="media/guidance4.jpg" alt="Guidance 4"><p>Guidance 4</p></div>
+            <div class="image-item"><img src="media/guidance5.jpg" alt="Guidance 5"><p>Guidance 5</p></div>
+        </div>
+    </section>
+
+    <section id="image-to-image-translation">
+        <h2>1.7 Image to Image Translation</h2>
+        <p>
+            Image-to-image translation involves transforming one image into another while preserving its content 
+            but applying stylistic or contextual changes. Below are three subcategories showcasing various applications.
+        </p>
+
+        <section id="editing-hand-drawn-web">
+            <h3>1.7.1 Editing Hand-Drawn and Web Images</h3>
+            <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
+                <!-- 21 images (3 rows of 7) -->
+                <div class="image-item"><img src="media/hand_drawn1.jpg" alt="Hand-Drawn 1"></div>
+                <div class="image-item"><img src="media/hand_drawn2.jpg" alt="Hand-Drawn 2"></div>
+                <div class="image-item"><img src="media/hand_drawn3.jpg" alt="Hand-Drawn 3"></div>
+                <!-- Repeat for 21 images -->
+            </div>
+        </section>
+
+        <section id="inpainting">
+            <h3>1.7.2 Inpainting</h3>
+            <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
+                <!-- 12 images (3 rows of 4) -->
+                <div class="image-item"><img src="media/inpaint1.jpg" alt="Inpaint 1"></div>
+                <div class="image-item"><img src="media/inpaint2.jpg" alt="Inpaint 2"></div>
+                <div class="image-item"><img src="media/inpaint3.jpg" alt="Inpaint 3"></div>
+                <!-- Repeat for 12 images -->
+            </div>
+        </section>
+
+        <section id="text-conditioned-image-to-image">
+            <h3>1.7.3 Text-Conditioned Image-to-Image Translation</h3>
+            <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
+                <!-- 21 images (3 rows of 7) -->
+                <div class="image-item"><img src="media/text_image1.jpg" alt="Text Conditioned 1"></div>
+                <div class="image-item"><img src="media/text_image2.jpg" alt="Text Conditioned 2"></div>
+                <div class="image-item"><img src="media/text_image3.jpg" alt="Text Conditioned 3"></div>
+                <!-- Repeat for 21 images -->
+            </div>
+        </section>
+    </section>
+
+    <section id="visual-anagrams">
+        <h2>1.8 Visual Anagrams</h2>
+        <p>
+            Visual anagrams involve creatively rearranging visual elements to explore new patterns and forms. 
+            Below are examples of anagrams generated using diffusion models.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/anagram1.jpg" alt="Anagram 1"></div>
+            <div class="image-item"><img src="media/anagram2.jpg" alt="Anagram 2"></div>
+            <div class="image-item"><img src="media/anagram3.jpg" alt="Anagram 3"></div>
+        </div>
+    </section>
+
+    <section id="hybrid-images">
+        <h2>1.10 Hybrid Images</h2>
+        <p>
+            Hybrid images blend features from multiple source images to create a unique visual output. These examples highlight 
+            the fusion of textures, colors, and patterns using diffusion techniques.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/hybrid1.jpg" alt="Hybrid 1"></div>
+            <div class="image-item"><img src="media/hybrid2.jpg" alt="Hybrid 2"></div>
+            <div class="image-item"><img src="media/hybrid3.jpg" alt="Hybrid 3"></div>
+        </div>
+    </section>
 
     <h2 class="section-header">Part B</h2>
 
@@ -182,12 +281,37 @@
         </p>
     </section>
 
+    <section id="implementing-unet">
+        <h3>1.1 Implementing the UNet</h3>
+        <p>
+            The UNet architecture is a versatile tool for denoising. Here, we implement and experiment with its structure.
+        </p>
+    </section>
+
+    <section id="using-unet">
+        <h3>1.2 Using the UNet to Train a Denoiser</h3>
+        <p>
+            By training the UNet with noisy image inputs and clean outputs, the model learns to reconstruct images 
+            effectively.
+        </p>
+        <h4>1.2.1 Training</h4>
+        <p>Details of the training process go here...</p>
+        <h4>1.2.2 Out-of-Distribution Testing</h4>
+        <p>Testing the trained model on unseen data for robustness.</p>
+    </section>
+
     <section id="training-diffusion-model">
         <h2>Part 2: Training a Diffusion Model</h2>
-        <p>
-            Dive into the process of training a diffusion model, incorporating time and class conditioning, and generating 
-            high-quality samples from the trained network.
-        </p>
+        <h3>2.1 Adding Time Conditioning to UNet</h3>
+        <p>Time-conditioning adapts the UNet for step-wise sampling in diffusion models.</p>
+        <h3>2.2 Training the UNet</h3>
+        <p>Results from training the UNet for diffusion tasks.</p>
+        <h3>2.3 Sampling from the UNet</h3>
+        <p>Sampling high-quality images from a trained UNet.</p>
+        <h3>2.4 Adding Class-Conditioning to UNet</h3>
+        <p>Introducing class-conditioning for targeted generation.</p>
+        <h3>2.5 Sampling from the Class-Conditioned UNet</h3>
+        <p>Examples of class-conditioned outputs generated by the UNet.</p>
     </section>
 </body>
 </html>
