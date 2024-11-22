@@ -122,10 +122,10 @@ images generated using these prompts: 'an oil painting of a snowy mountain villa
         </p>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
             <div class="image-item"><img src="media/20hat.png" alt="Setup Image 1"><p>steps = 20</p></div>
-            <div class="image-item"><img src="media/50hat.png" alt="Setup Image 2"><p>steps = 20</p></div>
-            <div class="image-item"><img src="media/10rocket.png" alt="Setup Image 3"><p>steps = 10</p></div>
-            <div class="image-item"><img src="media/50rocket.png" alt="Setup Image 4"><p>steps = 50</p></div>
-            <div class="image-item"><img src="media/10snow.png" alt="Setup Image 5"><p>steps = 10</p></div>
+            <div class="image-item"><img src="media/10rocket.png" alt="Setup Image 2"><p>steps = 10</p></div>
+            <div class="image-item"><img src="media/10snow.png" alt="Setup Image 3"><p>steps = 10</p></div>
+            <div class="image-item"><img src="media/50hat.png" alt="Setup Image 4"><p>steps = 50</p></div>
+            <div class="image-item"><img src="media/50rocket.png" alt="Setup Image 5"><p>steps = 50</p></div>
             <div class="image-item"><img src="media/20snow.png" alt="Setup Image 6"><p>steps = 20</p></div>
         </div>
     </section>
@@ -137,21 +137,26 @@ images generated using these prompts: 'an oil painting of a snowy mountain villa
         </p>
         <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
             <div class="image-item"><img src="media/orig.png" alt="Forward Process Image 1"><p>Original</p></div>
-            <div class="image-item"><img src="media/g250.png" alt="Forward Process Image 1"><p>noise = 250</p></div>
-            <div class="image-item"><img src="media/g500.png" alt="Forward Process Image 2"><p>noise = 500</p></div>
-            <div class="image-item"><img src="media/g750.png" alt="Forward Process Image 3"><p>noise = 750</p></div>
+            <div class="image-item"><img src="media/n250.png" alt="Forward Process Image 1"><p>noise = 250</p></div>
+            <div class="image-item"><img src="media/n500.png" alt="Forward Process Image 2"><p>noise = 500</p></div>
+            <div class="image-item"><img src="media/n750.png" alt="Forward Process Image 3"><p>noise = 750</p></div>
         </div>
     </section>
 
     <section id="classical-denoising">
         <h2>1.2 Classical Denoising</h2>
+        <p>
+            With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy images at various levels.
+            This highlights the model's ability to recover high-quality images by projecting noisy inputs back to the image manifold. However, one step is not sufficient enough to produce crystal clear results.
+        </p>
         <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="image-item"><img src="media/denoise1.png" alt="Denoising 1"><p>Denoising 1</p></div>
-            <div class="image-item"><img src="media/denoise2.png" alt="Denoising 2"><p>Denoising 2</p></div>
-            <div class="image-item"><img src="media/denoise3.png" alt="Denoising 3"><p>Denoising 3</p></div>
-            <div class="image-item"><img src="media/denoise4.png" alt="Denoising 4"><p>Denoising 4</p></div>
-            <div class="image-item"><img src="media/denoise5.png" alt="Denoising 5"><p>Denoising 5</p></div>
-            <div class="image-item"><img src="media/denoise6.png" alt="Denoising 6"><p>Denoising 6</p></div>
+            <div class="image-item"><img src="media/n250.png" alt="Forward Process Image 1"><p>noise = 250</p></div>
+            <div class="image-item"><img src="media/n500.png" alt="Forward Process Image 2"><p>noise = 500</p></div>
+            <div class="image-item"><img src="media/n750.png" alt="Forward Process Image 3"><p>noise = 750</p></div>
+            
+            <div class="image-item"><img src="media/g250.png" alt="Forward Process Image 1"><p>250 denoised</p></div>
+            <div class="image-item"><img src="media/g500.png" alt="Forward Process Image 2"><p>500 denoised</p></div>
+            <div class="image-item"><img src="media/g750.png" alt="Forward Process Image 3"><p>750 denoised</p></div>
         </div>
     </section>
 
