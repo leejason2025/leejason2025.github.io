@@ -333,12 +333,36 @@ With the pretrained DeepFloyd UNet, I estimated and removed noise from noisy ima
 
         <section id="text-conditioned-image-to-image">
             <h3>1.7.3 Text-Conditioned Image-to-Image Translation</h3>
+            <p>
+                Next, I guided the image-to-image translation process with text prompts, 
+                enabling controlled edits. This approach combines textual conditioning 
+                with iterative denoising to introduce thematic changes to images.
+
+            </p>
             <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
-                <!-- 21 images (3 rows of 7) -->
-                <div class="image-item"><img src="media/text_image1.png" alt="Text Conditioned 1"></div>
-                <div class="image-item"><img src="media/text_image2.png" alt="Text Conditioned 2"></div>
-                <div class="image-item"><img src="media/text_image3.png" alt="Text Conditioned 3"></div>
-                <!-- Repeat for 21 images -->
+                <div class="image-item"><img src="media/1R1.png" alt="Sample 1"><p>noise = 1</p></div>
+                <div class="image-item"><img src="media/1R2.png" alt="Sample 2"><p>noise = 3</p></div>
+                <div class="image-item"><img src="media/1R3.png" alt="Sample 3"><p>noise = 5</p></div>
+                <div class="image-item"><img src="media/1R4.png" alt="Sample 4"><p>noise = 7</p></div>
+                <div class="image-item"><img src="media/1R5.png" alt="Sample 5"><p>noise = 10</p></div>
+                <div class="image-item"><img src="media/1R6.png" alt="Sample 6"><p>noise = 20</p></div>
+                <div class="image-item"><img src="media/orig.png" alt="Sample 5"><p>original</p></div>
+
+                <div class="image-item"><img src="media/2R1.png" alt="Sample 1"><p>noise = 1</p></div>
+                <div class="image-item"><img src="media/2R2.png" alt="Sample 2"><p>noise = 3</p></div>
+                <div class="image-item"><img src="media/2R3.png" alt="Sample 3"><p>noise = 5</p></div>
+                <div class="image-item"><img src="media/2R4.png" alt="Sample 4"><p>noise = 7</p></div>
+                <div class="image-item"><img src="media/2R5.png" alt="Sample 5"><p>noise = 10</p></div>
+                <div class="image-item"><img src="media/2R6.png" alt="Sample 6"><p>noise = 20</p></div>
+                <div class="image-item"><img src="media/origA.png" alt="Sample 5"><p>original</p></div>
+                
+                <div class="image-item"><img src="media/3R1.png" alt="Sample 1"><p>noise = 1</p></div>
+                <div class="image-item"><img src="media/3R2.png" alt="Sample 2"><p>noise = 3</p></div>
+                <div class="image-item"><img src="media/3R3.png" alt="Sample 3"><p>noise = 5</p></div>
+                <div class="image-item"><img src="media/3R4.png" alt="Sample 4"><p>noise = 7</p></div>
+                <div class="image-item"><img src="media/3R5.png" alt="Sample 5"><p>noise = 10</p></div>
+                <div class="image-item"><img src="media/3R6.png" alt="Sample 6"><p>noise = 20</p></div>
+                <div class="image-item"><img src="media/origB.png" alt="Sample 5"><p>original</p></div>
             </div>
         </section>
     </section>
