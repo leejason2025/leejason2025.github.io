@@ -1,1 +1,141 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 2%;
+            padding: 0 5%;
+            text-align: center;
+            background-color: #E7E9F0;
+            color: #051747;
+        }
+
+        .title-block {
+            background-color: #081F62;
+            color: #E7E9F0;
+            padding: 4% 2%;
+            margin-bottom: 3%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.7em;
+            margin-bottom: 1%;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 1%;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            margin-bottom: 2%;
+            margin-top: 5%;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 10%;
+            height: 3px;
+            background-color: #081F62;
+            margin: 1% auto;
+        }
+
+        section {
+            margin-bottom: 3%;
+        }
+
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
+            justify-items: center;
+        }
+
+        img {
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            border: 5px solid #535F80;
+        }
+
+        p {
+            text-align: left;
+            margin-bottom: 2%;
+            font-size: 1.1em;
+            line-height: 1.6em;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-block">
+        <h1>Final Project</h1>
+        <h2>CS 180 Projects: Light Field Camera & Gradient Domain Fusion</h2>
+        <h3>Your Name</h3>
+    </div>
+
+    <section id="project1">
+        <h2>Project 1: Light Field Camera</h2>
+
+        <section id="depth-refocusing">
+            <h2>Depth Refocusing</h2>
+            <p>
+                Depth refocusing allows us to adjust the focus of an image to different depths after capturing it.
+                This is achieved by shifting and averaging images from a light field camera.
+            </p>
+            <div class="image-container">
+                <img src="media/depth1.jpg" alt="Depth Refocused Image 1">
+                <img src="media/depth2.jpg" alt="Depth Refocused Image 2">
+                <img src="media/depth3.jpg" alt="Depth Refocused Image 3">
+            </div>
+        </section>
+
+        <section id="aperture-adjustment">
+            <h2>Aperture Adjustment</h2>
+            <p>
+                By simulating different apertures, we can control the depth of field in post-processing.
+                Larger apertures create a shallow depth of field, while smaller apertures increase it.
+            </p>
+            <div class="image-container">
+                <img src="media/aperture1.jpg" alt="Aperture Adjustment Image 1">
+                <img src="media/aperture2.jpg" alt="Aperture Adjustment Image 2">
+                <img src="media/aperture3.jpg" alt="Aperture Adjustment Image 3">
+            </div>
+        </section>
+
+        <section id="summary">
+            <h2>Summary</h2>
+            <p>
+                Light field photography enables advanced image manipulations like depth refocusing and aperture adjustment.
+                These techniques highlight the flexibility and power of computational photography.
+            </p>
+        </section>
+    </section>
+
+    <section id="project2">
+        <h2>Project 2: Gradient Domain Fusion</h2>
+        <p>
+            Gradient domain fusion involves blending images by manipulating their gradients. This method is used for tasks
+            like seamless cloning and blending textures while maintaining natural transitions.
+        </p>
+        <div class="image-container">
+            <img src="media/gdf1.jpg" alt="Gradient Domain Fusion Example 1">
+            <img src="media/gdf2.jpg" alt="Gradient Domain Fusion Example 2">
+            <img src="media/gdf3.jpg" alt="Gradient Domain Fusion Example 3">
+        </div>
+    </section>
+</body>
+</html>
