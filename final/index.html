@@ -89,12 +89,22 @@
 
     <section id="project1">
         <h2>Project 1: Light Field Camera</h2>
-
+        <p> This project explores computational photography techniques using light field data, 
+            inspired by Ren Ng's groundbreaking work on light field cameras. The goal is to 
+            achieve advanced image manipulations like depth refocusing and aperture adjustment 
+            using real datasets from the Stanford Light Field Archive. By leveraging multiple 
+            images captured over a grid orthogonal to the optical axis, we demonstrate how simple
+            operations like shifting and averaging can produce visually striking results.</p>
         <section id="depth-refocusing">
             <h2>Depth Refocusing</h2>
             <p>
-                Depth refocusing allows us to adjust the focus of an image to different depths after capturing it.
-                This is achieved by shifting and averaging images from a light field camera.
+                Depth refocusing allows us to explore how focus changes across different depths in a scene. 
+                In a light field dataset, nearby objects exhibit more noticeable positional variation across 
+                the grid of images compared to distant objects. Averaging all images without any adjustments 
+                results in a sharp background and a blurry foreground. To control the focus, we shift each 
+                image relative to a central reference based on its offset. By scaling this shift using a constant factor C, 
+                we can dynamically adjust the focus, bringing different depths into clarity. The results demonstrate 
+                the ability to manipulate depth of field interactively.
             </p>
             <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
             <figure>
@@ -135,8 +145,15 @@
         <section id="aperture-adjustment">
             <h2>Aperture Adjustment</h2>
             <p>
-                By simulating different apertures, we can control the depth of field in post-processing.
-                Larger apertures create a shallow depth of field, while smaller apertures increase it.
+                Aperture adjustment allows us to simulate the effects of varying aperture sizes on an 
+                image's depth of field. A smaller aperture produces a deeper focus, while a 
+                larger aperture results in a shallower depth of field. To replicate this, we 
+                selectively include images from the light field dataset, starting with only the 
+                central image and gradually adding more based on their distance from the center. 
+                The Euclidean distance between each image's grid position and the center image 
+                determines its inclusion radius. As we increase this radius, the background and 
+                foreground blur more significantly, mimicking the effect of a larger aperture. 
+                The results demonstrate these changes step by step.
             </p>
             <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
             <figure>
@@ -169,8 +186,14 @@
         <section id="summary">
             <h2>Summary</h2>
             <p>
-                Light field photography enables advanced image manipulations like depth refocusing and aperture adjustment.
-                These techniques highlight the flexibility and power of computational photography.
+                Through this project, I gained a deeper understanding of the principles 
+                and potential of light field photography. I learned how capturing images 
+                over a grid enables powerful post-processing effects, such as depth refocusing 
+                and aperture adjustment, using simple operations like shifting and averaging. 
+                This highlighted how spatial information within light fields can be harnessed 
+                to manipulate focus and simulate varying apertures, enhancing flexibility in 
+                computational photography. Additionally, I appreciated the elegance of these 
+                techniques and their practical applications in modern imaging technologies.
             </p>
         </section>
     </section>
