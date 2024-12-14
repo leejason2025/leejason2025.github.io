@@ -201,23 +201,41 @@
     <section id="project2">
         <h2>Project 2: Gradient Domain Fusion</h2>
         <p>
-            Gradient domain fusion involves blending images by manipulating their gradients. This method is used for tasks
-            like seamless cloning and blending textures while maintaining natural transitions.
+            This project highlights the power and flexibility of gradient-domain techniques in computational photography. 
+            By focusing on gradients rather than raw pixel values, Poisson blending achieves seamless results in cases 
+            where simple copy-paste methods fail. Through this exploration, we gain a deeper understanding of the mathematical 
+            and visual principles underlying modern image editing tools.
         </p>
         <section id="toy-problem">
         <h2>Toy Problem</h2>
         <p>
-            The toy problem introduces the basics of gradient domain processing by focusing on reconstructing an image 
-            from its gradients. This involves solving a linear system to reconstruct the original image from a given 
-            gradient field and a boundary condition. By manipulating the gradients, we can modify specific aspects of 
-            the image, such as adding texture or altering color values, to better understand the principles of gradient 
-            domain fusion.
-        </p>
+            The toy problem demonstrates the fundamentals of gradient-domain processing by
+            reconstructing an image from its gradients. The objective is to recover the image
+            intensities by minimizing the difference between the gradients of the reconstructed
+            image and those of the source image for every pixel. This involves solving a 
+            least-squares optimization problem using a sparse matrix representation to conserve 
+            memory and improve computational efficiency.
+            To achieve this, three main objectives were defined:
         <div class="image-container">
-            <img src="media/toy1.png" alt="Toy Problem Example 1">
-            <img src="media/toy2.png" alt="Toy Problem Example 2">
-            <img src="media/p1.png" alt="Toy Problem Example 3">
-            <img src="media/p2.png" alt="Toy Problem Example 4">
+            <img src="media/ombj.png" alt="Poisson Blending Example 1">
+        </div>
+        <div class="image-container" style="grid-template-columns: repeat(2, 1fr);">
+            <figure>
+                <img src="media/toy1.png" alt="Toy Problem Example 1">
+                <figcaption>Original toy image</figcaption>
+            </figure>
+            <figure>
+                <img src="media/toy2.png" alt="Toy Problem Example 2">
+                <figcaption>Reconstructed toy image</figcaption>
+            </figure>
+            <figure>
+                <img src="media/p1.jpg" alt="Toy Problem Example 3">
+                <figcaption>Original penguin image</figcaption>
+            </figure>
+            <figure>
+                <img src="media/p2.jpg" alt="Toy Problem Example 3">
+                <figcaption>Reconstructed penguin image</figcaption>
+            </figure>
         </div>
     </section>
 
