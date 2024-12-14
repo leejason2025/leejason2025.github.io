@@ -204,11 +204,51 @@
             Gradient domain fusion involves blending images by manipulating their gradients. This method is used for tasks
             like seamless cloning and blending textures while maintaining natural transitions.
         </p>
+        <section id="toy-problem">
+        <h2>Toy Problem</h2>
+        <p>
+            The toy problem introduces the basics of gradient domain processing by focusing on reconstructing an image 
+            from its gradients. This involves solving a linear system to reconstruct the original image from a given 
+            gradient field and a boundary condition. By manipulating the gradients, we can modify specific aspects of 
+            the image, such as adding texture or altering color values, to better understand the principles of gradient 
+            domain fusion.
+        </p>
         <div class="image-container">
-            <img src="media/gdf1.jpg" alt="Gradient Domain Fusion Example 1">
-            <img src="media/gdf2.jpg" alt="Gradient Domain Fusion Example 2">
-            <img src="media/gdf3.jpg" alt="Gradient Domain Fusion Example 3">
+            <img src="media/toy1.jpg" alt="Toy Problem Example 1">
+            <img src="media/toy2.jpg" alt="Toy Problem Example 2">
+            <img src="media/toy3.jpg" alt="Toy Problem Example 3">
         </div>
+    </section>
+
+    <section id="poisson-blending">
+        <h2>Poisson Blending</h2>
+        <p>
+            Poisson blending is a technique that seamlessly integrates content from one image into another. By minimizing 
+            the difference between gradients of the source image and the target image, Poisson blending ensures smooth 
+            transitions across the boundary of the composite image. This method is ideal for creating realistic image 
+            composites where lighting and texture match naturally.
+        </p>
+        <div class="image-container">
+            <img src="media/poisson1.jpg" alt="Poisson Blending Example 1">
+            <img src="media/poisson2.jpg" alt="Poisson Blending Example 2">
+            <img src="media/poisson3.jpg" alt="Poisson Blending Example 3">
+        </div>
+    </section>
+
+    <section id="bells-and-whistles">
+        <h2>Bells and Whistles: Enhanced Grayscale</h2>
+        <p>
+            Enhanced grayscale conversion leverages gradient domain techniques to produce more visually striking 
+            grayscale images. By selectively enhancing edges and textures, this method creates an image that retains 
+            more details from the original color image compared to traditional grayscale conversion. This section 
+            demonstrates the impact of gradient manipulation on grayscale rendering.
+        </p>
+        <div class="image-container">
+            <img src="media/grayscale1.jpg" alt="Enhanced Grayscale Example 1">
+            <img src="media/grayscale2.jpg" alt="Enhanced Grayscale Example 2">
+            <img src="media/grayscale3.jpg" alt="Enhanced Grayscale Example 3">
+        </div>
+    </section>
     </section>
 </body>
 </html>
