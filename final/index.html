@@ -217,7 +217,7 @@
             memory and improve computational efficiency.
             To achieve this, three main objectives were defined:
         <div class="image-container">
-            <img src="media/ombj.png" alt="Poisson Blending Example 1">
+            <img src="media/obj.png" alt="Poisson Blending Example 1">
         </div>
         <div class="image-container" style="grid-template-columns: repeat(2, 1fr);">
             <figure>
@@ -242,15 +242,67 @@
     <section id="poisson-blending">
         <h2>Poisson Blending</h2>
         <p>
-            Poisson blending is a technique that seamlessly integrates content from one image into another. By minimizing 
-            the difference between gradients of the source image and the target image, Poisson blending ensures smooth 
-            transitions across the boundary of the composite image. This method is ideal for creating realistic image 
-            composites where lighting and texture match naturally.
+            The Poisson blending section explores seamlessly integrating objects from one 
+            image into another using gradient-domain techniques. The process is guided by the 
+            equation shown in the image below, which defines a least-squares optimization problem
+            to preserve the source image's gradients while blending smoothly into the target background. 
+            This approach ensures natural transitions and minimizes perceptual seams at the boundaries of the blended region.
+            Two tests were conducted to demonstrate the effectiveness of Poisson blending: integrating 
+            penguins onto snowy landscapes. These examples highlight the method's ability to maintain 
+            realistic lighting and texture consistency, creating visually seamless composites.
         </p>
         <div class="image-container">
-            <img src="media/poisson1.jpg" alt="Poisson Blending Example 1">
-            <img src="media/poisson2.jpg" alt="Poisson Blending Example 2">
-            <img src="media/poisson3.jpg" alt="Poisson Blending Example 3">
+            <img src="media/eq.png" alt="Poisson Blending Example 1">
+        </div>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <figure>
+                <img src="media/penguin-chick.jpeg" alt="Toy Problem Example 1">
+                <figcaption>Original Penguin Image</figcaption>
+            </figure>
+            <figure>
+                <img src="media/im2.JPG" alt="Toy Problem Example 2">
+                <figcaption>Snowy Background</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pcrop1.png" alt="Toy Problem Example 3">
+                <figcaption>Defining Mask</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pmask1.png" alt="Toy Problem Example 3">
+                <figcaption>Mask</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pmerge1.jpg" alt="Toy Problem Example 3">
+                <figcaption>Naive Image Blend</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pblend1.jpg" alt="Toy Problem Example 3">
+                <figcaption>Poisson Blended Image</figcaption>
+            </figure>
+            <figure>
+                <img src="media/penguin.jpg" alt="Toy Problem Example 1">
+                <figcaption>Original Penguin Image</figcaption>
+            </figure>
+            <figure>
+                <img src="media/im3.jpg" alt="Toy Problem Example 2">
+                <figcaption>Snowy Background</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pcrop2.png" alt="Toy Problem Example 3">
+                <figcaption>Defining Mask</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pmask2.png" alt="Toy Problem Example 3">
+                <figcaption>Mask</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pmerge2.jpg" alt="Toy Problem Example 3">
+                <figcaption>Naive Image Blend</figcaption>
+            </figure>
+            <figure>
+                <img src="media/pblend2.jpg" alt="Toy Problem Example 3">
+                <figcaption>Poisson Blended Image</figcaption>
+            </figure>
         </div>
     </section>
 
