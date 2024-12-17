@@ -138,28 +138,18 @@
             flex-shrink: 0; /* Prevent image from shrinking */
         }
         /* Art Portfolio Styling */
+        .art-item {
+            flex: 1 1 calc(25% - 20px); /* Each box takes ~25% width with a 20px gap */
+            max-width: calc(25% - 20px);
+        }
         .art-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px; /* Space between boxes */
-            justify-content: center; /* Center the grid */
+            gap: 20px;
+            justify-content: center;
             margin: 0 auto;
-            max-width: 1000px;
         }
-        
-        .art-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #F0F1F7;
-            border: 2px solid #535F80;
-            border-radius: 8px;
-            padding: 15px;
-            max-width: 300px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
+                
         .art-item img {
             width: 100%;
             height: auto;
