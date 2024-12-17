@@ -90,6 +90,18 @@
         .intro-text {
             max-width: 600px;
         }
+        .project-link {
+            text-decoration: none;
+            color: #081F62;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .project-link:hover {
+            color: #535F80;
+            text-decoration: underline;
+        }
+        
         .project-item {
             display: flex;
             align-items: center;
@@ -110,14 +122,12 @@
         
         .project-text h3 {
             font-size: 1.8em;
-            color: #051747;
             margin-bottom: 0.5em;
         }
         
         .project-text p {
             font-size: 1.1em;
             line-height: 1.5em;
-            color: #333;
         }
         
         .project-item img {
@@ -125,8 +135,9 @@
             height: auto;
             border: 3px solid #535F80;
             border-radius: 4px;
-            flex-shrink: 0; /* Prevent the image from shrinking */
+            flex-shrink: 0; /* Prevent image from shrinking */
         }
+
 
     </style>
 </head>
@@ -172,28 +183,36 @@
         </p>
         <div class="project-item">
             <div class="project-text">
-                <h3>Project 1: Colorizing Images of the Russian Empire</h3>
+                <h3>
+                    <a href="./1/index.html" class="project-link">Project 1: Colorizing Images of the Russian Empire</a>
+                </h3>
                 <p>This project explores colorizing grayscale images using alignment techniques. Placeholder text for more details about the project.</p>
             </div>
             <img src="/1/media/church_colorized.jpg" alt="Project 1 Image">
         </div>
         <div class="project-item">
             <div class="project-text">
-                <h3>Project 2: Fun with Filters and Frequencies</h3>
+                <h3>
+                    <a href="./2/index.html" class="project-link">Project 2: Fun with Filters and Frequencies</a>
+                </h3>
                 <p>This project focuses on applying image filters and understanding frequency domains. Placeholder text for project details.</p>
             </div>
             <img src="/2/media/Apple + Orange.jpg" alt="Project 2 Image">
         </div>
         <div class="project-item">
             <div class="project-text">
-                <h3>Project 3: Face Morphing and Modeling a Photo Collection</h3>
+                <h3>
+                    <a href="./3/index.html" class="project-link">Project 3: Face Morphing and Modeling a Photo Collection</a>
+                </h3>
                 <p>In this project, facial morphing techniques are used to create smooth transitions. Placeholder text for project details.</p>
             </div>
             <img src="/3/media/Jason_to_Joker.gif" alt="Project 3 Image">
         </div>
         <div class="project-item">
             <div class="project-text">
-                <h3>Project 4: Auto-stitching and Photo Mosaics</h3>
+                <h3>
+                    <a href="./4b/index.html" class="project-link">Project 4: Auto-stitching and Photo Mosaics</a>
+                </h3>
                 <p>This project involves generating panoramas by stitching together images. Placeholder text for project details.</p>
             </div>
             <img src="/4/media/combined_brick_auto.jpg" alt="Project 4 Image">
