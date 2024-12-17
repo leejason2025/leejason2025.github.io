@@ -138,64 +138,61 @@
             flex-shrink: 0; /* Prevent image from shrinking */
         }
         /* Art Grid Container */
-    .art-grid {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 0 auto;
-        padding: 20px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    .art-item {
-        position: relative;
-        flex: 1 1 calc(30% - 40px); /* Adjust for 3 images across the screen */
-        max-width: calc(30% - 40px);
-        min-width: 250px;
-        box-sizing: border-box;
-    }
-    
-    /* Container for image and hover text */
-    .art-hover-container {
-        position: relative;
-        overflow: hidden;
-        border: 2px solid #535F80;
-        border-radius: 8px;
-    }
-    
-    .art-hover-container img {
-        width: 100%;
-        height: auto;
-        transition: filter 0.3s ease;
-    }
-    
-    /* Hover effect: blur image */
-    .art-hover-container:hover img {
-        filter: blur(4px) brightness(60%);
-    }
-    
-    /* Hover text */
-    .hover-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #E7E9F0; /* Light text color */
-        font-size: 1.1em;
-        font-weight: bold;
-        text-align: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        padding: 10px;
-        pointer-events: none; /* Prevent text from interfering with hover */
-    }
-    
-    /* Show text on hover */
-    .art-hover-container:hover .hover-text {
-        opacity: 1;
-    }
+        .art-grid {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        .art-item {
+            position: relative;
+            width: 100%;
+            margin: 0; /* Remove any gaps */
+            box-sizing: border-box;
+        }
+        
+        /* Image and Hover Text Container */
+        .art-hover-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden; /* Ensures hover effects don’t spill */
+        }
+        
+        .art-hover-container img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            display: block;
+            margin: 0;
+            transition: filter 0.3s ease; /* Smooth hover transition */
+        }
+        
+        /* Hover effect: blur image */
+        .art-hover-container:hover img {
+            filter: blur(4px) brightness(60%);
+        }
+        
+        /* Hover Text */
+        .hover-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #E7E9F0; /* Light text color */
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 10px;
+            pointer-events: none; /* Prevents interaction with the text */
+        }
+        
+        /* Show text on hover */
+        .art-hover-container:hover .hover-text {
+            opacity: 1;
+        }
 
 
 
