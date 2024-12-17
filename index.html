@@ -72,23 +72,25 @@
         .intro-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Align content to the left */
             gap: 30px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap; /* Prevent wrapping */
             text-align: left;
             margin: 0 auto;
             max-width: 900px;
         }
-
+        
         .intro-container img {
             width: 300px; /* Rectangular Image */
             height: auto;
             border: 5px solid #535F80;
+            flex-shrink: 0; /* Prevent image from shrinking */
         }
-
+        
         .intro-text {
             max-width: 600px;
         }
+
     </style>
 </head>
 <body>
