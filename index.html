@@ -137,31 +137,66 @@
             border-radius: 4px;
             flex-shrink: 0; /* Prevent image from shrinking */
         }
-        .art-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-around; /* Spread items evenly across the full width */
-            margin: 0; /* Remove margin to span full width */
-            padding: 20px; /* Add padding for spacing */
-            width: 100%; /* Ensure the grid spans full width */
-            box-sizing: border-box; /* Include padding in width calculation */
-        }
-        
-        .art-item {
-            flex: 1 1 calc(20% - 40px); /* Adjusts to ~20% width per item with a 20px gap */
-            max-width: calc(20% - 40px);
-            min-width: 200px; /* Prevent items from becoming too small */
-            box-sizing: border-box;
-        }
-        
-        .art-item img {
-            width: 100%; /* Make images responsive */
-            height: auto;
-            border-radius: 4px;
-            border: 2px solid #535F80;
-            margin-bottom: 10px;
-        }
+        /* Art Grid Container */
+    .art-grid {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .art-item {
+        position: relative;
+        flex: 1 1 calc(30% - 40px); /* Adjust for 3 images across the screen */
+        max-width: calc(30% - 40px);
+        min-width: 250px;
+        box-sizing: border-box;
+    }
+    
+    /* Container for image and hover text */
+    .art-hover-container {
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #535F80;
+        border-radius: 8px;
+    }
+    
+    .art-hover-container img {
+        width: 100%;
+        height: auto;
+        transition: filter 0.3s ease;
+    }
+    
+    /* Hover effect: blur image */
+    .art-hover-container:hover img {
+        filter: blur(4px) brightness(60%);
+    }
+    
+    /* Hover text */
+    .hover-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #E7E9F0; /* Light text color */
+        font-size: 1.1em;
+        font-weight: bold;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 10px;
+        pointer-events: none; /* Prevent text from interfering with hover */
+    }
+    
+    /* Show text on hover */
+    .art-hover-container:hover .hover-text {
+        opacity: 1;
+    }
+
 
 
     </style>
@@ -247,39 +282,41 @@
     <section id="art-portfolio">
         <h2>Art Portfolio</h2>
         <p class="project-description">
-            Art has always been a personal passion. Here, I share some of my artistic creations.
+            Hover over each image to learn more about the piece.
         </p>
         <div class="art-grid">
+            <!-- First Art Item -->
             <div class="art-item">
-                <img src="media/01_Lee.jpg" alt="Art Piece">
-                <p class="art-description">A beautiful landscape showcasing my use of acrylics.</p>
+                <div class="art-hover-container">
+                    <img src="/media/myroom_animation.gif" alt="My Room">
+                    <div class="hover-text">
+                        My Room, 2024. Acrylic on Canvas, 36" x 48". Senior Thesis Project.
+                    </div>
+                </div>
             </div>
+    
+            <!-- Second Art Item -->
             <div class="art-item">
-                <img src="media/02_Lee.jpg" alt="Art Piece">
-                <p class="art-description">An abstract piece exploring shapes and colors.</p>
+                <div class="art-hover-container">
+                    <img src="/media/p1.jpg" alt="Untitled">
+                    <div class="hover-text">
+                        Untitled, 2024. Hand made pigments on Japanese Rice Paper mounted on cardboard. 25" x 30".
+                    </div>
+                </div>
             </div>
+    
+            <!-- Third Art Item -->
             <div class="art-item">
-                <img src="media/03_Lee.jpg" alt="Art Piece">
-                <p class="art-description">A detailed portrait study in charcoal.</p>
-            </div>
-            <div class="art-item">
-                <img src="media/04_Lee.jpg" alt="Art Piece">
-                <p class="art-description">Experimenting with watercolors for fluid motion.</p>
-            </div>
-            <div class="art-item">
-                <img src="media/05_Lee.jpg" alt="Art Piece">
-                <p class="art-description">An oil painting focused on light and shadow.</p>
-            </div>
-            <div class="art-item">
-                <img src="media/06_Lee.jpg" alt="Art Piece">
-                <p class="art-description">A surreal composition blending nature and fantasy.</p>
-            </div>
-            <div class="art-item">
-                <img src="media/07_Lee.jpg" alt="Art Piece">
-                <p class="art-description">A digital artwork experimenting with perspective.</p>
+                <div class="art-hover-container">
+                    <img src="/media/fire.JPG" alt="Fire">
+                    <div class="hover-text">
+                        Fire, 2024. Oil Pastel on BFK Paper and Nepalese Hand Made Paper.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
     <section id="resume">
         <h2>My Resume</h2>
         <iframe 
