@@ -16,6 +16,7 @@
             text-align: center;
         }
 
+        /* Compact Title Block */
         .title-block {
             background-color: #081F62;
             color: #E7E9F0;
@@ -33,6 +34,7 @@
             color: #081F62;
         }
 
+        /* Tabs Styling */
         .tabs {
             display: flex;
             justify-content: center;
@@ -65,39 +67,33 @@
             display: block;
         }
 
-        .project-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .project-link {
-            text-decoration: none;
-            color: #081F62;
-            font-size: 1.3em;
-        }
-
         .project-description {
             font-size: 1.1em;
             line-height: 1.6em;
             margin-bottom: 2em;
         }
 
-        .art-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+        /* Flexbox for Introduction Section */
+        .intro-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 900px;
         }
 
-        .art-grid img {
-            width: 100%;
+        .intro-container img {
+            width: 200px;
+            height: auto;
+            border-radius: 50%;
             border: 5px solid #535F80;
-            transition: transform 0.3s ease;
         }
 
-        .art-grid img:hover {
-            transform: scale(1.05);
+        .intro-text {
+            max-width: 600px;
         }
     </style>
 </head>
@@ -110,24 +106,25 @@
     <!-- Tabs -->
     <div class="tabs">
         <button class="tab active" onclick="openTab(event, 'home')">Home</button>
-        <button class="tab" onclick="openTab(event, 'art-portfolio')">Art Projects</button>
         <button class="tab" onclick="openTab(event, 'cs-projects')">Computer Science Projects</button>
+        <button class="tab" onclick="openTab(event, 'art-portfolio')">Art Projects</button>
         <button class="tab" onclick="openTab(event, 'resume')">Resume</button>
     </div>
 
     <!-- Sections -->
     <section id="home" class="active">
         <h2>Introduction</h2>
-        <p class="project-description">
-            Hi! I'm Jason. In this portfolio, I showcase my work from both fields, exploring the intersection 
-            of creativity and technology. I’m currently a senior at the University of California, Berkeley, 
-            double majoring in Computer Science and Art Practice. Growing up in San Jose, I developed a love
-            for both technology and creativity, which has shaped much of my work and studies. I enjoy blending 
-            traditional painting with all sorts of media or forms of art. Outside of my academic and artistic 
-            pursuits, I’m passionate about cooking, playing golf, and bouldering, which give me a chance to 
-            relax and stay active.
-
-        </p>
+        <div class="intro-container">
+            <!-- Photo -->
+            <img src="jason.png" alt="Jason's Photo">
+            <!-- Introduction Text -->
+            <div class="intro-text">
+                <p class="project-description">
+                    Hi! I'm Jason, a lifelong student in computer science and art. In this portfolio, I showcase my work
+                    from both fields, exploring the intersection of creativity and technology. Scroll down to see my projects.
+                </p>
+            </div>
+        </div>
     </section>
 
     <section id="cs-projects">
