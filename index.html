@@ -90,6 +90,43 @@
         .intro-text {
             max-width: 600px;
         }
+        .project-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Image on the right */
+            margin: 3% auto;
+            gap: 20px;
+            background-color: #F0F1F7;
+            border: 2px solid #535F80;
+            border-radius: 8px;
+            padding: 2%;
+            max-width: 900px;
+        }
+        
+        .project-text {
+            flex: 1; /* Allow text to take up the remaining space */
+            text-align: left;
+        }
+        
+        .project-text h3 {
+            font-size: 1.8em;
+            color: #051747;
+            margin-bottom: 0.5em;
+        }
+        
+        .project-text p {
+            font-size: 1.1em;
+            line-height: 1.5em;
+            color: #333;
+        }
+        
+        .project-item img {
+            width: 250px;
+            height: auto;
+            border: 3px solid #535F80;
+            border-radius: 4px;
+            flex-shrink: 0; /* Prevent the image from shrinking */
+        }
 
     </style>
 </head>
@@ -131,13 +168,35 @@
     <section id="cs-projects">
         <h2>Computer Science Portfolio</h2>
         <p class="project-description">
-            Here are reports on the projects I have been working on in my CS 180 class on Computer Vision and Computational photography.
+            Here are reports on the projects I have been working on in my CS 180 class on Computer Vision and Computational Photography.
         </p>
-        <div class="project-container">
-            <a href="./1/index.html" class="project-link">Project 1: Colorizing Images of the Russian Empire</a>
-            <a href="./2/index.html" class="project-link">Project 2: Fun with Filters and Frequencies</a>
-            <a href="./3/index.html" class="project-link">Project 3: Face Morphing and Modelling a Photo Collection</a>
-            <a href="./4b/index.html" class="project-link">Project 4: Auto-stitching and photo mosaics</a>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>Project 1: Colorizing Images of the Russian Empire</h3>
+                <p>This project explores colorizing grayscale images using alignment techniques. Placeholder text for more details about the project.</p>
+            </div>
+            <img src="/1/media/church_colorized.jpg" alt="Project 1 Image">
+        </div>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>Project 2: Fun with Filters and Frequencies</h3>
+                <p>This project focuses on applying image filters and understanding frequency domains. Placeholder text for project details.</p>
+            </div>
+            <img src="/2/media/Apple + Orange.jpg" alt="Project 2 Image">
+        </div>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>Project 3: Face Morphing and Modeling a Photo Collection</h3>
+                <p>In this project, facial morphing techniques are used to create smooth transitions. Placeholder text for project details.</p>
+            </div>
+            <img src="/3/media/Jason_to_Joker.gif" alt="Project 3 Image">
+        </div>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>Project 4: Auto-stitching and Photo Mosaics</h3>
+                <p>This project involves generating panoramas by stitching together images. Placeholder text for project details.</p>
+            </div>
+            <img src="/4/media/combined_brick_auto.jpg" alt="Project 4 Image">
         </div>
     </section>
 
