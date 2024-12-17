@@ -137,32 +137,30 @@
             border-radius: 4px;
             flex-shrink: 0; /* Prevent image from shrinking */
         }
-        /* Art Portfolio Styling */
-        .art-item {
-            flex: 1 1 calc(25% - 20px); /* Each box takes ~25% width with a 20px gap */
-            max-width: calc(25% - 20px);
-        }
         .art-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            justify-content: center;
-            margin: 0 auto;
+            justify-content: space-around; /* Spread items evenly across the full width */
+            margin: 0; /* Remove margin to span full width */
+            padding: 20px; /* Add padding for spacing */
+            width: 100%; /* Ensure the grid spans full width */
+            box-sizing: border-box; /* Include padding in width calculation */
         }
-                
+        
+        .art-item {
+            flex: 1 1 calc(20% - 40px); /* Adjusts to ~20% width per item with a 20px gap */
+            max-width: calc(20% - 40px);
+            min-width: 200px; /* Prevent items from becoming too small */
+            box-sizing: border-box;
+        }
+        
         .art-item img {
-            width: 100%;
+            width: 100%; /* Make images responsive */
             height: auto;
             border-radius: 4px;
             border: 2px solid #535F80;
             margin-bottom: 10px;
-        }
-        
-        .art-description {
-            font-size: 1em;
-            line-height: 1.4em;
-            color: #051747;
-            margin: 0;
         }
 
 
