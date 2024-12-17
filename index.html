@@ -137,6 +137,43 @@
             border-radius: 4px;
             flex-shrink: 0; /* Prevent image from shrinking */
         }
+        /* Art Portfolio Styling */
+        .art-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between boxes */
+            justify-content: center; /* Center the grid */
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+        
+        .art-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F0F1F7;
+            border: 2px solid #535F80;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .art-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 2px solid #535F80;
+            margin-bottom: 10px;
+        }
+        
+        .art-description {
+            font-size: 1em;
+            line-height: 1.4em;
+            color: #051747;
+            margin: 0;
+        }
 
 
     </style>
@@ -224,22 +261,37 @@
             Art has always been a personal passion. Here, I share some of my artistic creations.
         </p>
         <div class="art-grid">
-            <img src="media/01_Lee.jpg" alt="Art Piece">
-            <img src="media/02_Lee.jpg" alt="Art Piece">
-            <img src="media/03_Lee.jpg" alt="Art Piece">
-            <img src="media/04_Lee.jpg" alt="Art Piece">
-            <img src="media/05_Lee.jpg" alt="Art Piece">
-            <img src="media/06_Lee.jpg" alt="Art Piece">
-            <img src="media/07_Lee.jpg" alt="Art Piece">
+            <div class="art-item">
+                <img src="media/01_Lee.jpg" alt="Art Piece">
+                <p class="art-description">A beautiful landscape showcasing my use of acrylics.</p>
+            </div>
+            <div class="art-item">
+                <img src="media/02_Lee.jpg" alt="Art Piece">
+                <p class="art-description">An abstract piece exploring shapes and colors.</p>
+            </div>
+            <div class="art-item">
+                <img src="media/03_Lee.jpg" alt="Art Piece">
+                <p class="art-description">A detailed portrait study in charcoal.</p>
+            </div>
+            <div class="art-item">
+                <img src="media/04_Lee.jpg" alt="Art Piece">
+                <p class="art-description">Experimenting with watercolors for fluid motion.</p>
+            </div>
+            <div class="art-item">
+                <img src="media/05_Lee.jpg" alt="Art Piece">
+                <p class="art-description">An oil painting focused on light and shadow.</p>
+            </div>
+            <div class="art-item">
+                <img src="media/06_Lee.jpg" alt="Art Piece">
+                <p class="art-description">A surreal composition blending nature and fantasy.</p>
+            </div>
+            <div class="art-item">
+                <img src="media/07_Lee.jpg" alt="Art Piece">
+                <p class="art-description">A digital artwork experimenting with perspective.</p>
+            </div>
         </div>
     </section>
 
-    <section id="resume">
-        <h2>Resume</h2>
-        <p class="project-description">
-            Download my resume <a href="media/resume.pdf" target="_blank">here</a>.
-        </p>
-    </section>
 
     <script>
         function openTab(event, sectionId) {
