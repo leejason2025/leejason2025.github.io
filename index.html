@@ -1,171 +1,343 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
-    <title>Blog Template for Bootstrap</title>
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E7E9F0;
+            color: #051747;
+            text-align: center;
+        }
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        /* Compact Title Block */
+        .title-block {
+            background-color: #081F62;
+            color: #E7E9F0;
+            padding: 2% 2%;
+            text-align: center;
+        }
 
-    <!-- Custom styles for this template -->
-    <link href="blog.css" rel="stylesheet">
+        h1, h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.3em;
+        }
+
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background-color: #081F62;
+        }
+
+        .tab {
+            padding: 1% 3%;
+            cursor: pointer;
+            color: #E7E9F0;
+            font-size: 1.2em;
+            font-family: 'Raleway', sans-serif;
+            border: none;
+            background-color: #081F62;
+            transition: background-color 0.3s;
+        }
+
+        .tab:hover, .tab.active {
+            background-color: #535F80;
+        }
+
+        section {
+            display: none;
+            margin: 5% auto;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        .project-description {
+            font-size: 1.1em;
+            line-height: 1.6em;
+            margin-bottom: 2em;
+        }
+
+        /* Flexbox for Introduction Section */
+        .intro-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the left */
+            gap: 30px;
+            flex-wrap: nowrap; /* Prevent wrapping */
+            text-align: left;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        
+        .intro-container img {
+            width: 300px; /* Rectangular Image */
+            height: auto;
+            border: 5px solid #535F80;
+            flex-shrink: 0; /* Prevent image from shrinking */
+        }
+        
+        .intro-text {
+            max-width: 600px;
+        }
+        .project-link {
+            text-decoration: none;
+            color: #081F62;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .project-link:hover {
+            color: #535F80;
+            text-decoration: underline;
+        }
+        
+        .project-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Image on the right */
+            margin: 3% auto;
+            gap: 20px;
+            background-color: #F0F1F7;
+            border: 2px solid #535F80;
+            border-radius: 8px;
+            padding: 2%;
+            max-width: 900px;
+        }
+        
+        .project-text {
+            flex: 1; /* Allow text to take up the remaining space */
+            text-align: left;
+        }
+        
+        .project-text h3 {
+            font-size: 1.8em;
+            margin-bottom: 0.5em;
+        }
+        
+        .project-text p {
+            font-size: 1.1em;
+            line-height: 1.5em;
+        }
+        
+        .project-item img {
+            width: 250px;
+            height: auto;
+            border: 3px solid #535F80;
+            border-radius: 4px;
+            flex-shrink: 0; /* Prevent image from shrinking */
+        }
+        /* Art Grid Container */
+        .art-grid {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        .art-item {
+            position: relative;
+            width: 100%;
+            margin: 0; /* Remove any gaps */
+            box-sizing: border-box;
+        }
+        
+        /* Image and Hover Text Container */
+        .art-hover-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden; /* Ensures hover effects don’t spill */
+        }
+        
+        .art-hover-container img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            display: block;
+            margin: 0;
+            transition: filter 0.3s ease; /* Smooth hover transition */
+        }
+        
+        /* Hover effect: blur image */
+        .art-hover-container:hover img {
+            filter: blur(4px) brightness(60%);
+        }
+        
+        /* Hover Text */
+        .hover-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #E7E9F0; /* Light text color */
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 10px;
+            pointer-events: none; /* Prevents interaction with the text */
+        }
+        
+        /* Show text on hover */
+        .art-hover-container:hover .hover-text {
+            opacity: 1;
+        }
 
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
 
-  <body>
-
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Home</a>
-          <a class="blog-nav-item" href="#">New features</a>
-          <a class="blog-nav-item" href="#">Press</a>
-          <a class="blog-nav-item" href="#">New hires</a>
-          <a class="blog-nav-item" href="#">About</a>
-        </nav>
-      </div>
+    </style>
+</head>
+<body>
+    <div class="title-block">
+        <h1>Welcome to My Portfolio!</h1>
+        <p>Explore my work in Computer Science and Art.</p>
     </div>
 
-    <div class="container">
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab active" onclick="openTab(event, 'home')">Home</button>
+        <button class="tab" onclick="openTab(event, 'cs-projects')">Computer Science Projects</button>
+        <button class="tab" onclick="openTab(event, 'art-portfolio')">Art Projects</button>
+        <button class="tab" onclick="openTab(event, 'resume')">Resume</button>
+    </div>
 
-      <div class="blog-header">
-        <h1 class="blog-title">The Bootstrap Blog</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
-      </div>
+    <!-- Sections -->
+    <section id="home" class="active">
+        <h2>Introduction</h2>
+        <div class="intro-container">
+            <!-- Rectangular Photo -->
+            <img src="media/jason.png" alt="Jason's Photo">
+            <!-- Introduction Text -->
+            <div class="intro-text">
+                <p class="project-description">
+                    Hi! I'm Jason. In this portfolio, I showcase my work from both fields, exploring the intersection 
+                    of creativity and technology. I’m currently a senior at the University of California, Berkeley, 
+                    double majoring in Computer Science and Art Practice. 
+                    Growing up in San Jose, I developed a love for both technology and creativity, which 
+                    has shaped much of my work and studies. I enjoy blending traditional painting with all 
+                    sorts of media or forms of art. Outside of my academic and artistic pursuits,
+                    I’m passionate about cooking, playing golf, and bouldering, which give me a chance to relax and stay active.
+                </p>
+            </div>
+        </div>
+    </section>
 
-      <div class="row">
+    <section id="cs-projects">
+        <h2>Computer Science Portfolio</h2>
+        <p class="project-description">
+            Here are reports on the projects I have been working on in my CS 180 class on Computer Vision and Computational Photography.
+        </p>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>
+                    <a href="./1/index.html" class="project-link">Project 1: Colorizing Images of the Russian Empire</a>
+                </h3>
+                <p>This project explores colorizing grayscale images using alignment techniques. Key Concepts: Normalized Cross Correlation, Exhuastive Align, Pyramid Align, Guassian Pyramids, and Histogram Equaliziation.</p>
+            </div>
+            <img src="/1/media/church_colorized.jpg" alt="Project 1 Image">
+        </div>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>
+                    <a href="./2/index.html" class="project-link">Project 2: Fun with Filters and Frequencies</a>
+                </h3>
+                <p>This project focuses on applying image filters and understanding frequency domains. Key Concepts: Guassian Blur, Fourier Transform, Guassianstacks, and Laplacian Stacks.</p>
+            </div>
+            <img src="/2/media/Apple + Orange.jpg" alt="Project 2 Image">
+        </div>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>
+                    <a href="./3/index.html" class="project-link">Project 3: Face Morphing and Modeling a Photo Collection</a>
+                </h3>
+                <p>In this project, facial morphing techniques are used to create smooth transitions. Key Concepts: Deluaney Triangulation and Affine Transformations.</p>
+            </div>
+            <img src="/3/media/midway_face.jpg" alt="Project 3 Image">
+        </div>
+        <div class="project-item">
+            <div class="project-text">
+                <h3>
+                    <a href="./4b/index.html" class="project-link">Project 4: Auto-stitching and Photo Mosaics</a>
+                </h3>
+                <p>This project involves generating panoramas by stitching together images. Key Concepts: Homgraphies, Harris Corner Detection, Adaptive Non-Maximal Supression, Feature Descriptor Extraction, and RANSAC.</p>
+            </div>    
+            <img src="/4b/media/combined_brick_auto.jpg" alt="Project 4 Image">
+        </div>
+    </section>
 
-        <div class="col-sm-8 blog-main">
+    <section id="art-portfolio">
+        <h2>Art Portfolio</h2>
+        <p class="project-description">
+            Hover over each image to learn more about the piece.
+        </p>
+        <div class="art-grid">
+            <!-- First Art Item -->
+            <div class="art-item">
+                <div class="art-hover-container">
+                    <img src="/media/myroom_animation.gif" alt="My Room">
+                    <div class="hover-text">
+                        My Room, 2024. Acrylic on Canvas, 36" x 48". Senior Thesis Project.
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Second Art Item -->
+            <div class="art-item">
+                <div class="art-hover-container">
+                    <img src="/media/p1.jpg" alt="Untitled">
+                    <div class="hover-text">
+                        Untitled, 2024. Hand made pigments on Japanese Rice Paper mounted on cardboard. 25" x 30".
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Third Art Item -->
+            <div class="art-item">
+                <div class="art-hover-container">
+                    <img src="/media/fire.JPG" alt="Fire">
+                    <div class="hover-text">
+                        Fire, 2024. Oil Pastel on BFK Paper and Nepalese Hand Made Paper.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-          <div class="blog-post">
-            <h2 class="blog-post-title">Sample blog post</h2>
-            <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+    <section id="resume">
+        <h2>My Resume</h2>
+        <iframe 
+            src="media/jresume.pdf" 
+            width="100%" 
+            height="800px" 
+            style="border: none;">
+        </iframe>
+    </section>
 
-            <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-            <hr>
-            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-            <blockquote>
-              <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            </blockquote>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            <h2>Heading</h2>
-            <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-            <h3>Sub-heading</h3>
-            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <pre><code>Example code block</code></pre>
-            <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-            <h3>Sub-heading</h3>
-            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <ul>
-              <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-              <li>Donec id elit non mi porta gravida at eget metus.</li>
-              <li>Nulla vitae elit libero, a pharetra augue.</li>
-            </ul>
-            <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-            <ol>
-              <li>Vestibulum id ligula porta felis euismod semper.</li>
-              <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-              <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-            </ol>
-            <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
-          </div><!-- /.blog-post -->
+    <script>
+        function openTab(event, sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.classList.remove('active'));
 
-          <div class="blog-post">
-            <h2 class="blog-post-title">Another blog post</h2>
-            <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
 
-            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-            <blockquote>
-              <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            </blockquote>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-          </div><!-- /.blog-post -->
-
-          <div class="blog-post">
-            <h2 class="blog-post-title">New feature</h2>
-            <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
-
-            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <ul>
-              <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-              <li>Donec id elit non mi porta gravida at eget metus.</li>
-              <li>Nulla vitae elit libero, a pharetra augue.</li>
-            </ul>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-          </div><!-- /.blog-post -->
-
-          <nav>
-            <ul class="pager">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </nav>
-
-        </div><!-- /.blog-main -->
-
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          </div>
-          <div class="sidebar-module">
-            <h4>Archives</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">March 2014</a></li>
-              <li><a href="#">February 2014</a></li>
-              <li><a href="#">January 2014</a></li>
-              <li><a href="#">December 2013</a></li>
-              <li><a href="#">November 2013</a></li>
-              <li><a href="#">October 2013</a></li>
-              <li><a href="#">September 2013</a></li>
-              <li><a href="#">August 2013</a></li>
-              <li><a href="#">July 2013</a></li>
-              <li><a href="#">June 2013</a></li>
-              <li><a href="#">May 2013</a></li>
-              <li><a href="#">April 2013</a></li>
-            </ol>
-          </div>
-          <div class="sidebar-module">
-            <h4>Elsewhere</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-            </ol>
-          </div>
-        </div><!-- /.blog-sidebar -->
-
-      </div><!-- /.row -->
-
-    </div><!-- /.container -->
-
-    <footer class="blog-footer">
-      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
-    </footer>
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  </body>
+            // Show the targeted section and set the active tab
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
 </html>
