@@ -1,0 +1,151 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+body {
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #E7E9F0;
+  color: #051747;
+  text-align: center;
+}
+
+.title-block {
+  background-color: #081F62;
+  color: #E7E9F0;
+  padding: 2% 2%;
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  background-color: #081F62;
+}
+
+.tab {
+  padding: 1% 3%;
+  cursor: pointer;
+  color: #E7E9F0;
+  font-size: 1.2em;
+  font-family: 'Raleway', sans-serif;
+  border: none;
+  background-color: #081F62;
+  transition: background-color 0.3s;
+}
+
+.tab:hover, .tab.active {
+  background-color: #535F80;
+}
+
+.tab-content {
+  display: none;
+  margin: 5% auto;
+  max-width: 900px;
+  text-align: center;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.intro-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  flex-wrap: nowrap;
+  text-align: left;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.intro-container img {
+  width: 300px;
+  height: auto;
+  border: 5px solid #535F80;
+  flex-shrink: 0;
+}
+
+.intro-text {
+  max-width: 600px;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 3% auto;
+  gap: 20px;
+  background-color: #F0F1F7;
+  border: 2px solid #535F80;
+  border-radius: 8px;
+  padding: 2%;
+  max-width: 900px;
+}
+
+.project-text {
+  flex: 1;
+  text-align: left;
+}
+
+.project-link {
+  text-decoration: none;
+  color: #081F62;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.project-link:hover {
+  color: #535F80;
+  text-decoration: underline;
+}
+
+.project-item img {
+  width: 250px;
+  height: auto;
+  border: 3px solid #535F80;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.art-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.art-hover-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.art-hover-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: filter 0.3s ease;
+}
+
+.art-hover-container:hover img {
+  filter: blur(4px) brightness(60%);
+}
+
+.hover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #E7E9F0;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.art-hover-container:hover .hover-text {
+  opacity: 1;
+}
