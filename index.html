@@ -8,62 +8,85 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="main-header">
+  <header class="main-header" role="banner">
     <div class="logo-area">
-      <!-- Replace src with your actual logo path -->
       <img src="media/logo.png" alt="Jason's Logo" class="logo">
     </div>
-    <nav class="main-nav">
-      <a href="#" class="nav-link active" onclick="openTab(event, 'about')">About</a>
-      <a href="#" class="nav-link" onclick="openTab(event, 'coding')">Coding Projects</a>
-      <a href="#" class="nav-link" onclick="openTab(event, 'art')">Art Projects</a>
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <ul class="nav-list" role="tablist">
+        <li role="presentation">
+          <button class="nav-button active" onclick="openTab(event, 'about')" role="tab" aria-selected="true" aria-controls="about" id="about-tab">
+            <img src="media/about.png" alt="About" class="nav-icon">
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="nav-button" onclick="openTab(event, 'art')" role="tab" aria-selected="false" aria-controls="art" id="art-tab">
+            <img src="media/art_projects.png" alt="Art Projects" class="nav-icon">
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="nav-button" onclick="openTab(event, 'coding')" role="tab" aria-selected="false" aria-controls="coding" id="coding-tab">
+            <img src="media/coding_projects.png" alt="Coding Projects" class="nav-icon">
+          </button>
+        </li>
+      </ul>
     </nav>
   </header>
 
   <!-- Main Content Sections -->
-  <main>
+  <main role="main">
     <!-- About -->
-    <section id="about" class="tab-content active">
-      <h2>About Me</h2>
-      <div class="intro-container">
-        <img src="media/jason.png" alt="Jason's Photo">
+    <section id="about" class="tab-content active" role="tabpanel" aria-labelledby="about-heading">
+      <header class="section-header">
+        <h1 id="about-heading">About Me</h1>
+      </header>
+      <article class="intro-container">
+        <figure class="profile-image">
+          <img src="media/jason.png" alt="Jason's Photo">
+        </figure>
         <div class="intro-text">
           <p>
             Hi! I'm Jason. I’m a senior at UC Berkeley studying Computer Science and Art Practice. I explore the intersection of technology and creativity—through both traditional and computational mediums. Outside of academics, I enjoy cooking, golf, and bouldering.
           </p>
         </div>
-      </div>
+      </article>
     </section>
 
     <!-- Coding Projects -->
-    <section id="coding" class="tab-content">
-      <h2>Computer Science Projects</h2>
-      <div class="project-item">
+    <section id="coding" class="tab-content" role="tabpanel" aria-labelledby="coding-heading">
+      <header class="section-header">
+        <h1 id="coding-heading">Computer Science Projects</h1>
+      </header>
+      <article class="project-item">
         <div class="project-text">
-          <h3><a href="projects/1/index.html" class="project-link">Colorizing the Russian Empire</a></h3>
+          <h2><a href="projects/1/index.html" class="project-link">Colorizing the Russian Empire</a></h2>
           <p>Image colorization with alignment techniques: Gaussian Pyramids, Histogram Equalization, and more.</p>
         </div>
-        <img src="projects/1/media/church_colorized.jpg" alt="Project 1">
-      </div>
+        <figure class="project-image">
+          <img src="projects/1/media/church_colorized.jpg" alt="Colorized church image from Russian Empire project">
+        </figure>
+      </article>
       <!-- Add more projects similarly -->
     </section>
 
     <!-- Art Projects -->
-    <section id="art" class="tab-content">
-      <h2>Art Portfolio</h2>
-      <div class="art-grid">
-        <div class="art-hover-container">
-          <img src="media/myroom_animation.gif" alt="My Room">
-          <div class="hover-text">My Room, 2024. Acrylic on Canvas, 36" x 48".</div>
-        </div>
-        <div class="art-hover-container">
-          <img src="media/p1.jpg" alt="Untitled">
-          <div class="hover-text">Untitled, 2024. Pigments on rice paper, 25" x 30".</div>
-        </div>
-        <div class="art-hover-container">
-          <img src="media/fire.JPG" alt="Fire">
-          <div class="hover-text">Fire, 2024. Oil pastel on handmade paper.</div>
-        </div>
+    <section id="art" class="tab-content" role="tabpanel" aria-labelledby="art-heading">
+      <header class="section-header">
+        <h1 id="art-heading">Art Portfolio</h1>
+      </header>
+      <div class="art-grid" role="img" aria-label="Art portfolio gallery">
+        <figure class="art-hover-container">
+          <img src="media/myroom_animation.gif" alt="My Room artwork">
+          <figcaption class="hover-text">My Room, 2024. Acrylic on Canvas, 36" x 48".</figcaption>
+        </figure>
+        <figure class="art-hover-container">
+          <img src="media/p1.jpg" alt="Untitled artwork">
+          <figcaption class="hover-text">Untitled, 2024. Pigments on rice paper, 25" x 30".</figcaption>
+        </figure>
+        <figure class="art-hover-container">
+          <img src="media/fire.JPG" alt="Fire artwork">
+          <figcaption class="hover-text">Fire, 2024. Oil pastel on handmade paper.</figcaption>
+        </figure>
       </div>
     </section>
   </main>
