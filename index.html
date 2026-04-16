@@ -3,92 +3,243 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jason's Portfolio</title>
+  <title>Jason Lee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="main-header" role="banner">
-    <div class="logo-area">
-      <img src="media/logo.png" alt="Jason's Logo" class="logo">
-    </div>
-    <nav class="main-nav" role="navigation" aria-label="Main navigation">
-      <ul class="nav-list" role="tablist">
-        <li role="presentation">
-          <button class="nav-button active" onclick="openTab(event, 'about')" role="tab" aria-selected="true" aria-controls="about" id="about-tab">
-            <img src="media/about.png" alt="About" class="nav-icon">
-          </button>
-        </li>
-        <li role="presentation">
-          <button class="nav-button" onclick="openTab(event, 'art')" role="tab" aria-selected="false" aria-controls="art" id="art-tab">
-            <img src="media/art_projects.png" alt="Art Projects" class="nav-icon">
-          </button>
-        </li>
-        <li role="presentation">
-          <button class="nav-button" onclick="openTab(event, 'coding')" role="tab" aria-selected="false" aria-controls="coding" id="coding-tab">
-            <img src="media/coding_projects.png" alt="Coding Projects" class="nav-icon">
-          </button>
-        </li>
-      </ul>
+
+  <header id="site-header">
+    <button class="nav-logo nav-btn" data-tab="home">JASON LEE</button>
+    <nav id="main-nav">
+      <button class="nav-btn active" data-tab="home">HOME</button>
+      <button class="nav-btn" data-tab="vision">MY VISION</button>
+      <button class="nav-btn" data-tab="art">ART PRACTICE</button>
+      <button class="nav-btn" data-tab="ml">MACHINE LEARNING</button>
     </nav>
+    <button id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <!-- Main Content Sections -->
-  <main role="main">
-    <!-- About -->
-    <section id="about" class="tab-content active" role="tabpanel" aria-labelledby="about-heading">
-      <header class="section-header">
-        <h1 id="about-heading">About Me</h1>
-      </header>
-      <article class="intro-container">
-        <figure class="profile-image">
-          <img src="media/jason.png" alt="Jason's Photo">
-        </figure>
-        <div class="intro-text">
-          <p>
-            Hi! I'm Jason. I’m a senior at UC Berkeley studying Computer Science and Art Practice. I explore the intersection of technology and creativity—through both traditional and computational mediums. Outside of academics, I enjoy cooking, golf, and bouldering.
-          </p>
-        </div>
-      </article>
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="tab-section active">
+      <canvas id="splat-canvas"></canvas>
+      <div id="home-tagline">ART &amp; TECHNOLOGY</div>
     </section>
 
-    <!-- Coding Projects -->
-    <section id="coding" class="tab-content" role="tabpanel" aria-labelledby="coding-heading">
-      <header class="section-header">
-        <h1 id="coding-heading">Computer Science Projects</h1>
-      </header>
-      <article class="project-item">
-        <div class="project-text">
-          <h2><a href="projects/1/index.html" class="project-link">Colorizing the Russian Empire</a></h2>
-          <p>Image colorization with alignment techniques: Gaussian Pyramids, Histogram Equalization, and more.</p>
+    <!-- MY VISION -->
+    <section id="vision" class="tab-section">
+      <div class="page-content">
+        <div class="vision-layout">
+          <div class="vision-photo">
+            <img src="media/jason.png" alt="Jason Lee">
+          </div>
+          <div class="vision-text">
+            <h1 class="section-heading">Jason Lee</h1>
+            <p>
+              I graduated from UC Berkeley with a dual major in Computer Science and Art Practice,
+              alongside the EECS Honors Program — a selective track designed to push engineers beyond
+              the bounds of their own discipline and into broader intellectual territory.
+            </p>
+            <p>
+              While most of my peers stayed within one field, I was among the very few who actively
+              bridged CS with art — two domains that rarely speak the same language. That connection
+              became my calling.
+            </p>
+            <p>
+              My vision is to bridge the worlds of <span class="accent-orange">art</span> and
+              <span class="accent-turq">technology</span>. I believe we are on the edge of a new
+              realm of entertainment — one built not just on LLMs, but on deeper, less-explored
+              fields like <span class="accent-orange">computer vision</span> and
+              <span class="accent-turq">reinforcement learning</span>. The future of creative
+              experience lies in systems that can perceive, adapt, and respond — not just generate.
+            </p>
+            <p>
+              Outside of work, I enjoy cooking, golf, and bouldering.
+            </p>
+            <a href="https://www.linkedin.com/in/leejason2025" target="_blank" rel="noopener" class="linkedin-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
         </div>
-        <figure class="project-image">
-          <img src="projects/1/media/church_colorized.jpg" alt="Colorized church image from Russian Empire project">
-        </figure>
-      </article>
-      <!-- Add more projects similarly -->
-    </section>
-
-    <!-- Art Projects -->
-    <section id="art" class="tab-content" role="tabpanel" aria-labelledby="art-heading">
-      <header class="section-header">
-        <h1 id="art-heading">Art Portfolio</h1>
-      </header>
-      <div class="art-grid" role="img" aria-label="Art portfolio gallery">
-        <figure class="art-hover-container">
-          <img src="media/myroom_animation.gif" alt="My Room artwork">
-          <figcaption class="hover-text">My Room, 2024. Acrylic on Canvas, 36" x 48".</figcaption>
-        </figure>
-        <figure class="art-hover-container">
-          <img src="media/p1.jpg" alt="Untitled artwork">
-          <figcaption class="hover-text">Untitled, 2024. Pigments on rice paper, 25" x 30".</figcaption>
-        </figure>
-        <figure class="art-hover-container">
-          <img src="media/fire.JPG" alt="Fire artwork">
-          <figcaption class="hover-text">Fire, 2024. Oil pastel on handmade paper.</figcaption>
-        </figure>
       </div>
     </section>
+
+    <!-- ART PRACTICE -->
+    <section id="art" class="tab-section">
+      <div class="page-content">
+        <h1 class="section-heading">Art Practice</h1>
+
+        <div class="art-era">
+          <div class="era-header">
+            <span class="era-label">2021 — 2025</span>
+            <div class="era-line"></div>
+          </div>
+          <div class="art-cards">
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/myroom_animation.gif" alt="My Room">
+              </div>
+              <div class="art-card-info">
+                <h3>My Room</h3>
+                <span class="art-medium">Acrylic on Canvas &middot; 36&Prime; &times; 48&Prime; &middot; 2024</span>
+                <p>An intimate exploration of personal space and memory, rendered in layered acrylic with animated light play.</p>
+              </div>
+            </div>
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/p1.jpg" alt="Untitled">
+              </div>
+              <div class="art-card-info">
+                <h3>Untitled</h3>
+                <span class="art-medium">Pigments on Rice Paper &middot; 25&Prime; &times; 30&Prime; &middot; 2024</span>
+                <p>Exploring the tension between control and accident through water-soluble pigments on delicate rice paper.</p>
+              </div>
+            </div>
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/fire.JPG" alt="Fire">
+              </div>
+              <div class="art-card-info">
+                <h3>Fire</h3>
+                <span class="art-medium">Oil Pastel on Handmade Paper &middot; 2024</span>
+                <p>A study in luminosity and destruction — the paradox of fire as both creator and consumer.</p>
+              </div>
+            </div>
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/p2.jpg" alt="Untitled II">
+              </div>
+              <div class="art-card-info">
+                <h3>Untitled II</h3>
+                <span class="art-medium">Mixed Media &middot; 2023</span>
+                <p>Intersections of digital and physical mark-making on an unconventional substrate.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="art-era">
+          <div class="era-header">
+            <span class="era-label">2018 — 2021</span>
+            <div class="era-line"></div>
+          </div>
+          <div class="art-cards">
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/01_Lee.jpg" alt="Composition I">
+              </div>
+              <div class="art-card-info">
+                <h3>Composition I</h3>
+                <span class="art-medium">Oil on Canvas &middot; 2020</span>
+                <p>Early explorations in classical medium, pushing toward abstraction through form and negative space.</p>
+              </div>
+            </div>
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/02_Lee.jpg" alt="Composition II">
+              </div>
+              <div class="art-card-info">
+                <h3>Composition II</h3>
+                <span class="art-medium">Oil on Canvas &middot; 2020</span>
+                <p>Continued study in tonal range and the geometry of shadow.</p>
+              </div>
+            </div>
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/03_Lee.jpg" alt="Study in Blue">
+              </div>
+              <div class="art-card-info">
+                <h3>Study in Blue</h3>
+                <span class="art-medium">Watercolor &middot; 2019</span>
+                <p>Color theory exploration with a limited palette — the richness found within constraint.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="art-era">
+          <div class="era-header">
+            <span class="era-label">2013 — 2018</span>
+            <div class="era-line"></div>
+          </div>
+          <div class="art-cards">
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/04_Lee.jpg" alt="Early Work I">
+              </div>
+              <div class="art-card-info">
+                <h3>Early Work I</h3>
+                <span class="art-medium">Pencil on Paper &middot; 2017</span>
+                <p>Foundational drawing studies grounded in careful observation of the physical world.</p>
+              </div>
+            </div>
+            <div class="art-card">
+              <div class="art-card-img">
+                <img src="media/05_Lee.jpg" alt="Early Work II">
+              </div>
+              <div class="art-card-info">
+                <h3>Early Work II</h3>
+                <span class="art-medium">Charcoal &middot; 2016</span>
+                <p>Figure drawing and tonal studies that shaped an eye for light and structure.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MACHINE LEARNING -->
+    <section id="ml" class="tab-section">
+      <div class="page-content">
+        <h1 class="section-heading">Machine Learning</h1>
+        <div class="ml-cards">
+
+          <div class="ml-card">
+            <div class="ml-tags">
+              <span class="tag">Reinforcement Learning</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">OpenAI Gym</span>
+            </div>
+            <h2 class="ml-card-title">Reinforcement Learning Agent</h2>
+            <p>
+              Designed and trained a deep RL agent using policy gradient methods. The project explored
+              reward shaping, environment design, and the challenge of sparse feedback — bridging
+              mathematical optimization with emergent intelligent behavior. Training from scratch
+              revealed how much architecture and hyperparameter choice govern what an agent can learn.
+            </p>
+            <a href="#" class="view-project-link">View Project &rarr;</a>
+          </div>
+
+          <div class="ml-card">
+            <div class="ml-tags">
+              <span class="tag">Fine-Tuning</span>
+              <span class="tag">LoRA</span>
+              <span class="tag">Transformers</span>
+            </div>
+            <h2 class="ml-card-title">LoRA Fine-Tuning</h2>
+            <p>
+              Applied Low-Rank Adaptation (LoRA) to fine-tune a large language model on domain-specific
+              data. Investigated the efficiency-performance tradeoff between parameter-efficient training
+              and full fine-tuning, achieving strong results with a fraction of the compute and memory
+              footprint — a meaningful finding for resource-constrained deployment.
+            </p>
+            <a href="#" class="view-project-link">View Project &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script src="js/script.js"></script>
