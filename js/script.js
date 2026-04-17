@@ -465,7 +465,7 @@ function renderPhotoDissolve() {
   const rows = Math.floor(h / CELL_H);
   const CHARS = '.,:;+-=*%@#';
 
-  const INSIDE_BAND  = 150; // px inside image where chars start appearing
+  const INSIDE_BAND  = 90;  // px inside image where chars start appearing
   const OUTSIDE_BAND = 180; // px outside image where chars fade to none
 
   // Match the page background color so chars subtract the image into the void
