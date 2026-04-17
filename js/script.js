@@ -697,9 +697,43 @@ function tryInit() {
   document.fonts.ready.then(startAnim);
 }
 
+// ── intro overlay — typewriter "Hello World!" then eyelid reveal ─────────────
+function runIntro() {
+  const overlay = document.getElementById('intro-overlay');
+  if (!overlay) return;
+  const charsEl = overlay.querySelector('.intro-chars');
+  if (!charsEl) return;
+
+  const TEXT = 'Hello World!';
+  const TYPE_MS = 85;
+  const HOLD_MS = 700;
+  const FADE_MS = 250;
+  const OPEN_MS = 2400;
+
+  let i = 0;
+  function typeNext() {
+    if (i < TEXT.length) {
+      charsEl.textContent = TEXT.slice(0, ++i);
+      setTimeout(typeNext, TYPE_MS);
+    } else {
+      setTimeout(reveal, HOLD_MS);
+    }
+  }
+
+  function reveal() {
+    overlay.classList.add('fading-text');
+    setTimeout(() => overlay.classList.add('revealing'), FADE_MS);
+    setTimeout(() => overlay.classList.add('gone'),      FADE_MS + OPEN_MS);
+  }
+
+  typeNext();
+}
+
 function boot() {
   if (bootDone) return;
   bootDone = true;
+
+  runIntro();
 
   hamburger = document.getElementById('hamburger');
   mainNav   = document.getElementById('main-nav');

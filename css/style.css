@@ -27,6 +27,90 @@
 
 html { scroll-behavior: smooth; }
 
+/* ── intro overlay ──────────────────────────────────────────────────────────
+   Two black halves (eyelids) cover the viewport from first paint. A centered
+   typewriter types "Hello World!". After a short hold, halves slide apart
+   vertically — like eyes opening — to reveal the site. */
+
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.intro-half {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #080808;
+  will-change: transform;
+}
+.intro-top    { top: 0; }
+.intro-bottom { bottom: 0; }
+
+/* Eyelids: two quick blinks (partial open → close) then a full sweep open. */
+@keyframes eyelid-top {
+  0%   { transform: translateY(0);       }
+  12%  { transform: translateY(-20%);    }   /* blink 1 — small */
+  22%  { transform: translateY(0);       }   /* fully close */
+  40%  { transform: translateY(-55%);    }   /* blink 2 — much wider */
+  52%  { transform: translateY(-15%);    }   /* partial close, not all the way */
+  100% { transform: translateY(-100%);   }   /* fully open */
+}
+@keyframes eyelid-bottom {
+  0%   { transform: translateY(0);       }
+  12%  { transform: translateY( 20%);    }
+  22%  { transform: translateY(0);       }
+  40%  { transform: translateY( 55%);    }
+  52%  { transform: translateY( 15%);    }
+  100% { transform: translateY( 100%);   }
+}
+
+#intro-overlay.revealing .intro-top    { animation: eyelid-top    2.4s ease-in-out forwards; }
+#intro-overlay.revealing .intro-bottom { animation: eyelid-bottom 2.4s ease-in-out forwards; }
+
+#intro-overlay.gone { display: none; }
+
+#intro-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.intro-chars {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+          background-clip: text;
+  color: transparent;
+}
+
+#intro-overlay.fading-text #intro-text { opacity: 0; }
+
+.intro-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  background: var(--amber);
+  margin-left: 0.08em;
+  vertical-align: text-bottom;
+  animation: intro-blink 0.65s steps(1) infinite;
+}
+
+@keyframes intro-blink { 50% { opacity: 0; } }
+
 body {
   background: var(--bg);
   color: var(--text);
