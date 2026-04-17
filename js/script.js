@@ -426,19 +426,59 @@ function buildTopoCells(canvasId) {
         x, y,
         phase: Math.random() * 4,
         speed: 0.010 + Math.random() * 0.022,
+        heat:  0,
       });
     }
   }
 }
 
+const NAV_H   = 64;
+const TOPO_HR = 140;   // heat radius in px
+const TOPO_HS = 0.35;  // heat gain per frame at center
+const TOPO_HD = 0.88;  // heat decay per frame
+
 function drawTopoFrame() {
   if (!topoCtx) { topoAnimId = null; return; }
-  topoCtx.clearRect(0, 0, topoW, topoH);
-  topoCtx.fillStyle = 'rgba(142, 202, 230, 0.14)';
+
+  // Mouse in canvas coords — every topo canvas sits below the nav.
+  const mx = mouseX;
+  const my = mouseY - NAV_H;
+  const R2 = TOPO_HR * TOPO_HR;
+
+  // Update phase + heat
   for (const cell of topoCells) {
     cell.phase = (cell.phase + cell.speed) % 4;
+    const dx = cell.x - mx, dy = cell.y - my;
+    const d2 = dx * dx + dy * dy;
+    if (d2 < R2 && d2 > 0) {
+      const prox = 1 - Math.sqrt(d2) / TOPO_HR;
+      cell.heat = Math.min(1, cell.heat + prox * TOPO_HS);
+    }
+    cell.heat *= TOPO_HD;
+    if (cell.heat < 0.001) cell.heat = 0;
+  }
+
+  topoCtx.clearRect(0, 0, topoW, topoH);
+
+  // Cool cells in one batched fill
+  topoCtx.fillStyle = 'rgba(142, 202, 230, 0.14)';
+  for (const cell of topoCells) {
+    if (cell.heat >= 0.02) continue;
     topoCtx.fillText(TOPO_ROT[Math.floor(cell.phase)], cell.x, cell.y);
   }
+
+  // Heated cells — color blends sky → amber as heat rises
+  for (const cell of topoCells) {
+    if (cell.heat < 0.02) continue;
+    const t = Math.min(1, cell.heat * 1.4);
+    const r = Math.round(142 + (255 - 142) * t);
+    const g = Math.round(202 + (183 - 202) * t);
+    const b = Math.round(230 + (  3 - 230) * t);
+    const alpha = 0.14 + cell.heat * 0.7;
+    topoCtx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+    topoCtx.fillText(TOPO_ROT[Math.floor(cell.phase)], cell.x, cell.y);
+  }
+
   topoAnimId = requestAnimationFrame(drawTopoFrame);
 }
 
@@ -605,6 +645,10 @@ function openTab(tabName) {
       startTopoAnim('art-topo-canvas');
       packArtGrid();
     });
+  } else if (tabName === 'ml') {
+    requestAnimationFrame(() => {
+      startTopoAnim('ml-topo-canvas');
+    });
   }
 }
 
@@ -622,6 +666,11 @@ function onResize() {
     if (art && art.classList.contains('active')) {
       startTopoAnim('art-topo-canvas');
       packArtGrid();
+    }
+
+    const ml = document.getElementById('ml');
+    if (ml && ml.classList.contains('active')) {
+      startTopoAnim('ml-topo-canvas');
     }
 
     const home = document.getElementById('home');

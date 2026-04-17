@@ -433,6 +433,24 @@ body {
 }
 
 /* ── MACHINE LEARNING ── */
+#ml { position: relative; }
+
+#ml-topo-canvas {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - var(--nav-h));
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#ml .page-content {
+  position: relative;
+  z-index: 1;
+}
+
 .ml-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
