@@ -704,7 +704,11 @@ function runIntro() {
   const charsEl = overlay.querySelector('.intro-chars');
   if (!charsEl) return;
 
-  const TEXT = 'Hello World!';
+  const hour = new Date().getHours();
+  const TEXT =
+    hour >= 5 && hour < 12 ? 'Good Morning!' :
+    hour >= 12 && hour < 18 ? 'Good Afternoon!' :
+                              'Good Evening!';
   const TYPE_MS = 85;
   const HOLD_MS = 700;
   const FADE_MS = 250;
