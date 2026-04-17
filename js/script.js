@@ -359,12 +359,32 @@ let topoCtx     = null;
 let topoW       = 0, topoH = 0;
 let topoAnimId  = null;
 
-function buildTopoCells() {
-  const canvas = document.getElementById('topo-canvas');
+function buildTopoCells(canvasId) {
+  const canvas = document.getElementById(canvasId);
   if (!canvas) return;
-  const w = canvas.offsetWidth;
-  const h = canvas.offsetHeight;
+
+  // Force a layout flush before measuring — the canvas might have just been
+  // un-hidden from a display:none parent and its computed size can be stale.
+  void document.body.offsetHeight;
+
+  // For fixed-positioned canvases, fall back to the viewport if offsetWidth
+  // hasn't settled yet — this prevents the drawing buffer from being 300×150
+  // while CSS stretches the element to fullscreen (which manifests as giant,
+  // blurry chars concentrated in the top-left corner).
+  const isFixed = getComputedStyle(canvas).position === 'fixed';
+  let w = canvas.offsetWidth;
+  let h = canvas.offsetHeight;
+  if (isFixed) {
+    const navHVar = getComputedStyle(document.documentElement)
+      .getPropertyValue('--nav-h');
+    const navH = parseFloat(navHVar) || 64;
+    if (w < window.innerWidth - 50)        w = window.innerWidth;
+    if (h < window.innerHeight - navH - 50) h = window.innerHeight - navH;
+  }
   if (w === 0 || h === 0) return;
+
+  canvas.style.width  = w + 'px';
+  canvas.style.height = h + 'px';
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   canvas.width  = w * dpr;
@@ -422,15 +442,17 @@ function drawTopoFrame() {
   topoAnimId = requestAnimationFrame(drawTopoFrame);
 }
 
-function startTopoAnim() {
-  if (topoAnimId) return;
-  if (!topoCells.length) buildTopoCells();
+function startTopoAnim(canvasId) {
+  stopTopoAnim();
+  buildTopoCells(canvasId);
   if (!topoCtx) return;
   topoAnimId = requestAnimationFrame(drawTopoFrame);
 }
 
 function stopTopoAnim() {
   if (topoAnimId) { cancelAnimationFrame(topoAnimId); topoAnimId = null; }
+  topoCells = [];
+  topoCtx   = null;
 }
 
 // ── photo dissolve (vision tab) ──────────────────────────────────────────────
@@ -519,6 +541,42 @@ function renderPhotoDissolve() {
   }
 }
 
+// ── art grid packer — computes span from image aspect + info height so cards
+// pack without the chicken-and-egg problem of "span depends on height depends
+// on span".
+function packArtGrid() {
+  const grids = document.querySelectorAll('#art .art-cards');
+  grids.forEach(grid => {
+    const styles = getComputedStyle(grid);
+    const rowH   = parseFloat(styles.gridAutoRows) || 8;
+    const rowGap = parseFloat(styles.rowGap) || 0;
+    const cards  = grid.querySelectorAll('.art-card');
+
+    cards.forEach(card => {
+      const img  = card.querySelector('img');
+      const info = card.querySelector('.art-card-info');
+
+      const compute = () => {
+        if (!img || !img.naturalWidth || !img.naturalHeight) return;
+        const cardW = card.getBoundingClientRect().width;
+        if (cardW === 0) return;
+
+        const imgH   = cardW * (img.naturalHeight / img.naturalWidth);
+        const infoH  = info ? info.offsetHeight : 0;
+        const totalH = imgH + infoH;
+        const span   = Math.ceil((totalH + rowGap) / (rowH + rowGap));
+        card.style.gridRowEnd = `span ${span}`;
+      };
+
+      if (img && img.complete && img.naturalHeight > 0) {
+        compute();
+      } else if (img) {
+        img.addEventListener('load', compute, { once: true });
+      }
+    });
+  });
+}
+
 // ── tab switching ─────────────────────────────────────────────────────────────
 function openTab(tabName) {
   document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
@@ -535,13 +593,18 @@ function openTab(tabName) {
   if (tabName === 'home') startAnim();
   else stopAnim();
 
+  stopTopoAnim();
+
   if (tabName === 'vision') {
     requestAnimationFrame(() => {
-      startTopoAnim();
+      startTopoAnim('topo-canvas');
       renderPhotoDissolve();
     });
-  } else {
-    stopTopoAnim();
+  } else if (tabName === 'art') {
+    requestAnimationFrame(() => {
+      startTopoAnim('art-topo-canvas');
+      packArtGrid();
+    });
   }
 }
 
@@ -551,10 +614,14 @@ function onResize() {
   resizeTmr = setTimeout(() => {
     const vision = document.getElementById('vision');
     if (vision && vision.classList.contains('active')) {
-      stopTopoAnim();
-      buildTopoCells();
-      startTopoAnim();
+      startTopoAnim('topo-canvas');
       renderPhotoDissolve();
+    }
+
+    const art = document.getElementById('art');
+    if (art && art.classList.contains('active')) {
+      startTopoAnim('art-topo-canvas');
+      packArtGrid();
     }
 
     const home = document.getElementById('home');
