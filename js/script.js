@@ -351,7 +351,15 @@ function stopAnim() {
 }
 
 // ── topographic ASCII bg (vision tab) ────────────────────────────────────────
-function renderTopo() {
+// Each contour cell rotates in place through | / - \ at its own speed so the
+// whole field slowly shimmers.
+const TOPO_ROT = ['|', '/', '-', '\\'];
+let topoCells   = [];
+let topoCtx     = null;
+let topoW       = 0, topoH = 0;
+let topoAnimId  = null;
+
+function buildTopoCells() {
   const canvas = document.getElementById('topo-canvas');
   if (!canvas) return;
   const w = canvas.offsetWidth;
@@ -361,18 +369,17 @@ function renderTopo() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   canvas.width  = w * dpr;
   canvas.height = h * dpr;
-  const ctx = canvas.getContext('2d');
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.font = `bold ${FONT_PX}px "Courier New", Courier, monospace`;
-  ctx.textAlign    = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillStyle    = 'rgba(142, 202, 230, 0.14)';
-  ctx.clearRect(0, 0, w, h);
+  topoCtx = canvas.getContext('2d');
+  topoCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  topoCtx.font = `bold ${FONT_PX}px "Courier New", Courier, monospace`;
+  topoCtx.textAlign    = 'center';
+  topoCtx.textBaseline = 'middle';
+  topoW = w;
+  topoH = h;
 
   const cols = Math.floor(w / CELL_W);
   const rows = Math.floor(h / CELL_H);
 
-  // sum of low-frequency sinusoids → smooth rolling height field
   function topo(x, y) {
     return (
       Math.sin(x * 0.0080) * 1.2 +
@@ -382,9 +389,10 @@ function renderTopo() {
     );
   }
 
-  const STEP   = 0.45; // distance between contour lines
-  const THRESH = 0.14; // how close to a contour level counts as "on" the line
+  const STEP   = 0.45;
+  const THRESH = 0.14;
 
+  topoCells = [];
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const x = c * CELL_W + CELL_W / 2;
@@ -394,22 +402,35 @@ function renderTopo() {
       const dist  = Math.abs(phase - Math.round(phase));
       if (dist > THRESH) continue;
 
-      // gradient direction picks a character aligned with the contour line
-      const dzx = topo(x + 1, y) - z;
-      const dzy = topo(x, y + 1) - z;
-      const ax = Math.abs(dzx);
-      const ay = Math.abs(dzy);
-
-      let ch;
-      if (ax < 1e-4 && ay < 1e-4)     ch = '.';
-      else if (ay > ax * 2.2)         ch = '-';
-      else if (ax > ay * 2.2)         ch = '|';
-      else if (dzx * dzy > 0)         ch = '\\';
-      else                            ch = '/';
-
-      ctx.fillText(ch, x, y);
+      topoCells.push({
+        x, y,
+        phase: Math.random() * 4,
+        speed: 0.010 + Math.random() * 0.022,
+      });
     }
   }
+}
+
+function drawTopoFrame() {
+  if (!topoCtx) { topoAnimId = null; return; }
+  topoCtx.clearRect(0, 0, topoW, topoH);
+  topoCtx.fillStyle = 'rgba(142, 202, 230, 0.14)';
+  for (const cell of topoCells) {
+    cell.phase = (cell.phase + cell.speed) % 4;
+    topoCtx.fillText(TOPO_ROT[Math.floor(cell.phase)], cell.x, cell.y);
+  }
+  topoAnimId = requestAnimationFrame(drawTopoFrame);
+}
+
+function startTopoAnim() {
+  if (topoAnimId) return;
+  if (!topoCells.length) buildTopoCells();
+  if (!topoCtx) return;
+  topoAnimId = requestAnimationFrame(drawTopoFrame);
+}
+
+function stopTopoAnim() {
+  if (topoAnimId) { cancelAnimationFrame(topoAnimId); topoAnimId = null; }
 }
 
 // ── photo dissolve (vision tab) ──────────────────────────────────────────────
@@ -444,8 +465,8 @@ function renderPhotoDissolve() {
   const rows = Math.floor(h / CELL_H);
   const CHARS = '.,:;+-=*%@#';
 
-  const INSIDE_BAND  = 90;  // px inside image where chars start appearing
-  const OUTSIDE_BAND = 130; // px outside image where chars fade to none
+  const INSIDE_BAND  = 150; // px inside image where chars start appearing
+  const OUTSIDE_BAND = 180; // px outside image where chars fade to none
 
   // Match the page background color so chars subtract the image into the void
   // (the image appears to dissolve away rather than into another pattern).
@@ -465,7 +486,8 @@ function renderPhotoDissolve() {
       let density;
       if (minInside > 0) {
         if (minInside > INSIDE_BAND) continue;
-        density = Math.pow(1 - minInside / INSIDE_BAND, 0.85);
+        // shallow falloff so chars stay dense well into the image
+        density = Math.pow(1 - minInside / INSIDE_BAND, 0.5);
       } else {
         const d = -minInside;
         if (d > OUTSIDE_BAND) continue;
@@ -480,7 +502,11 @@ function renderPhotoDissolve() {
       // At the very edge, overprint multiple chars per cell with tiny jitter
       // so the boundary reads as a thick shredded band rather than a grid.
       const edgeDist = Math.abs(minInside);
-      const overprint = edgeDist < 12 ? 3 : edgeDist < 28 ? 2 : 1;
+      const isInside = minInside > 0;
+      const overprint =
+        edgeDist < 15                ? 3 :
+        edgeDist < 40                ? 2 :
+        (isInside && edgeDist < 90)  ? 2 : 1;
       for (let k = 0; k < overprint; k++) {
         const ox = (Math.random() - 0.5) * (overprint > 1 ? 3.5 : 0);
         const oy = (Math.random() - 0.5) * (overprint > 1 ? 3.5 : 0);
@@ -511,9 +537,11 @@ function openTab(tabName) {
 
   if (tabName === 'vision') {
     requestAnimationFrame(() => {
-      renderTopo();
+      startTopoAnim();
       renderPhotoDissolve();
     });
+  } else {
+    stopTopoAnim();
   }
 }
 
@@ -523,7 +551,9 @@ function onResize() {
   resizeTmr = setTimeout(() => {
     const vision = document.getElementById('vision');
     if (vision && vision.classList.contains('active')) {
-      renderTopo();
+      stopTopoAnim();
+      buildTopoCells();
+      startTopoAnim();
       renderPhotoDissolve();
     }
 
