@@ -62,7 +62,7 @@ body {
   border-bottom: 1px solid var(--border-t);
 }
 
-.nav-logo {
+.nav-btn.nav-logo {
   font-family: var(--display);
   font-size: 1.05rem;
   font-weight: 800;
@@ -71,9 +71,13 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
   cursor: pointer;
   flex-shrink: 0;
+  padding: 0;
 }
+
+.nav-btn.nav-logo::after { display: none; }
 
 #main-nav {
   display: flex;
