@@ -129,52 +129,60 @@ function setupScene() {
   scene.add(pivot);
 }
 
-// ── procedural cables ─────────────────────────────────────────────────────────
-function buildCables(anchorTopY, anchorHalfW, anchorSideY, anchorSideX) {
+// ── procedural cables — all radiate from a single nape anchor ────────────────
+function buildCables(nape) {
   const wireMat = new THREE.MeshStandardMaterial({
     color: 0x556677, metalness: 0.3, roughness: 0.6,
   });
   const far = 12;
 
-  function wire(start, baseA, spread, radius = 0.045) {
+  // Every wire shares p0 at the nape and immediately spreads in its own
+  // direction — no shared crown waypoint, so the bundle reads as a single
+  // convergence point at the back of the helmet.
+  function wire(outAngle, spread, radius = 0.04) {
     const rand = (s) => (Math.random() - 0.5) * s;
-    const p0 = start.clone();
-    const a1 = baseA + rand(spread);
+
+    const p0 = nape.clone();
+
+    // Tight cluster near nape
+    const a1 = outAngle + rand(spread * 0.4);
     const p1 = p0.clone().add(new THREE.Vector3(
-      Math.cos(a1), Math.sin(a1), rand(0.3)
-    ).multiplyScalar(0.35 + Math.random() * 0.3));
-    const a2 = a1 + rand(spread * 1.2);
+      Math.cos(a1) * 0.32,
+      Math.sin(a1) * 0.32,
+      rand(0.2)
+    ));
+
+    // Full spread
+    const a2 = outAngle + rand(spread);
     const p2 = p1.clone().add(new THREE.Vector3(
-      Math.cos(a2), Math.sin(a2), rand(0.25)
-    ).multiplyScalar(0.6 + Math.random() * 0.6));
+      Math.cos(a2), Math.sin(a2), rand(0.35)
+    ).multiplyScalar(0.7 + Math.random() * 0.5));
+
     const a3 = a2 + rand(0.3);
     const p3 = p2.clone().add(new THREE.Vector3(
-      Math.cos(a3), Math.sin(a3), rand(0.1)
+      Math.cos(a3), Math.sin(a3), rand(0.15)
     ).multiplyScalar(far));
+
     const curve = new THREE.CatmullRomCurve3([p0, p1, p2, p3]);
     inner.add(new THREE.Mesh(
-      new THREE.TubeGeometry(curve, 40, radius, 6, false),
+      new THREE.TubeGeometry(curve, 48, radius, 6, false),
       wireMat
     ));
   }
 
+  // Top fan — 16 wires rising up and outward
   const TOP_N = 16;
   for (let i = 0; i < TOP_N; i++) {
     const t = (i + 0.5) / TOP_N;
-    const sx = -anchorHalfW + 2 * anchorHalfW * t;
-    const baseA = Math.PI / 2 + (t - 0.5) * 1.3;
-    const radius = 0.035 + Math.random() * 0.03;
-    wire(new THREE.Vector3(sx, anchorTopY, 0), baseA, 0.35, radius);
+    const outA = Math.PI / 2 + (t - 0.5) * 1.4;
+    wire(outA, 0.25, 0.035 + Math.random() * 0.025);
   }
+
+  // Side wires — 3 per side, exiting left/right after the crown bundle
   for (const side of [-1, 1]) {
     for (let j = 0; j < 3; j++) {
-      const sy = anchorSideY - 0.4 + j * 0.4;
-      wire(
-        new THREE.Vector3(side * anchorSideX, sy, 0),
-        side > 0 ? 0 : Math.PI,
-        0.55,
-        0.035
-      );
+      const outA = (side > 0 ? 0 : Math.PI) + (j - 1) * 0.25;
+      wire(outA, 0.3, 0.035);
     }
   }
 }
@@ -212,7 +220,9 @@ function loadModel() {
 
       const box2 = new THREE.Box3().setFromObject(model);
       const s2   = box2.getSize(new THREE.Vector3());
-      buildCables(box2.max.y - 0.1, s2.x * 0.35, 0, s2.x * 0.5);
+      // Single bundle anchor at the nape (back-lower-center of the helmet).
+      const nape = new THREE.Vector3(0, box2.min.y + s2.y * 0.40, -s2.z * 0.45);
+      buildCables(nape);
     },
     undefined,
     (err) => console.error('Failed to load helmet.glb', err)
