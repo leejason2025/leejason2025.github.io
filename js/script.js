@@ -350,6 +350,149 @@ function stopAnim() {
   if (animId) { cancelAnimationFrame(animId); animId = null; }
 }
 
+// ── topographic ASCII bg (vision tab) ────────────────────────────────────────
+function renderTopo() {
+  const canvas = document.getElementById('topo-canvas');
+  if (!canvas) return;
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  if (w === 0 || h === 0) return;
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width  = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.font = `bold ${FONT_PX}px "Courier New", Courier, monospace`;
+  ctx.textAlign    = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle    = 'rgba(142, 202, 230, 0.14)';
+  ctx.clearRect(0, 0, w, h);
+
+  const cols = Math.floor(w / CELL_W);
+  const rows = Math.floor(h / CELL_H);
+
+  // sum of low-frequency sinusoids → smooth rolling height field
+  function topo(x, y) {
+    return (
+      Math.sin(x * 0.0080) * 1.2 +
+      Math.cos(y * 0.0100) * 1.0 +
+      Math.sin((x + y) * 0.0060) * 0.8 +
+      Math.cos((x - y) * 0.0070) * 0.6
+    );
+  }
+
+  const STEP   = 0.45; // distance between contour lines
+  const THRESH = 0.14; // how close to a contour level counts as "on" the line
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = c * CELL_W + CELL_W / 2;
+      const y = r * CELL_H + CELL_H / 2;
+      const z = topo(x, y);
+      const phase = z / STEP;
+      const dist  = Math.abs(phase - Math.round(phase));
+      if (dist > THRESH) continue;
+
+      // gradient direction picks a character aligned with the contour line
+      const dzx = topo(x + 1, y) - z;
+      const dzy = topo(x, y + 1) - z;
+      const ax = Math.abs(dzx);
+      const ay = Math.abs(dzy);
+
+      let ch;
+      if (ax < 1e-4 && ay < 1e-4)     ch = '.';
+      else if (ay > ax * 2.2)         ch = '-';
+      else if (ax > ay * 2.2)         ch = '|';
+      else if (dzx * dzy > 0)         ch = '\\';
+      else                            ch = '/';
+
+      ctx.fillText(ch, x, y);
+    }
+  }
+}
+
+// ── photo dissolve (vision tab) ──────────────────────────────────────────────
+function renderPhotoDissolve() {
+  const container = document.querySelector('.vision-photo');
+  if (!container) return;
+  const img    = container.querySelector('img');
+  const canvas = container.querySelector('.photo-dissolve');
+  if (!img || !canvas) return;
+
+  const cRect = container.getBoundingClientRect();
+  const iRect = img.getBoundingClientRect();
+  const w = cRect.width, h = cRect.height;
+  if (w === 0 || h === 0) return;
+
+  const imgLeft = iRect.left - cRect.left;
+  const imgTop  = iRect.top  - cRect.top;
+  const imgW    = iRect.width;
+  const imgH    = iRect.height;
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width  = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.font = `bold ${FONT_PX}px "Courier New", Courier, monospace`;
+  ctx.textAlign    = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.clearRect(0, 0, w, h);
+
+  const cols = Math.floor(w / CELL_W);
+  const rows = Math.floor(h / CELL_H);
+  const CHARS = '.,:;+-=*%@#';
+
+  const INSIDE_BAND  = 90;  // px inside image where chars start appearing
+  const OUTSIDE_BAND = 130; // px outside image where chars fade to none
+
+  // Match the page background color so chars subtract the image into the void
+  // (the image appears to dissolve away rather than into another pattern).
+  const BG_RGB = '8, 8, 8';
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = c * CELL_W + CELL_W / 2;
+      const y = r * CELL_H + CELL_H / 2;
+
+      const dxL = x - imgLeft;
+      const dxR = (imgLeft + imgW) - x;
+      const dyT = y - imgTop;
+      const dyB = (imgTop + imgH) - y;
+      const minInside = Math.min(dxL, dxR, dyT, dyB);
+
+      let density;
+      if (minInside > 0) {
+        if (minInside > INSIDE_BAND) continue;
+        density = Math.pow(1 - minInside / INSIDE_BAND, 0.85);
+      } else {
+        const d = -minInside;
+        if (d > OUTSIDE_BAND) continue;
+        density = Math.pow(1 - d / OUTSIDE_BAND, 0.85);
+      }
+
+      if (Math.random() > density) continue;
+
+      // alpha tracks density: opaque at the edge, fading inward and outward
+      ctx.fillStyle = `rgba(${BG_RGB}, ${Math.min(1, density * 1.1)})`;
+
+      // At the very edge, overprint multiple chars per cell with tiny jitter
+      // so the boundary reads as a thick shredded band rather than a grid.
+      const edgeDist = Math.abs(minInside);
+      const overprint = edgeDist < 12 ? 3 : edgeDist < 28 ? 2 : 1;
+      for (let k = 0; k < overprint; k++) {
+        const ox = (Math.random() - 0.5) * (overprint > 1 ? 3.5 : 0);
+        const oy = (Math.random() - 0.5) * (overprint > 1 ? 3.5 : 0);
+        ctx.fillText(
+          CHARS[Math.floor(Math.random() * CHARS.length)],
+          x + ox, y + oy
+        );
+      }
+    }
+  }
+}
+
 // ── tab switching ─────────────────────────────────────────────────────────────
 function openTab(tabName) {
   document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
@@ -365,12 +508,25 @@ function openTab(tabName) {
   });
   if (tabName === 'home') startAnim();
   else stopAnim();
+
+  if (tabName === 'vision') {
+    requestAnimationFrame(() => {
+      renderTopo();
+      renderPhotoDissolve();
+    });
+  }
 }
 
 // ── resize ────────────────────────────────────────────────────────────────────
 function onResize() {
   clearTimeout(resizeTmr);
   resizeTmr = setTimeout(() => {
+    const vision = document.getElementById('vision');
+    if (vision && vision.classList.contains('active')) {
+      renderTopo();
+      renderPhotoDissolve();
+    }
+
     const home = document.getElementById('home');
     if (!home || !home.classList.contains('active')) return;
     stopAnim();

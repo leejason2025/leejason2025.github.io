@@ -197,32 +197,92 @@ body {
 }
 
 /* ── MY VISION ── */
+#vision { position: relative; }
+
+#topo-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#vision .page-content {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
 .vision-layout {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 4rem;
-  align-items: start;
+  grid-template-columns: 42vw 1fr;
+  gap: 0;
+  align-items: stretch;
+  height: calc(100vh - var(--nav-h));
+  width: 100%;
+}
+
+.vision-photo {
+  position: relative;
+  height: 100%;
+  padding: 4rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .vision-photo img {
   width: 100%;
-  border-radius: 10px;
-  border: 1px solid var(--border-t);
-  box-shadow: 0 0 40px rgba(2, 48, 71, 0.5), 0 0 80px rgba(33, 158, 188, 0.07);
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
+  border: none;
+  box-shadow: none;
+  -webkit-mask-image: radial-gradient(ellipse 96% 98% at center, black 65%, transparent 100%);
+          mask-image: radial-gradient(ellipse 96% 98% at center, black 65%, transparent 100%);
+}
+
+.vision-photo .photo-dissolve {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.vision-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 5rem;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .vision-text h1 {
   font-family: var(--display);
-  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-size: clamp(5.6rem, 11vw, 8.8rem);
   font-weight: 700;
-  letter-spacing: 0.06em;
-  margin-bottom: 1.5rem;
-  background: var(--grad);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg,
+    var(--orange) 0%,
+    var(--amber)  22%,
+    var(--sky)    58%,
+    var(--teal)   100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+          background-clip: text;
+  color: transparent;
   display: inline-block;
+  width: max-content;
+  max-width: 100%;
 }
 
 .vision-text p {
@@ -441,9 +501,10 @@ body {
 
   .vision-layout {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    height: auto;
   }
-  .vision-photo { max-width: 200px; margin: 0 auto; }
+  .vision-photo { height: 55vh; }
+  .vision-text { padding: 2rem 1.5rem; }
 
   .ml-cards { grid-template-columns: 1fr; }
   .page-content { padding: 3rem 1.5rem 5rem; }
