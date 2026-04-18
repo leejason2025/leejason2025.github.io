@@ -696,12 +696,13 @@ function tryInit() {
     requestAnimationFrame(tryInit);
     return;
   }
-  setupScene();
-  // Skip the 3D helmet on narrow viewports — the GLB is ~4MB and the 3D
-  // render is expensive. Mobile gets the ASCII bg + heat trail + tagline,
-  // which is what people can actually see on a small screen anyway.
+  // On mobile we serve a static PNG instead of the 3D helmet — skip all
+  // Three.js init so we don't download the GLB, Three.js, or Draco decoder.
   const isMobile = window.matchMedia('(max-width: 820px)').matches;
-  if (!isMobile) loadModel();
+  if (!isMobile) {
+    setupScene();
+    loadModel();
+  }
   document.fonts.ready.then(() => {
     const hash = (window.location.hash || '').replace('#', '');
     if (['vision', 'art', 'ml'].includes(hash)) {
