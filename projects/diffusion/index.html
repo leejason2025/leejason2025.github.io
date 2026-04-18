@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diffusion Models</title>
+    <link rel="stylesheet" href="../project.css">
+</head>
+<body>
+    <a class="proj-back" href="/">&larr; BACK</a>
+    <div class="title-block">
+        <h1>Diffusion Models</h1>
+        <h2>Denoising, Sampling &amp; Image-to-Image Translation</h2>
+    </div>
+
+    <section id="intro">
+        <h2>Introduction</h2>
+        <p>
+            An exploration of diffusion models: how images can be pushed into pure noise and then reconstructed step-by-step into coherent content. The first half of this work uses Stability AI's pretrained DeepFloyd IF model to study sampling, guidance, and image-to-image translation. The second trains a custom denoising UNet from scratch on MNIST.
+        </p>
+    </section>
+
+    <section id="setup">
+        <h2>Setup &amp; Prompt Quality</h2>
+        <p>
+            DeepFloyd IF is a two-stage generative model: the first stage drafts a base image, the second refines it to higher resolution. I sampled the prompts "an oil painting of a snowy mountain village," "a man wearing a hat," and "a rocket ship" at different step counts (seed fixed at 88). More steps adds detail and structure, but not necessarily realism. Higher step counts tend to multiply form and ornament rather than improve the plausibility of the scene.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/20hat.png" alt="Hat, 20 steps"><p>steps = 20</p></div>
+            <div class="image-item"><img src="media/10rocket.png" alt="Rocket, 10 steps"><p>steps = 10</p></div>
+            <div class="image-item"><img src="media/10snow.png" alt="Village, 10 steps"><p>steps = 10</p></div>
+            <div class="image-item"><img src="media/50hat.png" alt="Hat, 50 steps"><p>steps = 50</p></div>
+            <div class="image-item"><img src="media/50rocket.png" alt="Rocket, 50 steps"><p>steps = 50</p></div>
+            <div class="image-item"><img src="media/20snow.png" alt="Village, 20 steps"><p>steps = 20</p></div>
+        </div>
+    </section>
+
+    <section id="forward-process">
+        <h2>Forward Process</h2>
+        <p>
+            The forward process progressively adds noise to a clean image, eventually collapsing it into pure Gaussian noise. Sampling is the reverse: reconstruct the clean image by undoing that noising step-by-step. Below I apply the noise schedule to a test image of the Berkeley Campanile at three corruption levels.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="image-item"><img src="media/orig.png" alt="Original"><p>original</p></div>
+            <div class="image-item"><img src="media/n250.png" alt="Noise 250"><p>noise = 250</p></div>
+            <div class="image-item"><img src="media/n500.png" alt="Noise 500"><p>noise = 500</p></div>
+            <div class="image-item"><img src="media/n750.png" alt="Noise 750"><p>noise = 750</p></div>
+        </div>
+    </section>
+
+    <section id="classical-denoising">
+        <h2>Classical Denoising Baseline</h2>
+        <p>
+            As a baseline, I tried to recover the original image using classical Gaussian blur. The results show its limits: smoothing removes some high-frequency noise but can't recover the structure that diffusion models do. Blur is a fundamentally lossy prior.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/n250.png" alt="Noisy 250"><p>noisy, 250</p></div>
+            <div class="image-item"><img src="media/n500.png" alt="Noisy 500"><p>noisy, 500</p></div>
+            <div class="image-item"><img src="media/n750.png" alt="Noisy 750"><p>noisy, 750</p></div>
+            <div class="image-item"><img src="media/g250.png" alt="Blurred 250"><p>gaussian denoise</p></div>
+            <div class="image-item"><img src="media/g500.png" alt="Blurred 500"><p>gaussian denoise</p></div>
+            <div class="image-item"><img src="media/g750.png" alt="Blurred 750"><p>gaussian denoise</p></div>
+        </div>
+    </section>
+
+    <section id="one-step-denoising">
+        <h2>One-Step Denoising</h2>
+        <p>
+            Passing the noisy image through the pretrained DeepFloyd UNet once, a single-step denoise, does dramatically better than Gaussian blur. The UNet projects the noisy input toward the image manifold it learned during training. But a single jump isn't enough to cleanly reconstruct from heavy noise; detail stays muddy at high noise levels.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/o250.png" alt="One-step 250"><p>one-step, 250</p></div>
+            <div class="image-item"><img src="media/o500.png" alt="One-step 500"><p>one-step, 500</p></div>
+            <div class="image-item"><img src="media/0750.png" alt="One-step 750"><p>one-step, 750</p></div>
+        </div>
+    </section>
+
+    <section id="iterative-denoising">
+        <h2>Iterative Denoising</h2>
+        <p>
+            Iterative denoising is where diffusion models shine: instead of one big jump, the UNet takes many small steps toward a clean image. Striding through timesteps rather than running every single one trades a small amount of quality for a large speedup. The sequence below shows how the image sharpens as timesteps advance.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="image-item"><img src="media/i0.png" alt="Step 0"><p>step 0</p></div>
+            <div class="image-item"><img src="media/i5.png" alt="Step 5"><p>step 5</p></div>
+            <div class="image-item"><img src="media/i10.png" alt="Step 10"><p>step 10</p></div>
+            <div class="image-item"><img src="media/i15.png" alt="Step 15"><p>step 15</p></div>
+            <div class="image-item"><img src="media/i20.png" alt="Step 20"><p>step 20</p></div>
+        </div>
+        <p>Side-by-side comparison of the three denoising approaches at the same starting noise level:</p>
+        <div class="image-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="image-item"><img src="media/i.png" alt="Iterative result"><p>iterative</p></div>
+            <div class="image-item"><img src="media/io.png" alt="One-step result"><p>one-step</p></div>
+            <div class="image-item"><img src="media/ig.png" alt="Gaussian result"><p>gaussian</p></div>
+        </div>
+    </section>
+
+    <section id="sampling">
+        <h2>Sampling from Pure Noise</h2>
+        <p>
+            Instead of starting from a noisy <em>real</em> image, I start from pure random noise and let the iterative process synthesize an image from scratch. The model "hallucinates" plausible content by repeatedly denoising. Five generations below, each starting from a different noise seed:
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="image-item"><img src="media/s1.png" alt="Sample 1"><p>sample 1</p></div>
+            <div class="image-item"><img src="media/s2.png" alt="Sample 2"><p>sample 2</p></div>
+            <div class="image-item"><img src="media/s3.png" alt="Sample 3"><p>sample 3</p></div>
+            <div class="image-item"><img src="media/s4.png" alt="Sample 4"><p>sample 4</p></div>
+            <div class="image-item"><img src="media/s5.png" alt="Sample 5"><p>sample 5</p></div>
+        </div>
+    </section>
+
+    <section id="classifier-free-guidance">
+        <h2>Classifier-Free Guidance</h2>
+        <p>
+            Classifier-free guidance (CFG) amplifies the influence of the text prompt during sampling by extrapolating between a conditional and an unconditional prediction at every step. The effect is crisper, more prompt-aligned outputs, at the cost of slightly less diversity.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="image-item"><img src="media/g1.png" alt="CFG sample 1"><p>cfg sample 1</p></div>
+            <div class="image-item"><img src="media/g2.png" alt="CFG sample 2"><p>cfg sample 2</p></div>
+            <div class="image-item"><img src="media/g3.png" alt="CFG sample 3"><p>cfg sample 3</p></div>
+            <div class="image-item"><img src="media/g4.png" alt="CFG sample 4"><p>cfg sample 4</p></div>
+            <div class="image-item"><img src="media/g5.png" alt="CFG sample 5"><p>cfg sample 5</p></div>
+        </div>
+    </section>
+
+    <section id="image-to-image-translation">
+        <h2>Image-to-Image Translation</h2>
+        <p>
+            Adding noise to a real image and then denoising it under a text prompt nudges the image toward the prompt while retaining some of the original composition. The more noise you start with, the further the model is free to drift. Below, the Campanile and two stills from the show <em>Arcane</em> are pulled toward "a high quality photo" at progressively higher noise levels.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
+            <div class="image-item"><img src="media/txt1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/txt2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/txt3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/txt4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/txt5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/txt6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/orig.png" alt="original"><p>original</p></div>
+        </div>
+        <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
+            <div class="image-item"><img src="media/A1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/A2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/A3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/A4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/A5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/A6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/origA.png" alt="original"><p>original</p></div>
+        </div>
+        <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
+            <div class="image-item"><img src="media/B1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/B2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/B3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/B4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/B5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/B6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/origB.png" alt="original"><p>original</p></div>
+        </div>
+
+        <h3>Hand-Drawn &amp; Web Images</h3>
+        <p>
+            The same translation technique takes flat, abstracted inputs (rough sketches and pulled web images) and pushes them toward natural photographic rendering. Low noise produces subtle refinement; high noise produces dramatic reinterpretation.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
+            <div class="image-item"><img src="media/W1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/W2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/W3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/W4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/W5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/W6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/OrigW.png" alt="original"><p>original</p></div>
+            <div class="image-item"><img src="media/C1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/C2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/C3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/C4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/C5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/C6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/OrigC.png" alt="original"><p>original</p></div>
+            <div class="image-item"><img src="media/D1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/D2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/D3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/D4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/D5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/D6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/OrigD.png" alt="original"><p>original</p></div>
+        </div>
+
+        <h3>Inpainting</h3>
+        <p>
+            Inpainting re-samples only the pixels inside a mask, letting the surrounding image constrain what's plausible. The model fills the masked region with coherent content stitched to the unmasked context.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="image-item"><img src="media/orig.png" alt="Original"><p>original</p></div>
+            <div class="image-item"><img src="media/MC.png" alt="Mask"><p>mask</p></div>
+            <div class="image-item"><img src="media/CC.png" alt="Replaced"><p>replaced</p></div>
+            <div class="image-item"><img src="media/resC.png" alt="Result"><p>result</p></div>
+
+            <div class="image-item"><img src="media/origA.png" alt="Original"><p>original</p></div>
+            <div class="image-item"><img src="media/MJ.png" alt="Mask"><p>mask</p></div>
+            <div class="image-item"><img src="media/CJ.png" alt="Replaced"><p>replaced</p></div>
+            <div class="image-item"><img src="media/resJ.png" alt="Result"><p>result</p></div>
+
+            <div class="image-item"><img src="media/origB.png" alt="Original"><p>original</p></div>
+            <div class="image-item"><img src="media/MW.png" alt="Mask"><p>mask</p></div>
+            <div class="image-item"><img src="media/CW.png" alt="Replaced"><p>replaced</p></div>
+            <div class="image-item"><img src="media/resW.png" alt="Result"><p>result</p></div>
+        </div>
+
+        <h3>Text-Conditioned Translation</h3>
+        <p>
+            Combining image-to-image translation with textual conditioning lets a prompt steer how an image is reinterpreted. The same source image becomes a different subject at each noise level.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(7, 1fr);">
+            <div class="image-item"><img src="media/1R1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/1R2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/1R3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/1R4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/1R5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/1R6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/orig.png" alt="original"><p>original</p></div>
+
+            <div class="image-item"><img src="media/2R1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/2R2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/2R3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/2R4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/2R5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/2R6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/origA.png" alt="original"><p>original</p></div>
+
+            <div class="image-item"><img src="media/3R1.png" alt="noise 1"><p>noise = 1</p></div>
+            <div class="image-item"><img src="media/3R2.png" alt="noise 3"><p>noise = 3</p></div>
+            <div class="image-item"><img src="media/3R3.png" alt="noise 5"><p>noise = 5</p></div>
+            <div class="image-item"><img src="media/3R4.png" alt="noise 7"><p>noise = 7</p></div>
+            <div class="image-item"><img src="media/3R5.png" alt="noise 10"><p>noise = 10</p></div>
+            <div class="image-item"><img src="media/3R6.png" alt="noise 20"><p>noise = 20</p></div>
+            <div class="image-item"><img src="media/origB.png" alt="original"><p>original</p></div>
+        </div>
+    </section>
+
+    <section id="training-unet">
+        <h2>Training a Denoising UNet</h2>
+        <p>
+            Up to this point I'd been using a <em>pretrained</em> diffusion model. Next I implemented and trained my own single-step denoising UNet from scratch on MNIST: no class conditioning, just learning to undo Gaussian noise. The UNet architecture uses encoder/decoder blocks with skip connections, letting the network reason about both fine texture and global structure.
+        </p>
+
+        <h3>Training Setup</h3>
+        <p>
+            MNIST, 5 epochs, batch size 256, Adam optimizer, L2 loss between the network's output and the clean image. Noise is freshly sampled every batch so the model sees a wide range of corruptions across training. The loss curve below shows smooth convergence; outputs clearly improve between epoch 1 and epoch 5.
+        </p>
+        <div class="image-container" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="image-item"><img src="media/noisechart.png" alt="Noise schedule"><p>noise schedule</p></div>
+            <div class="image-item"><img src="media/trainingloss.png" alt="Training loss"><p>training loss</p></div>
+        </div>
+        <div class="image-container" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="image-item"><img src="media/epoc1.png" alt="Epoch 1 results"><p>epoch 1</p></div>
+            <div class="image-item"><img src="media/epoc2.png" alt="Epoch 5 results"><p>epoch 5</p></div>
+        </div>
+
+        <h3>Out-of-Distribution Testing</h3>
+        <p>
+            To probe generalization, I evaluated the trained model on noise levels it hadn't been trained on. The UNet degrades gracefully: reconstruction quality falls off smoothly as noise exceeds the training range rather than breaking abruptly.
+        </p>
+        <div class="image-container" style="grid-template-columns: 1fr;">
+            <div class="image-item"><img src="media/denoised.png" alt="OOD denoising"><p>out-of-distribution denoising across noise levels</p></div>
+        </div>
+    </section>
+</body>
+</html>
