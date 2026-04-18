@@ -100,10 +100,10 @@ function setupScene() {
   scene.background = new THREE.Color(0x000000);
 
   camera = new THREE.PerspectiveCamera(38, logW / logH, 0.1, 200);
-  // Pull the camera back on narrow viewports so the helmet fits portrait
-  // composition without being cropped by the top/bottom.
+  // Pull the camera back on narrow viewports so the full helmet fits within
+  // the portrait aspect (helmet is ~4.2 wide; phones are ~0.55 aspect ratio).
   const isMobile = window.matchMedia('(max-width: 820px)').matches;
-  camera.position.set(0, 0, isMobile ? 7.4 : 4.2);
+  camera.position.set(0, 0, isMobile ? 11 : 4.2);
 
   const glCanvas = document.createElement('canvas');
   renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: false });
