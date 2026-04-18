@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { GLTFLoader }  from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
 // ── palette, ramp, grid ───────────────────────────────────────────────────────
 const PALETTE = [
@@ -190,6 +191,9 @@ function buildCables(nape) {
 // ── model load ────────────────────────────────────────────────────────────────
 function loadModel() {
   const loader = new GLTFLoader();
+  const draco  = new DRACOLoader();
+  draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+  loader.setDRACOLoader(draco);
   loader.load('helmet.glb',
     (gltf) => {
       model = gltf.scene;

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb8500"/>
+      <stop offset=".35" stop-color="#ffb703"/>
+      <stop offset=".75" stop-color="#8ecae6"/>
+      <stop offset="1" stop-color="#219ebc"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#080808"/>
+  <text x="16" y="23" font-family="'Space Grotesk', 'Helvetica Neue', sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="url(#g)">JL</text>
+</svg>
