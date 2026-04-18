@@ -242,26 +242,6 @@ body {
   height: 100%;
 }
 
-/* Static helmet image shown only on mobile (Three.js is skipped there) */
-.mobile-helmet { display: none; }
-
-@media (max-width: 820px) {
-  .mobile-helmet {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
-    max-width: 88vw;
-    max-height: 68vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: 1;
-  }
-}
-
 #home-tagline {
   position: absolute;
   bottom: 4%;

@@ -100,7 +100,10 @@ function setupScene() {
   scene.background = new THREE.Color(0x000000);
 
   camera = new THREE.PerspectiveCamera(38, logW / logH, 0.1, 200);
-  camera.position.set(0, 0, 4.2);
+  // Pull the camera back on narrow viewports so the helmet fits portrait
+  // composition without being cropped by the top/bottom.
+  const isMobile = window.matchMedia('(max-width: 820px)').matches;
+  camera.position.set(0, 0, isMobile ? 7.4 : 4.2);
 
   const glCanvas = document.createElement('canvas');
   renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: false });
@@ -696,13 +699,8 @@ function tryInit() {
     requestAnimationFrame(tryInit);
     return;
   }
-  // On mobile we serve a static PNG instead of the 3D helmet — skip all
-  // Three.js init so we don't download the GLB, Three.js, or Draco decoder.
-  const isMobile = window.matchMedia('(max-width: 820px)').matches;
-  if (!isMobile) {
-    setupScene();
-    loadModel();
-  }
+  setupScene();
+  loadModel();
   document.fonts.ready.then(() => {
     const hash = (window.location.hash || '').replace('#', '');
     if (['vision', 'art', 'ml'].includes(hash)) {
