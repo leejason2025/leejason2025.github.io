@@ -697,7 +697,11 @@ function tryInit() {
     return;
   }
   setupScene();
-  loadModel();
+  // Skip the 3D helmet on narrow viewports — the GLB is ~4MB and the 3D
+  // render is expensive. Mobile gets the ASCII bg + heat trail + tagline,
+  // which is what people can actually see on a small screen anyway.
+  const isMobile = window.matchMedia('(max-width: 820px)').matches;
+  if (!isMobile) loadModel();
   document.fonts.ready.then(() => {
     const hash = (window.location.hash || '').replace('#', '');
     if (['vision', 'art', 'ml'].includes(hash)) {
