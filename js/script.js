@@ -694,13 +694,31 @@ function tryInit() {
   }
   setupScene();
   loadModel();
-  document.fonts.ready.then(startAnim);
+  document.fonts.ready.then(() => {
+    const hash = (window.location.hash || '').replace('#', '');
+    if (['vision', 'art', 'ml'].includes(hash)) {
+      openTab(hash);
+    } else {
+      startAnim();
+    }
+  });
 }
 
-// ── intro overlay — typewriter "Hello World!" then eyelid reveal ─────────────
+// ── intro overlay — typewriter greeting then eyelid reveal ───────────────────
+// Skipped when:
+//   1. URL has a hash (deep-link to a tab, or "back" from a project page)
+//   2. Intro already shown earlier in this browser session
 function runIntro() {
   const overlay = document.getElementById('intro-overlay');
   if (!overlay) return;
+
+  const hasHash     = window.location.hash && window.location.hash.length > 1;
+  const alreadySeen = sessionStorage.getItem('introShown') === '1';
+  if (hasHash || alreadySeen) {
+    overlay.classList.add('gone');
+    return;
+  }
+
   const charsEl = overlay.querySelector('.intro-chars');
   if (!charsEl) return;
 
@@ -727,7 +745,10 @@ function runIntro() {
   function reveal() {
     overlay.classList.add('fading-text');
     setTimeout(() => overlay.classList.add('revealing'), FADE_MS);
-    setTimeout(() => overlay.classList.add('gone'),      FADE_MS + OPEN_MS);
+    setTimeout(() => {
+      overlay.classList.add('gone');
+      sessionStorage.setItem('introShown', '1');
+    }, FADE_MS + OPEN_MS);
   }
 
   typeNext();

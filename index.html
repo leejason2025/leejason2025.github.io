@@ -265,33 +265,36 @@
           <div class="ml-card">
             <div class="ml-tags">
               <span class="tag">Reinforcement Learning</span>
-              <span class="tag">PyTorch</span>
-              <span class="tag">OpenAI Gym</span>
+              <span class="tag">PPO</span>
+              <span class="tag">Behavioral Cloning</span>
             </div>
-            <h2 class="ml-card-title">Reinforcement Learning Agent</h2>
+            <h2 class="ml-card-title">Dense Reward Generation for RL Fine-Tuning</h2>
             <p>
-              Designed and trained a deep RL agent using policy gradient methods. The project explored
-              reward shaping, environment design, and the challenge of sparse feedback — bridging
-              mathematical optimization with emergent intelligent behavior. Training from scratch
-              revealed how much architecture and hyperparameter choice govern what an agent can learn.
+              Behavioral-cloning policies plateau from compounding distribution shift; RL fine-tuning
+              can correct them but is bottlenecked by sparse, binary task-completion rewards. I extract
+              waypoints from the BC encoder's own latent space to produce an unsupervised dense reward,
+              then run PPO on top. The residual pipeline yields +7 points over BC on LIBERO-Spatial
+              and trains 5x faster than sparse PPO while preserving pretrained behavior.
             </p>
-            <a href="#" class="view-project-link">View Project &rarr;</a>
+            <a href="projects/rl/" class="view-project-link">View Project &rarr;</a>
           </div>
 
           <div class="ml-card">
             <div class="ml-tags">
-              <span class="tag">Fine-Tuning</span>
               <span class="tag">LoRA</span>
-              <span class="tag">Transformers</span>
+              <span class="tag">World Models</span>
+              <span class="tag">V-JEPA2</span>
             </div>
-            <h2 class="ml-card-title">LoRA Fine-Tuning</h2>
+            <h2 class="ml-card-title">Energy Landscape Analysis of LoRA on V-JEPA2-AC</h2>
             <p>
-              Applied Low-Rank Adaptation (LoRA) to fine-tune a large language model on domain-specific
-              data. Investigated the efficiency-performance tradeoff between parameter-efficient training
-              and full fine-tuning, achieving strong results with a fraction of the compute and memory
-              footprint, a meaningful finding for resource-constrained deployment.
+              Applied Low-Rank Adaptation to Meta's V-JEPA2-AC video world model for robotic
+              manipulation on DROID-100. Measured energy landscapes before and after fine-tuning
+              across 30 held-out trajectories. LoRA caused representation collapse: flat,
+              non-discriminative landscapes, despite the technique's success on LLMs. A reminder that
+              parameter-efficient methods designed for discrete token prediction don't transfer cleanly
+              to continuous-valued latent spaces.
             </p>
-            <a href="#" class="view-project-link">View Project &rarr;</a>
+            <a href="projects/lora/" class="view-project-link">View Project &rarr;</a>
           </div>
 
           <div class="ml-card">
