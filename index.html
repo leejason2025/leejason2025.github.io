@@ -51,26 +51,14 @@
           </div>
           <div class="vision-text">
             <h1 class="section-heading">JASON LEE</h1>
+            <p>My vision is to bridge art and technology.</p>
             <p>
-              I graduated from UC Berkeley with a dual major in Computer Science and Art Practice,
-              alongside the EECS Honors Program, a selective track designed to push engineers beyond
-              the bounds of their own discipline and into broader intellectual territory.
+              We're at the edge of a new realm of entertainment, built not just on LLMs
+              but on deeper fields like computer vision and reinforcement learning.
             </p>
             <p>
-              While most of my peers stayed within a single discipline, I was among the few
-              actively bridging CS and art, an intersection that remains largely underexplored,
-              and the space that became my calling.
-            </p>
-            <p>
-              My vision is to bridge the worlds of art and technology. I believe we are on
-              the edge of a new realm of entertainment, one built not just on LLMs, but on
-              deeper, less explored fields like deep computer vision and reinforcement learning.
-              The future of creative experience lies in systems that can perceive, adapt,
+              The future of creative experience lies in systems that perceive, adapt,
               and respond, not just generate.
-            </p>
-            <p>
-              Outside of work, I'm drawn to exploring cuisine and fine dining, hunting down
-              collectibles, golf, and bouldering.
             </p>
           </div>
         </div>
@@ -267,6 +255,43 @@
 
           <div class="ml-card">
             <div class="ml-tags">
+              <span class="tag">3D Training Data</span>
+              <span class="tag">Synthetic Data</span>
+              <span class="tag">Embodied AI</span>
+            </div>
+            <h2 class="ml-card-title">notjustchairs.ai: 3D Training Data for Embodied AI</h2>
+            <p>
+              A venture building large-scale 3D data for both embodied AI and creative work.
+              For robotics, the pipeline produces structured, physically grounded datasets,
+              including articulated objects with movable joints exported as URDF, to train
+              models that perceive and manipulate the physical world. For creative fields,
+              it delivers production-ready 3D assets for games, film, and virtual worlds.
+              More coming soon.
+            </p>
+            <a href="https://notjustchairs.ai" target="_blank" rel="noopener" class="view-project-link">Visit Site &rarr;</a>
+          </div>
+
+          <div class="ml-card">
+            <div class="ml-tags">
+              <span class="tag">Gaussian Splatting</span>
+              <span class="tag">Video-VAE</span>
+              <span class="tag">Feed-Forward 3D</span>
+            </div>
+            <h2 class="ml-card-title">latent2splat: Decoding 3D Gaussian Assets from Frozen Video-VAE Latents</h2>
+            <p>
+              Can a frozen, general-purpose video-VAE latent be decoded directly into an
+              explicit 3D Gaussian Splatting asset, supervised by multi-view render loss alone?
+              On Objaverse-LVIS orbit renders, a strict ray-anchored decoder collapses into
+              translucent fog, while a scaffolded RGBD fusion recovers ~21 dB and ~0.96 alpha-IoU
+              on held-out objects. The latent isn't the wall: the scaffold recovers ~9 dB of lost
+              detail, so the real bottleneck is the decoder's representation and the data, not the
+              frozen video latent.
+            </p>
+            <a href="projects/latent2splat/poster.pdf" target="_blank" rel="noopener" class="view-project-link">View Poster &rarr;</a>
+          </div>
+
+          <div class="ml-card">
+            <div class="ml-tags">
               <span class="tag">Reinforcement Learning</span>
               <span class="tag">PPO</span>
               <span class="tag">Behavioral Cloning</span>
@@ -298,70 +323,6 @@
               to continuous-valued latent spaces.
             </p>
             <a href="projects/lora/" class="view-project-link">View Project &rarr;</a>
-          </div>
-
-          <div class="ml-card">
-            <div class="ml-tags">
-              <span class="tag">Computer Vision</span>
-              <span class="tag">Pyramids</span>
-              <span class="tag">Alignment</span>
-            </div>
-            <h2 class="ml-card-title">Images of the Russian Empire</h2>
-            <p>
-              Reconstructed full-color images from Prokudin-Gorskii's early 20th-century glass-plate
-              photographs by aligning separate R, G, and B exposures. Implemented multi-scale pyramid
-              search with normalized cross-correlation to handle large offsets efficiently, then
-              refined with edge-based alignment for the trickiest plates.
-            </p>
-            <a href="projects/restoration/" class="view-project-link">View Project &rarr;</a>
-          </div>
-
-          <div class="ml-card">
-            <div class="ml-tags">
-              <span class="tag">Image Filters</span>
-              <span class="tag">Fourier</span>
-              <span class="tag">Hybrid Images</span>
-            </div>
-            <h2 class="ml-card-title">Filters &amp; Frequencies</h2>
-            <p>
-              Explored frequency-domain image analysis through edge detection, Difference-of-Gaussians
-              filters, and hybrid images that shift subject as viewing distance changes. Built seamless
-              multi-resolution blending with Gaussian and Laplacian stacks to composite disparate images
-              into a single coherent scene.
-            </p>
-            <a href="projects/filters/" class="view-project-link">View Project &rarr;</a>
-          </div>
-
-          <div class="ml-card">
-            <div class="ml-tags">
-              <span class="tag">Delaunay</span>
-              <span class="tag">Image Warping</span>
-              <span class="tag">Morphing</span>
-            </div>
-            <h2 class="ml-card-title">Face Morphing</h2>
-            <p>
-              Built a face-morphing pipeline that transitions between two portraits via manual
-              correspondence points and Delaunay triangulation. Extended the work to compute the mean
-              face of a population, extrapolate caricatures, and transfer shape and appearance across
-              demographic groups.
-            </p>
-            <a href="projects/morph/" class="view-project-link">View Project &rarr;</a>
-          </div>
-
-          <div class="ml-card">
-            <div class="ml-tags">
-              <span class="tag">Generative AI</span>
-              <span class="tag">Diffusion</span>
-              <span class="tag">UNet</span>
-            </div>
-            <h2 class="ml-card-title">Diffusion Models</h2>
-            <p>
-              Studied denoising, sampling, and image-to-image translation using Stability AI's
-              pretrained DeepFloyd IF. Implemented classifier-free guidance, inpainting, and
-              text-conditioned style transfer, then trained a custom single-step UNet denoiser from
-              scratch on MNIST to understand the mechanics end-to-end.
-            </p>
-            <a href="projects/diffusion/" class="view-project-link">View Project &rarr;</a>
           </div>
 
         </div>
